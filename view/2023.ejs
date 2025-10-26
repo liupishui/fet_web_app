@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Example</title>
+</head>
+<body>
+
+<!-- 引入 Vue.js 3 的核心库 -->
+<script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+
+<div id="app">
+  {{ message }}
+</div>
+
+<script>
+  // 创建一个 Vue 实例
+  const app = Vue.createApp({
+    data() {
+      return {
+        message: 'Hello, Vue 3!'
+      };
+    }
+  });
+
+  // 挂载 Vue 实例到页面上的元素
+  app.mount('#app');
+</script>
+
+</body>
+</html>

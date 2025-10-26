@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>系统安装</title>
+    <style>
+        .form{
+            display: flex;
+            flex-flow: column;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .input_text{
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+            text-indent: 1em;
+            margin-bottom: 20px;
+            height: 50px;
+            width: 200px;
+        }
+        .input_text:focus{
+            outline: none;
+        }
+        .btn{
+            background: #2f90b9;
+            color: #fff;
+            height: 40px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <input type="password" class="input_text" id="password" placeholder="请输入系统密码">
+        <input type="button" class="btn" id="install" value="确定">
+    </div>
+    <script src="/public/scripts/jquery.min.js"></script>
+    <script>
+        document.getElementById('install').onclick = function(){
+            let passwordStr = document.getElementById('password').value.replace(/\s+/g,'');
+            if(passwordStr==''){
+                alert('请输入系统密码')
+            }else{
+                $.post('/install',{password:$("#password").val().replace(/\s+/g,'')},function(data){
+                    if(data.data.ok){
+                        alert('设置成功!');
+                        window.location.href="/login";
+                    }else{
+                        alert('已经设置过系统密码请勿重复设置！');
+                        window.location.href="/login";
+                    }
+                });
+            }
+        };
+    </script>
+</body>
+</html>

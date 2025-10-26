@@ -1,0 +1,18 @@
+SELECT strftime('%Y', addtime) AS year, COUNT(*) AS post_count
+FROM news_articles
+GROUP BY year
+ORDER BY year;
+
+
+SELECT
+  strftime('%Y', addtime) AS year,
+  strftime('%m', addtime) AS month,
+  COUNT(*) AS article_count
+FROM
+  news_articles
+GROUP BY
+  year,
+  month
+ORDER BY
+  year,
+  month;

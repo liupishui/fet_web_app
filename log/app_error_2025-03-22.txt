@@ -1,0 +1,12 @@
+
+
+2025-03-22 16:30:04
+未处理的 Promise 拒绝:
+{"name":"SequelizeDatabaseError","parent":{"errno":1,"code":"SQLITE_ERROR","sql":"select * from users"},"original":{"errno":1,"code":"SQLITE_ERROR","sql":"select * from users"},"sql":"select * from users","parameters":{}}
+Error
+    at Database.<anonymous> (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\sequelize\lib\dialects\sqlite\query.js:185:27)
+    at C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\sequelize\lib\dialects\sqlite\query.js:183:50
+    at new Promise (<anonymous>)
+    at Query.run (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\sequelize\lib\dialects\sqlite\query.js:183:12)
+    at C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\sequelize\lib\sequelize.js:315:28
+    at async eval (eval-914f46e7.repl:2:10)

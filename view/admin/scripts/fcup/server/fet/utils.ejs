@@ -1,0 +1,20 @@
+<% let {context,app} = this; %>
+<%
+jsonMsg = function (context,app,$status,$message,$url='',$index=0,$name=''){
+    let $arr = {};
+    $arr['status'] = $status;
+    $arr['message'] = $message;
+    $arr['url'] = $url;
+    $arr['name'] = $name;
+    $arr['file_index'] = $index;
+    //console.log($arr);
+    context.toJSON($arr);
+};
+UP_PATH = function(context,app){
+    return app.serverPath+'/view/public/fcup_upload/'+ app.getNowTime().date + '/';
+}
+
+UP_URL = function (context,app){
+    return '/public/fcup_upload/'+ app.getNowTime().date + '/';
+}
+%>

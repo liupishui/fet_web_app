@@ -1,0 +1,86 @@
+<% 
+    let {context,app,__filename} = this;
+%>
+<%- await include('./uploader.class.ejs', {config: config }) %>
+<% 
+
+let path = app.require('node:path');
+let fs = app.require('node:fs');
+
+/**
+ * 遍历获取目录下的指定类型的文件
+*/
+let getfiles = function(pathStr,allowFiles){
+    let files = [];
+    let getfile = function(pathCurr){
+        let fileAll = fs.readdirSync(app.serverPath+'/view/'+pathCurr,{withFileTypes:true});
+        fileAll.forEach(function(element){
+            if(element.isDirectory()){
+                getfile(pathCurr+'/'+element.name+'/');
+            }else{
+                if(allowFiles.includes(path.extname(element.name))){
+                    let info = fs.lstatSync(app.serverPath+'/view/'+pathCurr+'/'+element.name);
+                    files.push({url:pathCurr+'/'+element.name,mtime:info.mtime.getTime()});
+                }
+            }
+        })
+    }
+    getfile(pathStr);
+    return files;
+};
+let $allowFiles = "";
+let $listSize = "";
+let $path = "";
+if(context.url.query.action==='listfile'){
+    $allowFiles = config['fileManagerAllowFiles'];
+    $listSize = config['fileManagerListSize'];
+    $path = config['fileManagerListPath'];
+}
+if(context.url.query.action==='listimage'){
+    $allowFiles = config['imageManagerAllowFiles'];
+    $listSize = config['imageManagerListSize'];
+    $path = config['imageManagerListPath'];
+}
+
+/*
+ * 获取参数
+ * 是查找文件夹内所有的文件，然后再去找文件。还是返回文件夹内以日期为文件夹的文件夹个数，以文件夹为索引
+ * 目前现在文件少还是以前者为主
+*/
+
+$size = context.url.query.size ? context.url.query.size : $listSize;
+$start = context.url.query.start ? context.url.query.start : 0;
+$end = $start + $size;
+
+/* 获取文件列表 */
+//let $files = getfiles($path,$allowFiles);
+let condition = $allowFiles.join(`' OR extname='`);
+condition = `(extname='` + condition + `')`;
+let $filesArr = app.sqlite.prepare(`SELECT * FROM files WHERE ${condition} and user_id=${context.session.get('user').id} ORDER BY addtime desc LIMIT ${$start},${$size}`).all();
+//获取所有记录数
+let fileCount = app.sqlite.prepare(`select count(*) from files where ${condition} and user_id=${context.session.get('user').id}`).all()[0]['count(*)'];
+if($filesArr.length===0){
+    context.toJSON({
+        state:"no match file",
+        list:[],
+        start:$start,
+        total:fileCount
+    });
+    return;
+}
+
+let $len = fileCount;
+//倒序排列，最后上传的在最上面
+//let $len = $files.length;
+//$files.reverse();
+//let $list = $files.splice($start,$size);
+$list = $filesArr.map(function(item){
+    return {url:item.path,mtime:new Date(item.addtime).getTime()};
+})
+context.toJSON({
+    state:"SUCCESS",
+    list:$list,
+    start:$start,
+    total:$len
+});
+%>

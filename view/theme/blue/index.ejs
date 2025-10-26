@@ -1,0 +1,66 @@
+<% let {context,app,require} = this; 
+%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles/reset.css">
+</head>
+<body>
+<h2 class="test">获取轮播图</h2>
+<%- JSON.stringify(await require('./index.fet').banner.call(this,2)); %>
+<h2>新闻列表</h2>
+<% let hotnews = await require('./index.fet').hotnews.call(this,5); %>
+    <% for(let i=0;i<hotnews.length;i++){%>
+        <a href="./detail.ejs?id=<%-hotnews[i].id+''+(context.url.query.theme?'&theme='+context.url.query.theme:'')%>"><%-hotnews[i].title.substr(1,2);%></a>
+    <%}%>
+<h2>新闻分类</h2>
+<% let newsCat = await require('./index.fet').newsCategorySubtree.call(this,1);%>
+<%- JSON.stringify(newsCat); %>
+<h2>面包屑导航</h2>
+<% let newsBread = await require('./index.fet').newsCategoryFamilytree.call(this,23);%>
+<%- JSON.stringify(newsBread); %>
+<h2>新闻列表</h2>
+<% let articaleList = await require('./index.fet').newsArticlesListServer.call(this,1,10);%>
+<%- JSON.stringify(articaleList); %>
+
+    <script>
+        var connectWebSocket = function() {
+            if (typeof(WebSocket) !== 'undefined') {
+            var timmerReload = '';
+            var socketReload = new WebSocket((window.location.href.indexOf('https') === 0 ? 'wss://' : 'ws://') + window.location.host);
+            //socketReload.binaryType = "arraybuffer"
+            socketReload.onopen = function(event) {
+                var cookieSessionId = document.cookie.replace(/\s+/g,'').split(';').filter(function(val){return val.replace(/\s+/g,'').indexOf('session_id=')===0});
+                if(cookieSessionId.length>0){
+                socketReload.send(cookieSessionId[0]);
+                }
+            };
+            socketReload.onmessage = function(event) {
+                console.log(event.data);
+                if (event.data.indexOf('modifyLiveReload:') == 0) {
+                
+                }
+            }
+            socketReload.onclose = function(event) {
+                if (event.code === 1000) {
+                console.log('websocket正常关闭')
+                } else {
+                // console.log(event.code);
+                connectWebSocket();
+                }
+            }
+            socketReload.onerror = function(event) {
+                socketReload.close();
+                console.log(event);
+            };
+    
+            }
+        }
+      connectWebSocket();
+    </script>
+</body>
+</html>

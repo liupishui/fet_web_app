@@ -1,0 +1,153 @@
+<%
+    // await include('./config.ejs');
+    let {context,app,require} = this;
+    let baseURL = require('config.fet.js').baseURL;
+    let api6080 = require('../../utils/api6080');
+    context.LRU_HREF_PAGE_OPTION = {ttl:1};
+    let page = context.url.query.pg ? context.url.query.pg : 1;
+    let type = context.url.query.t ? context.url.query.t : '';
+    if(typeof(context.url.query.name)==='undefined'){
+        context.url.query.name = '';
+    }
+    let data = await api6080.getMovieListByName(context,app,baseURL,page,type,context.url.query.name);
+    if(data===false){
+      context.res.statusCode = 404;
+      context.toHTML('没有查到结果');
+      return;
+    };
+    let pageData = await context.use(app.utils.pageoperater.serverPage,{parameterName:'pg',pageSize: data.list.$.pagesize,rowSize:data.list.$.recordcount});
+%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+  <style type="text/css">
+    a {
+      text-decoration: none;
+    }
+
+    .nav a {
+      color: #333;
+      font-size: 14px;
+    }
+
+    .nav .curr {
+      font-weight: bold;
+      font-size: 16px;
+      color: crimson;
+    }
+
+    .list {
+      display: flex;
+      flex-flow: column;
+    }
+
+    .list .item {
+      display: flex;
+      padding: 12px 20px;
+    }
+
+    .list .item .poster {
+      margin-right: 14px;
+    }
+
+    .list .item .desc {
+      word-wrap: break-word;
+      word-break: break-all;
+    }
+
+    .page {
+      font-size: 14px;
+      padding-left: 16px;
+    }
+
+    .page a {
+      color: cornflowerblue;
+      display: inline-block;
+      margin: 0 4px;
+      border: 1px solid cornflowerblue;
+      border-radius: 4px;
+      padding: 0 5px;
+      min-width: 24px;
+      text-align: center;
+      line-height: 32px;
+    }
+
+    .page span {
+      color: #333;
+      font-weight: bold;
+      font-size: 16px;
+      margin: 0 10px;
+    }
+  </style>
+  <div class="nav">
+    <a href="./">首页</a>
+    <% data.class && data.class.ty.forEach(function(ty){ %>
+    <a href="<%- (context.url.parse(context.req.url).pathname+'?pg=1&t=' + ty.$.id + (context.url.query.name?'&name='+context.url.query.name:'')); %>" class="<%- type==ty.$.id?'curr':'' %>"><%- ty._ %></a>
+    <% }) %>
+    <form action="./" method="get">
+      <input type="text" value="<%- context.url.query.name?context.url.query.name:''; %>" name="name">
+      <input type="submit" value="搜索">
+    </form>
+  </div>
+  <div></div>
+  <% let idArr = data.list.video.map(function(video){return video.id}); %>
+  <%# JSON.stringify(idArr); %>
+  <% let dataVideo = await context.use(app.utils.api6080.getMovieDetailByIdArray,baseURL,idArr); %>
+  <div class="list">
+    <% if(dataVideo.list.video.length===0){ %>
+    没有内容
+    <% } else{ %>
+    <% dataVideo.list.video.forEach(video=>{%>
+    <div class="item">
+      <a href="detail.ejs?videoid=<%- video.id %>" target="_blank" class="poster">
+        <img src="<%- video.pic; %>" style="width: 100px;height:150px;overflow: hidden;object-fit: cover;" alt="">
+      </a>
+      <div class="detail">
+        <a href="detail.ejs?videoid=<%- video.id %>" target="_blank" class="name">
+          <%- video.name %>
+        </a>
+        <div>
+          地区：<%- video.area ? video.area:0; %>&emsp;&emsp;年份：<%- video.year; %>
+        </div>
+        <div>演员：<%- video.actor; %></div>
+        <div>导演：<%- video.director; %></div>
+        <div class="desc">描述：<%- video.des; %></div>
+      </div>
+    </div>
+    <% }) %>
+    <% } %>
+  </div>
+  <% if(data.list) { %>
+  <!--
+    <div class="page">
+        <% if(page!=1){ %>
+        <a href="<%- context.url.pathname+'?pg='+((page-1)>parseInt(data.list.$.pagecount)?parseInt(data.list.$.pagecount):(page-1))+'&t='+type %>">上一页</a>
+        <% } %>
+        <% if(parseInt(page)< parseInt(data.list.$.pagecount)) { %>
+        <a href="<%- context.url.pathname+'?pg='+(page+1)+'&t='+type %>">下一页</a>
+        <% } %>
+       当前<b><%- page %></b>页&emsp;共<b><%- data.list.$.pagecount; %></b>页
+    </div>
+    -->
+  <% } %>
+  <div class="page">
+    <% 
+      let querystring = require('querystring');
+      let urlObject = context.url.parse(context.url.href);
+      delete urlObject.query.pg;
+      let urlsearch = querystring.stringify(urlObject.query);
+      let staticUrlTemplate = '/6080/?'+ urlsearch +'&pg={page}'; 
+    %>
+    <%- pageData.getStaticHtml([3,4,5,6,7,8],staticUrlTemplate); %>
+  </div>
+</body>
+
+</html>

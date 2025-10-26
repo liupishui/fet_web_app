@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误信息</title>
+    <style>
+        body,html{
+            background: #1e1e1e;
+            color: #f2f2f2;
+        }
+        .errorMessage{
+            font-weight: bold;
+            padding: 0 20px;
+        }
+        .errorMessage .errorCode{
+            color: #f5f53a;
+            margin-right: 10px;
+        }
+        .list-stack{
+            display: flex;
+            flex-flow: column;
+        }
+        .list-stack .item{
+            padding: 0 20px;
+            display: flex;
+            flex-flow: column;
+            line-height: 1.5;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #919191;
+            position: relative;
+        }
+        .list-stack .item::before{
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 10px;
+            border-bottom: 1px solid #999;
+            width: 10px;
+        }
+
+        .list-stack .functionName{
+           color: #ccc;
+        }
+        .list-stack .filename,.list-stack .columnNumber{
+            color: #f5f53a;
+        }
+        .list-stack .columnNumber{
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h3 class="errorMessage">
+        <span class="errorCode">
+            <% if(typeof(error.code)!=='undefined') {%>
+                <%- error.code -%>:
+            <% } %>
+            <% if(typeof(error.errno)!=='undefined') {%>
+                <%- error.errno %>
+            <% } %>
+        </span>
+        <% error.messageArr = error.message.split('\r\n')  %>
+        <% for( let index = 0; index < error.messageArr.length; index++ ) { %>
+            <pre<%- error.messageArr[index].indexOf(' >> ')===0?' style="color:#f5f53a;"':'' %>><%= error.messageArr[index] %></pre>
+        <% } %>
+    </h3>
+    <ul class="list-stack">
+        <% stackframes.forEach(element => { %>
+        <li class="item">
+            <div class="hd">
+                <% 
+                    element.fileName = element.fileName.replace(/\\/g,'/');
+                    var filename = element.fileName.split('/').splice(-2).join('\\');
+                %>
+                <span class="filename"><%= filename %></span>:<span class="columnNumber"><%= element.lineNumber%></span> <span class="functionName"><%= element.functionName %></span>
+            </div>
+            <div class="bd">
+                <%= element.source %>
+            </div>
+            <%# element.lineNumber %>
+        </li>
+        <% }) %>
+    </ul>
+</body>
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <style type="text/css">
+        html,body{
+            background: #f3f3f4;
+        }
+        .form{
+            box-shadow: 0 0 2px #666 inset;
+            background:linear-gradient(#666, #666) left top,
+                    linear-gradient(#666, #666) left top,
+                    linear-gradient(#666, #666) right bottom,
+                    linear-gradient(#666, #666) right bottom;
+            background-repeat: no-repeat;
+            background-size:2px 12px, 12px 20px;
+            width: 90%;
+            margin: 40px auto;
+            padding: 1px;
+            line-height: 1.9;
+        }
+        .form-inner{
+            position: relative;
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            box-sizing: border-box;
+            padding: 15px 20px 40px;
+        }
+        .form .hd{
+            font-size: 36px;
+            padding-bottom: 10px;
+        }
+        .form .hd .sub{
+            font-size: 16px;
+            color: #666;
+        }
+        .form .hd .btn-link{
+            color:#073ff8;
+            text-decoration: none;
+        }
+        .form .hd .btn-link:hover{
+            text-decoration: underline;
+        }
+        .form .bd{
+            font-size: 18px;
+            color: #333;
+        }
+        .form .form-group .label{
+            width: 60px;
+            line-height: 2.2;
+        }
+        .form .form-group{
+            margin-bottom: -5px;
+        }
+        .form .form-group:last-child{
+            margin-bottom: 0;
+        }
+        .form .form-group:last-child .error{
+            margin-top: -10px;
+            padding-bottom: 10px;
+        }
+        .form .input_text{
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+            height: 45px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 18px;
+            transition: all ease .4s;
+        }
+        .form .input_text::placeholder{
+            color: #aaa;
+        }
+        .form .input_text:focus{
+            outline: none;
+            border: 1px solid #073ff8;
+        }
+        .form .error{
+            color: #f00;
+            height: 30px;
+        }
+        .form .btn-submit{
+            width: 30%;
+            min-width: 100px;
+            color: #fff;
+            background: #073ff8;
+            border-radius: 4px;
+            height: 46px;
+            cursor: pointer;
+            border: none;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form">
+        <div class="form-inner">
+            <div class="hd">
+                欢迎注册
+                <div class="sub">
+                    已有账号？<a href="/login" class="btn-link">登录</a>
+                </div>
+            </div>
+            <div class="bd">
+                <div class="form-group">
+                    <div class="label">
+                        用户名
+                    </div>
+                    <div class="form-control">
+                        <input type="text" autocomplete="off" placeholder="4到16位，字母数字下划线" id="username" class="input_text">
+                    </div>
+                    <div class="error" id="username_msg"></div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        密&emsp;码
+                    </div>
+                    <div class="form-control">
+                        <input type="password" id="password" placeholder="6到16位，包括至少一位字母，一个特殊字符" class="input_text">
+                    </div>
+                    <div class="error" id="password_msg"></div>
+                </div>
+                <div class="form-group">
+                    <div class="label">
+                        验证码
+                    </div>
+                    <div class="form-control">
+                        <input type="text" autocomplete="off" id="code" placeholder="请输入验证码" class="input_text">
+                        <img src="/checkcode" width="150" onclick="this.src = '/checkcode?'+new Date().getTime()" height="50" alt="">
+                    </div>
+                    <div class="error" id="code_msg"></div>
+                </div>    
+            </div>
+            <button type="button" class="btn-submit">注册</button> 
+        </div>
+    </div>
+</body>
+<script src="public/scripts/jquery.min.js"></script>
+<script src="public/scripts/crypto-js.min.js"></script>
+<script type="text/javascript">
+    function validate_username(){
+        $("#username_msg").text('');
+        var username =  $("#username").val();
+        if(new RegExp(/^[_a-zA-Z0-9]{4,16}$/).test(username)===false){
+            $("#username_msg").text('4到16位，字母数字下划线');
+        }
+        return true;
+    }
+    function validate_password(){
+        $("#password_msg").text('');
+        var password = $("#password").val();
+        if(new RegExp(/(?=.*[A-Za-z])(?=.*[$@!%*#.?&])[A-Za-z\d$@!%*#.?&]{6,16}$/).test(password)===false){
+            $("#password_msg").text('6到16位，包括至少一位字母，一个特殊字符');
+            return;
+        }
+        return true;
+    }
+    function validate_code(){
+        $("#code_msg").text('');
+        var code = $("#code").val();
+        if(new RegExp(/^[a-zA-Z0-9]{4,4}$/).test(code)===false){
+            $("#code_msg").text('验证码格式不正确');
+            return;
+        }
+        return true;
+    }
+    $("#username").on('input',function(){
+        validate_username();
+    })
+    $("#password").on('input',function(){
+        validate_password();
+    })
+    $("#code").on('input',function(){
+        validate_code();
+    })
+    $("button").click(function(){
+        if(validate_username()===true && validate_password()===true && validate_code()===true){
+            var sendPassword = CryptoJS.MD5($("#password").val()).toString();
+            $.post('/register',{username:$("#username").val(),password:sendPassword,code:$("#code").val()},function(data){
+                if(data.reg==1){
+                    alert('注册成功');
+                    window.location.href = '/login';
+                }else{
+                    $(".form img").trigger('click');
+                    if(data.username){
+                        $("#username_msg").text(data.username);
+                    }
+                    if(data.password){
+                        $("#password_msg").text(data.password);
+                    }
+                    if(data.code){
+                        $("#code_msg").text(data.code);
+                    }
+                }
+            })
+        }
+    });
+</script>
+</html>

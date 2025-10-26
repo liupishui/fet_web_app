@@ -1,0 +1,495 @@
+<% 
+let {app,context,__filename,__dirname} = this %>
+<% 
+    //图片上传
+    // var gg = async function(){
+    //     return '123';
+    // }
+    // var ss = async function(){
+    //     let rst = await gg();
+    //     return rst;
+    // }
+    let that = this;
+    let path = app.require('node:path');
+    let fs = app.require('node:fs');
+    let crypto = app.require('crypto');
+    Uploader = function($fileField, $config, $type = "upload", $watermark = false,$iswater){
+        //console.log($fileField, $config, $type, $watermark = false,$iswater);
+        //context.res.write(this.name);
+        this.fileField = $fileField;
+		this.config = $config;
+		this.type = $type;
+        //this.getFullName();
+
+		if(typeof($iswater)!=='undefined'){
+			if($iswater==1){
+				this.water = true;
+			}else{
+				this.water = false;
+			}
+		}else{
+			this.water = $watermark;
+		}
+		if ( $type === "remote" ) {
+            //远程图片防止版权问题，强制加图片来源
+            this.water = $iswater;
+			// 远程抓取图片，获取文件信息 放在getFileInfo里
+		}
+    };
+    Uploader.prototype.addToDatabase = async function(){
+        //数据存储到数据库
+        if(this.type === "remote"){
+            await this.saveRemote();
+        }else if(this.type === "base64"){
+			await this.upBase64();
+        }else{
+            await this.upFile();
+        }
+        if(this.stateInfo!=='SUCCESS'){
+            return;
+        }
+        const hash = crypto.createHash('md5');
+        let input = fs.readFileSync(this.filePath);
+        hash.update(input);
+        let file_md5 = hash.digest('hex');
+        context.session.start();
+        if(context.session.get('user')==null){
+            try{
+                fs.unlinkSync(this.filePath);
+            }catch(e){}
+            this.stateInfo = this.getStateInfo( "ERROR_Forbidden" );
+            return;
+        }
+        let file_exist = app.tables.files.get({file_md5:file_md5,domain_id:context.session.get('user').domain_id});
+        if(file_exist && file_exist.length > 0){
+            //如果文件已存，则删除刚上传的文件，更新文件信息
+            fs.unlinkSync(this.filePath);
+            this.fileType = path.extname(file_exist[0].path);
+            this.fullName = file_exist[0].path;
+            this.filePath = this.getFilePath();
+            this.fileName = this.getFileName();
+        }else{
+            //如果不存在，则存入数据库
+            let addData = {
+                path:"",
+                source:"",
+                plugin:"",
+                basename_org:"",
+                extname:"",
+                file_size:"",
+                file_index:1,
+                file_total:1,
+                alt:"",
+                height:"",
+                width:"",
+                file_md5:"",
+                names:[
+                    {
+                        xiaohang:"2"
+                        }
+                ],
+                user_id:1
+            }
+            addData.path = this.fullName;
+            addData.basename_org = this.oriName;
+            if(this.type==='remote'){
+                addData.source = this.water;
+                addData.basename_org = path.basename(this.fullName);
+            }
+            addData.plugin = 'ueditor';
+            addData.extname = this.fileType;
+            addData.file_size = this.fileSize;
+            addData.file_md5 = file_md5;
+            addData.user_id = context.session.get('user').id;
+            let imgSize = await context.use(app.utils.img.size,this.filePath);
+            addData.width = imgSize.width;
+            addData.height = imgSize.height;
+            addData.domain_id = context.session.get('user').domain_id;
+            let rst = app.tables.files.add(addData);
+        }
+        return true;
+    }
+    Uploader.prototype.BufferIsImg = function(buffer){
+        const fileHeader = buffer.toString('hex', 0, 4);
+        
+        if (fileHeader.startsWith('89504e47')) {
+            // PNG 文件的文件头
+            return '.png';
+        } else if (fileHeader.startsWith('ffd8')) {
+            // JPEG 文件的文件头
+            return '.jpg';
+        } else if (fileHeader.startsWith('47494638')) {
+            // GIF 文件的文件头
+            return '.gif';
+        } else if (fileHeader.startsWith('424d')) {
+            // BMP 文件的文件头
+            return '.bmp';
+        } else {
+            return false;
+        }
+    }
+    Uploader.prototype.saveRemote = async function(){
+        $imgUrl = decodeURIComponent(this.fileField);
+        $imgUrl = $imgUrl.replace('&amp;','&');
+        //http开头验证
+        if ( $imgUrl.indexOf('http') !== 0 ) {
+            this.stateInfo = this.getStateInfo( "ERROR_HTTP_LINK" );
+            return;
+        }
+
+        //获取远程图片
+        let data = await app.lib.axios().get(this.fileField,{responseType:'arraybuffer'}); 
+        //验证是否是真实图片
+        this.fileType = this.BufferIsImg(data.data);
+        if(this.fileType===false){
+            this.stateInfo = this.getStateInfo( "ERROR_TYPE_NOT_ALLOWED" );
+            return;
+        }
+
+        this.oriName = $imgUrl;
+        this.fileSize = data.data.length;
+        this.fullName = this.getFullName();
+        this.filePath = this.getFilePath();
+        this.fileName = this.getFileName();
+        $dirname = path.dirname(this.filePath);
+        //检查文件大小是否超出限制
+        //远程图片暂时不设置大小
+        // if ( this.checkSize() ) {
+        //     this.stateInfo = this.getStateInfo( "ERROR_SIZE_EXCEED" );
+        //     return;
+        // }
+		//创建目录失败
+
+        if(!fs.existsSync($dirname)){
+            let isMakdir = false;
+            try{
+                fs.mkdirSync($dirname,{recursive:true});
+                isMakdir = true;
+            }catch(e){
+            }
+            if(isMakdir===false){
+                this.stateInfo = this.getStateInfo( "ERROR_CREATE_DIR" );
+                return;
+            }
+        }
+        
+        //移动文件
+        fs.writeFileSync(this.filePath,data.data);
+        this.stateInfo = this.getStateInfo( "0" )
+        await this.watermark(this.filePath,this.filePath,this.water);
+        //console.log(data)
+        return true;
+    }
+    Uploader.prototype.upFile = async function(){
+        //console.log(context.post)
+        this.file = context.post.__files[this.fileField];
+        let $file = this.file;
+        if(typeof($file)==='undefined'){
+            this.stateInfo = this.getStateInfo("ERROR_FILE_NOT_FOUND");
+            return;
+        }
+        if(this.file['error']){
+            this.stateInfo = this.getStateInfo($file[ 'error' ]);
+            return;
+        }else if(!fs.existsSync($file.path)){
+            this.stateInfo = this.getStateInfo("ERROR_TMP_FILE_NOT_FOUND");
+            return;
+        }
+        this.oriName = $file['name'];
+        this.fileSize = $file['size'];
+        this.fileType = this.getFileExt();
+        this.fullName = this.getFullName();
+        this.filePath = this.getFilePath();
+        this.fileName = this.getFileName();
+        let $dirname = path.dirname(this.filePath);
+		//检查文件大小是否超出限制
+        if(!this.checkSize()){
+            this.stateInfo = this.getStateInfo( "ERROR_SIZE_EXCEED" );
+            fs.unlinkSync($file.path);
+            return;
+        }
+		//创建目录失败
+        if(!fs.existsSync($dirname)){
+            let isMakdir = false;
+            try{
+                fs.mkdirSync($dirname,{recursive:true});
+                isMakdir = true;
+            }catch(e){
+            }
+            if(isMakdir===false){
+                this.stateInfo = this.getStateInfo( "ERROR_CREATE_DIR" );
+                fs.unlinkSync($file.path);
+                return;
+            }
+        }
+		//移动文件
+        if(fs.existsSync(this.filePath)){
+            this.stateInfo = this.getStateInfo( "ERROR_FILE_MOVE" );
+            fs.unlinkSync($file.path);
+            return;
+        }
+        try{
+            fs.renameSync($file.path, this.filePath);
+            this.stateInfo = this.getStateInfo( "0" );
+        }catch(e){
+            this.stateInfo = this.getStateInfo( "ERROR_FILE_MOVE" );
+            fs.unlinkSync($file.path);
+            return;
+        }
+
+        //添加水印
+        if(this.water){
+            //待完成
+            await this.watermark(this.filePath,this.filePath);
+        }
+        return;
+    }
+
+    /**
+    * 上传base64
+    */
+    Uploader.prototype.upBase64 = async function(){
+        let $base64Data = context.post[this.fileField];
+        let $img = Buffer.from($base64Data,'base64');
+        this.oriName = this.config[ 'oriName' ];
+		this.fileSize = $img.length;
+		this.fileType = this.getFileExt();
+		this.fullName = this.getFullName();
+		this.filePath = this.getFilePath();
+		this.fileName = this.getFileName();
+		$dirname = path.dirname( this.filePath );
+
+        //检查文件大小是否超出限制
+        if(!this.checkSize()){
+            this.stateInfo = this.getStateInfo( "ERROR_SIZE_EXCEED" );
+            return;
+        }
+
+        //检查是否不允许的文件格式
+        if(!this.checkType){
+            this.stateInfo = this.getStateInfo( "ERROR_TYPE_NOT_ALLOWED" );
+            return;
+        }
+
+        //创建目录失败
+        if(!fs.existsSync($dirname)){
+            let isMakdir = false;
+            try{
+                fs.mkdirSync($dirname,{recursive:true});
+                isMakdir = true;
+            }catch(e){
+            }
+            if(isMakdir===false){
+                this.stateInfo = this.getStateInfo( "ERROR_CREATE_DIR" );
+                return;
+            }
+        }
+
+        //移动文件
+        if(fs.existsSync(this.filePath)){
+            this.stateInfo = this.getStateInfo( "ERROR_FILE_MOVE" );
+            return;
+        }
+        try{
+            fs.writeFileSync(this.filePath, $img);
+            this.stateInfo = this.getStateInfo( "0" );
+        }catch(e){
+            this.stateInfo = this.getStateInfo( "ERROR_FILE_MOVE" );
+            return;
+        }
+        //添加水印
+        if(this.water){
+            //待完成
+            await this.watermark(this.filePath,this.filePath);
+        }
+        return;
+    }
+
+    /**
+    * 上传错误检查
+    * @param $errCode
+    * @return string
+    */
+    Uploader.prototype.getStateInfo = function($errCode){
+        return this.$stateMap[$errCode] ? this.$stateMap[$errCode]: this.$stateMap[ "ERROR_UNKNOWN" ];
+    }
+
+	/**
+	 * 获取文件扩展名
+	 * @return string
+	 */
+    Uploader.prototype.getFileExt = function(){
+        return path.extname(this.oriName);
+    }
+
+    /**
+	 * 重命名文件
+	 * @return string
+	 */
+    Uploader.prototype.getFullName = function(){
+        let date = app.getNowTime().date.split('_');
+        let time = app.getNowTime().time.split(':');
+        let $d = [...date,...time];
+        let $format = this.config[ "pathFormat" ];
+        $format = $format.replace('{yyyy}',$d[ 0 ]);
+        $format = $format.replace('{yy}',$d[ 0 ].substr(2));
+        $format = $format.replace('{mm}',$d[ 1 ]);
+        $format = $format.replace('{dd}',$d[ 2 ]);
+        $format = $format.replace('{hh}',$d[ 3 ]);
+        $format = $format.replace('{ii}',$d[ 4 ]);
+        $format = $format.replace('{ss}',$d[ 5 ]);
+        $format = $format.replace('{time}',context.runtime);
+
+        //过滤文件名的非法字符,并替换文件名
+		$oriName = this.oriName.substr(0,this.oriName.indexOf('.'));
+		$oriName = $oriName.replace(/[\|\?\"\<\>\/\*\\\\]+/,$oriName );
+		$format = $format.replace("{filename}", $oriName);
+
+        //替换随机字符串
+		$randNum = Math.random().toString().substr(2);
+        let $randNumMatch = $format.match(/\{rand\:([\d]*)\}/i);
+        if($randNumMatch){
+            // console.log($randNum.substr(0,$randNumMatch[1]));
+            // console.log($format.match(/\{rand\:[\d]*\}/));
+            $format = $format.replace(/\{rand\:[\d]*\}/i,$randNum.substr(0,$randNumMatch[1]));
+        }
+        if ( this.fileType ) {
+			$ext = this.fileType;
+		} else {
+			$ext = this.getFileExt();
+		}
+        //console.log(222,$format + $ext);
+		return $format + $ext;
+    }
+
+    /**
+	 * 获取文件名
+	 * @return string
+	 */
+    Uploader.prototype.getFileName = function(){
+        return path.basename(this.filePath);
+    }
+
+    /**
+	 * 获取文件完整路径
+	 * @return string
+	 */
+    Uploader.prototype.getFilePath = function(){
+        $fullname = this.fullName;
+		$rootPath = app.serverPath+'/view/';
+		return $rootPath + $fullname;
+    }
+
+    /**
+	 * 文件类型检测
+	 * @return bool
+	 */
+    Uploader.prototype.checkType = function(){
+        return this.config[ "allowFiles" ].includes(this.getFileExt());
+    }
+
+    /**
+	 * 文件大小检测
+	 * @return bool
+	 */
+     Uploader.prototype.checkSize = function(){
+        return this.fileSize <= this.config["maxSize"];
+     }
+    
+     /**
+	 * 获取当前上传成功文件的各项信息
+	 * @return array
+	 */
+     Uploader.prototype.getFileInfo = async function(){
+        let addRst = await this.addToDatabase();
+        return {
+            state:this.stateInfo,
+            url:this.fullName,
+            title:this.fileName,
+            source:this.oriName,
+            original:this.oriName,
+            type:this.fileType,
+            size:this.fileSize,
+        };
+    }
+
+    /*
+    * 图片加水印
+    * $source  string  图片资源
+    * $target  string  添加水印后的名字
+    * $w_pos   int     水印位置安排（1-10）【1:左头顶；2:中间头顶；3:右头顶...值空:随机位置】
+    * $w_img   string  水印图片路径
+    * $w_text  string  显示的文字
+    * $w_font  int     字体大小
+    * $w_color string  字体颜色
+   */
+
+   Uploader.prototype.watermark = async function($source, $target, $w_text = ''){
+        if($w_text!==''){
+            //console.dir(context.url);
+            let pareUrl = context.url.parse($w_text);
+            let copyrightWebsite = pareUrl.protocol+'//'+pareUrl.hostname;
+            //console.log();
+            let rst = await context.use(app.utils.img.watermark, $source, $target, 9, '',copyrightWebsite, 16, '#CC0000');
+        }else{
+            let rst = await context.use(app.utils.img.watermark, $source, $target, 9, __dirname+'/water/watermark.png',$w_text,10, '#CC0000');
+        }
+    }
+
+    Uploader.prototype.check =function($image){
+        //判断图片是否存在和是否是图片
+        return fs.existsSync($image);
+    }
+    Uploader.prototype.oriName = '';
+    Uploader.prototype.fileField = '';
+    Uploader.prototype.config = '';
+    Uploader.prototype.type = '';
+    Uploader.prototype.$stateMap = {
+        "0":"SUCCESS",
+        "1":"文件大小超出 upload_max_filesize 限制",
+        "2":"文件大小超出 MAX_FILE_SIZE 限制",
+        "3":"文件未被完整上传",
+        "4":"没有文件被上传",
+        "5":"上传文件为空",
+        "ERROR_TMP_FILE" : "临时文件错误",
+        "ERROR_TMP_FILE_NOT_FOUND" : "找不到临时文件",
+        "ERROR_SIZE_EXCEED" : "文件大小超出网站限制",
+        "ERROR_TYPE_NOT_ALLOWED" : "文件类型不允许",
+        "ERROR_CREATE_DIR" : "目录创建失败",
+        "ERROR_DIR_NOT_WRITEABLE" : "目录没有写权限",
+        "ERROR_FILE_MOVE" : "文件保存时出错",
+        "ERROR_FILE_NOT_FOUND" : "找不到上传文件",
+        "ERROR_WRITE_CONTENT" : "写入文件内容错误",
+        "ERROR_UNKNOWN" : "未知错误",
+        "ERROR_DEAD_LINK" : "链接不可用",
+        "ERROR_HTTP_LINK" : "链接不是http链接",
+        "ERROR_HTTP_CONTENTTYPE" : "链接contentType不正确",
+        "ERROR_Forbidden" : "用户未登录，禁止上传"
+    }
+    // let fs = app.require('node:fs');
+    // let path = app.require('node:path');
+    // //移动上传的文件到/view/public/ueditor/images/2023-03-23/下
+
+    // let newImgPathUrlPath = '/public/ueditor/images/' + app.getNowTime().date + '/';
+    // //创建图片存储文件夹
+    // if (!fs.existsSync(app.serverPath + '/view/' + newImgPathUrlPath)) {
+    //     fs.mkdirSync(app.serverPath + '/view/' + newImgPathUrlPath, { recursive: true });
+    // }
+    
+    // //新图片可访问url全路径
+    // let newImgPathUrlPathFull = newImgPathUrlPath + app.lib.uuid().v4() + '-' + context.runtime + path.extname(context.post.__files.upfile.name);
+
+    // //将上传图片移动到新的文件夹
+    // fs.renameSync(context.post.__files.upfile.path, app.serverPath + '/view/' + newImgPathUrlPathFull);
+
+    // //{"state":"SUCCESS","url":"\/ueditor\/php\/upload\/image\/20230712\/1689132544795056.jpg","title":"1689132544795056.jpg","original":"111.jpg","type":".jpg","size":82751}
+    // let resData = {
+    //     "state":"SUCCESS",
+    //     "url":newImgPathUrlPathFull,
+    //     "title":path.basename(newImgPathUrlPathFull),
+    //     "original":context.post.__files.upfile.name,
+    //     "type":path.extname(newImgPathUrlPathFull),
+    //     "size":context.post.__files.upfile.size
+    // }
+    // context.toJSON(resData,true);
+%>

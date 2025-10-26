@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>创建群聊</title>
+    <script type="text/javascript" src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="styles/default.css" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/iconfont/iconfont.css" />
+</head>
+
+<body>
+    <div class="wp">
+        <div class="topbar topbar_fixed">
+            <div class="topbar_inner">
+                <div class="topbar_l">
+                    <a href="" class="btn-back">
+                        <div class="icon-wp">
+                            <span class="iconfont icon-arr_l"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="topbar_c">
+                    创建群聊
+                </div>
+                <div class="topbar_r">
+                    <a href="" class="btn-del text-blue">
+                        清空
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="list-address_book list-address_book_group_make">
+            <div class="searchbox_wp">
+                <div class="searchbox">
+                    <div class="searchbox_inner">
+                        <div class="icon-wp">
+                            <span class="iconfont icon-search"></span>
+                        </div>
+                        <div class="form-control">
+                            <input type="text" class="input_text" placeholder="搜索关键词">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="item-group" id="A">
+                    <div class="item item-index">
+                        A
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" checked class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            啊呀
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            阿凌
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" checked class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            安娜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar4.png);"></div>
+                        <div class="name">
+                            A伊娃
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar5.png);"></div>
+                        <div class="name">
+                            艾琳
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="B">
+                    <div class="item item-index">
+                        B
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="C">
+                    <div class="item item-index">
+                        C
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="D">
+                    <div class="item item-index">
+                        D
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="E">
+                    <div class="item item-index">
+                        E
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="F">
+                    <div class="item item-index">
+                        F
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="G">
+                    <div class="item item-index">
+                        G
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="H">
+                    <div class="item item-index">
+                        H
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="I">
+                    <div class="item item-index">
+                        I
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="J">
+                    <div class="item item-index">
+                        J
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="K">
+                    <div class="item item-index">
+                        K
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="L">
+                    <div class="item item-index">
+                        L
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="M">
+                    <div class="item item-index">
+                        M
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="N">
+                    <div class="item item-index">
+                        N
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="O">
+                    <div class="item item-index">
+                        O
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="P">
+                    <div class="item item-index">
+                        P
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="Q">
+                    <div class="item item-index">
+                        Q
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="R">
+                    <div class="item item-index">
+                        R
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="S">
+                    <div class="item item-index">
+                        S
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="T">
+                    <div class="item item-index">
+                        T
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="U">
+                    <div class="item item-index">
+                        U
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="V">
+                    <div class="item item-index">
+                        V
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="W">
+                    <div class="item item-index">
+                        W
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="X">
+                    <div class="item item-index">
+                        X
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="Y">
+                    <div class="item item-index">
+                        Y
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="Z">
+                    <div class="item item-index">
+                        Z
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+                <div class="item-group" id="other">
+                    <div class="item item-index">
+                        #
+                    </div>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </label>
+                    <label class="item">
+                        <input type="checkbox" class="input_checkbox" />
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="aside_bar_index">
+            <div class="item" data-target="top">
+                <span class="icon-wp">
+                    <span class="iconfont icon-arr_t"></span>
+                </span>
+                <div class="show">
+                    <span class="icon-wp">
+                        <span class="iconfont icon-arr_t"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="item" data-target="A">
+                A
+                <div class="show">A</div>
+            </div>
+            <div class="item" data-target="B">
+                B
+                <div class="show">B</div>
+            </div>
+            <div class="item" data-target="C">
+                C
+                <div class="show">C</div>
+            </div>
+            <div class="item" data-target="D">
+                D
+                <div class="show">D</div>
+            </div>
+            <div class="item" data-target="E">
+                E
+                <div class="show">E</div>
+            </div>
+            <div class="item" data-target="F">
+                F
+                <div class="show">F</div>
+            </div>
+            <div class="item" data-target="G">
+                G
+                <div class="show">G</div>
+            </div>
+            <div class="item" data-target="H">
+                H
+                <div class="show">H</div>
+            </div>
+            <div class="item" data-target="I">
+                I
+                <div class="show">I</div>
+            </div>
+            <div class="item" data-target="J">
+                J
+                <div class="show">J</div>
+            </div>
+            <div class="item" data-target="K">
+                K
+                <div class="show">K</div>
+            </div>
+            <div class="item" data-target="L">
+                L
+                <div class="show">L</div>
+            </div>
+            <div class="item" data-target="M">
+                M
+                <div class="show">M</div>
+            </div>
+            <div class="item" data-target="N">
+                N
+                <div class="show">N</div>
+            </div>
+            <div class="item" data-target="O">
+                O
+                <div class="show">O</div>
+            </div>
+            <div class="item" data-target="P">
+                P
+                <div class="show">P</div>
+            </div>
+            <div class="item" data-target="Q">
+                Q
+                <div class="show">Q</div>
+            </div>
+            <div class="item" data-target="R">
+                R
+                <div class="show">R</div>
+            </div>
+            <div class="item" data-target="S">
+                S
+                <div class="show">S</div>
+            </div>
+            <div class="item" data-target="T">
+                T
+                <div class="show">T</div>
+            </div>
+            <div class="item" data-target="U">
+                U
+                <div class="show">U</div>
+            </div>
+            <div class="item" data-target="V">
+                V
+                <div class="show">V</div>
+            </div>
+            <div class="item" data-target="W">
+                W
+                <div class="show">W</div>
+            </div>
+            <div class="item" data-target="X">
+                X
+                <div class="show">X</div>
+            </div>
+            <div class="item" data-target="Y">
+                Y
+                <div class="show">Y</div>
+            </div>
+            <div class="item" data-target="Z">
+                Z
+                <div class="show">Z</div>
+            </div>
+            <div class="item" data-target="other">
+                #
+                <div class="show">#</div>
+            </div>
+
+        </div>
+        <div class="group_user_selected">
+            <div class="num_selected">
+                已选2人
+            </div>
+            <div class="items-selected">
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                    <div class="name">
+                        啊呀fd
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                    <div class="name">
+                        阿凌
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                    <div class="name">
+                        阿凌
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                    <div class="name">
+                        阿凌
+                    </div>
+                </div>
+            </div>
+            <button class="btn-confirm">确定</button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+<script type="text/javascript">
+    renderWordIndex();
+</script>
+
+</html>

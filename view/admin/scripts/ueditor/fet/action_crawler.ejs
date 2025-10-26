@@ -1,0 +1,25 @@
+<% let {context,app,__filename,__dirname} = this; %>
+<%- await include('./uploader.class.ejs', {config: config }) %>
+<%
+$config = {
+    "pathFormat" : config['catcherPathFormat'],
+    "maxSize": config['catcherMaxSize'],
+    "allowFiles" : config['catcherAllowFiles'],
+    "oriName" : "remote.png"
+};
+$fieldName = config['catcherFieldName'];
+$list = {};
+$list.list=[];
+if (context.post[$fieldName]) {
+    $source = context.post[$fieldName];
+} else {
+    $source = context.url.query[$fieldName];
+}
+$source = JSON.parse($source);
+for(let i=0;i<$source.length;i++){
+    let uploader = new Uploader($source[i].src, $config, 'remote', false, $source[i].from);
+   let rst = await uploader.getFileInfo();
+   $list.list.push(rst);
+}
+context.toJSON($list);
+%>

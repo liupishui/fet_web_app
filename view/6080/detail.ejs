@@ -1,0 +1,145 @@
+<% 
+    let {context,app,require} = this;
+    let baseURL = require('config.fet').baseURL;
+        context.LRU_HREF_PAGE_OPTION = {ttl:1};
+%>
+<% 
+    let movieData = await context.use(app.utils.api6080.getMovieDetailByIdArray,baseURL,[context.url.query.videoid]);
+    let videoOrder = context.url.query.order ? parseInt(context.url.query.order) : 0;
+%>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title><%- movieData.list.video[0].name; %></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+  <style type="text/css">
+    p {
+      padding: 0;
+    }
+
+    .playlist a {
+      color: #333;
+    }
+
+    .playlist .curr {
+      font-weight: bold;
+      font-size: 16px;
+      color: crimson;
+    }
+
+    .playbox {
+      width: 70%;
+      margin: 0 auto;
+    }
+
+    @media screen and (max-width:1024px) {
+      .playbox {
+        width: 96%;
+      }
+    }
+  </style>
+  <div class="playbox">
+    <div style="padding-bottom: 56.25%;position: relative;">
+      <div style="width: 100%;height: 100%;position: absolute;background-color: #000;" id="nihao">
+      </div>
+    </div>
+    <div style="padding-top: 20px;">剧集列表：</div>
+    <div class="playlist">
+      <%
+      let videoListObject = movieData.list.video[0].dl.dd;
+      if(movieData.list.video[0].dl.dd instanceof Array){
+        videoListObject = movieData.list.video[0].dl.dd.filter((item)=>{
+          return item._.indexOf('.m3u8')!==-1
+        })[0]
+      };
+      %>
+      <% let videoList = videoListObject._.split('#'); %>
+      <% videoList.forEach((video,index)=>{ %>
+      <a data-url="<%-video.split('$')[1]%>" href="<%- `${context.url.pathname}?videoid=${context.url.query.videoid}&order=${index}`;%>" class="<%- index==videoOrder?'curr':''; %>">
+        <%- video.split('$')[0] %>
+      </a>
+      <%  }) %>
+    </div>
+    <h1 style="font-size: 18px;font-weight: bold;padding: 10px 0 10px;">
+      <%- movieData.list.video[0].name; %>
+    </h1>
+    <div style="color: #666;">
+      <%- movieData.list.video[0].des; %>
+    </div>
+  </div>
+  <script src="https://cdn.staticfile.org/jquery/1.9.1/jquery.min.js"></script>
+  <script src="/public/dplayer/hls.min.js"></script>
+  <script src="/public/dplayer/DPlayer.min.js"></script>
+  <script src="/public/artplayer/artplayer.js"></script>
+  <script>
+    // var playerObject = '';
+    //     playerObject = new DPlayer({
+    //         container: $("#nihao")[0],
+    //         autoplay: false,
+    //         theme:'#01dc1c',
+    //         type:'normal',
+    //         video: {
+    //             url: ""
+    //         }
+    //     });
+    // setTimeout(function(){
+    //     playerObject.play&&playerObject.play();
+    // },10000);
+    function playM3u8(video, url, art) {
+      if (Hls.isSupported()) {
+        if (art.hls) art.hls.destroy();
+        const hls = new Hls();
+        hls.loadSource(url);
+        hls.attachMedia(video);
+        art.hls = hls;
+        art.on('destroy', () => hls.destroy());
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = url;
+      } else {
+        art.notice.show = 'Unsupported playback format: m3u8';
+      }
+    }
+    <% let videos =  videoListObject._.split('#');
+       let videosArr = videos.map(function(item){return item.split('$')[1]});
+    %>
+    var urlAll = <%-JSON.stringify(videosArr);%>;
+    var art = new Artplayer({
+      container: $("#nihao")[0],
+      url: "<%- videoListObject._.split('#')[videoOrder].split('$')[1];%>",
+      autoplay: true,
+      type: 'm3u8',
+      flip:true,
+      fullscreen:true,
+      //fullscreenWeb:true,
+      pip:true,
+      autoMini:true,
+      customType: {
+        m3u8: playM3u8,
+      },
+    });
+    let timmerNext = '';
+    art.on('ready', () => {
+      console.info(art.hls);
+      console.info(art);
+      timmerNext = setInterval(function() {
+        if ((art.currentTime - art.duration > -2) && art.currentTime != 0 ) {
+          if ($(".playlist a[class='curr']").index() != urlAll.length-1) {
+            $(".playlist a[class='curr']").next().trigger('click');
+          }
+        }
+      }, 1000);
+    });
+    $(".playlist").delegate('a','click',function(e){
+      e.preventDefault();
+      art.switch = $(e.target).attr('data-url');
+      $(e.target).siblings().removeClass('curr').end().addClass('curr');
+    });
+  </script>
+</body>
+
+</html>

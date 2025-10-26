@@ -1,0 +1,50 @@
+<% 
+    let {context,app,__filename} = this;
+%>
+<%- await include('./uploader.class.ejs', {config: config }) %>
+<%
+    /* 上传配置 */
+    $base64 = "upload";
+    $watermark = "false";
+switch (context.url.query['action']) {
+    case 'uploadimage':
+        $config = {
+            "pathFormat": config['imagePathFormat'],
+            "maxSize": config['imageMaxSize'],
+            "allowFiles": config['imageAllowFiles']
+        };
+        $fieldName = config['imageFieldName'];
+        $watermark = config['imageWatermark'];
+        break;
+    case 'uploadscrawl':
+        $config = {
+            "pathFormat": config['scrawlPathFormat'],
+            "maxSize": config['scrawlMaxSize'],
+            "allowFiles": config['scrawlAllowFiles'],
+            "oriName": "scrawl.png"
+        };
+        $fieldName = config['scrawlFieldName'];
+        $base64 = "base64";
+        break;
+    case 'uploadvideo':
+        $config = {
+            "pathFormat": config['videoPathFormat'],
+            "maxSize": config['videoMaxSize'],
+            "allowFiles": config['videoAllowFiles']
+        };
+        $fieldName = config['videoFieldName'];
+        break;
+    case 'uploadfile':
+    default:
+        $config = {
+            "pathFormat": config['filePathFormat'],
+            "maxSize": config['fileMaxSize'],
+            "allowFiles": config['fileAllowFiles']
+        };
+        $fieldName = config['fileFieldName'];
+        break;
+}
+let uploader = new Uploader($fieldName, $config, $base64, $watermark, context.url.query.iswater);
+//context.res.write(uploader.name);
+context.toJSON(await uploader.getFileInfo());
+%>

@@ -1,0 +1,10 @@
+html{
+    --main-color:#ef49ad;
+}
+body{
+    color: var(--main-color);
+}
+.test{
+    --main-color:#e58a89;
+    color: var(--main-color);
+}

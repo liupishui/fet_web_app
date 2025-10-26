@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>通讯录</title>
+    <script type="text/javascript" src="scripts/rem.js"></script>
+    <link rel="stylesheet" href="styles/default.css" />
+    <link rel="stylesheet" href="styles/reset.css" />
+    <link rel="stylesheet" href="styles/iconfont/iconfont.css" />
+</head>
+
+<body>
+    <div class="wp">
+        <div class="topbar topbar_fixed">
+            <div class="topbar_inner">
+                <div class="topbar_l">
+                </div>
+                <div class="topbar_c">
+                    通讯录
+                </div>
+                <div class="topbar_r">
+                    <a href="" class="btn-add_gray">
+                        <span class="iconfont icon-add"></span>
+                    </a>
+                    <div class="drop_menu">
+                        <a href="group_make.html" class="item">发起群聊</a>
+                        <a href="" class="item">添加好友</a>
+                        <a href="" class="item">扫一扫</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="list-address_book">
+            <div class="searchbox_wp">
+                <div class="searchbox">
+                    <div class="searchbox_inner">
+                        <div class="icon-wp">
+                            <span class="iconfont icon-search"></span>
+                        </div>
+                        <div class="form-control">
+                            <input type="text" class="input_text" placeholder="搜索关键词">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="item-group" id="top">
+                    <div class="item item-user_add">
+                        <div class="avatar">
+                            <span class="iconfont icon-user_add"></span>
+                        </div>
+                        <div class="name">
+                            新的朋友
+                        </div>
+                    </div>
+                    <a href="friend_group.html" class="item item-friend_group">
+                        <div class="avatar">
+                            <span class="iconfont icon-friend_group"></span>
+                        </div>
+                        <div class="name">
+                            分组
+                        </div>
+                    </a>
+                    <a href="group_list.html" class="item item-user_group">
+                        <div class="avatar">
+                            <span class="iconfont icon-group"></span>
+                        </div>
+                        <div class="name">
+                            群聊
+                        </div>
+                    </a>
+
+                </div>
+                <div class="item-group" id="A">
+                    <div class="item item-index">
+                        A
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            啊呀
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            阿凌
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            安娜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar4.png);"></div>
+                        <div class="name">
+                            A伊娃
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar5.png);"></div>
+                        <div class="name">
+                            艾琳
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="B">
+                    <div class="item item-index">
+                        B
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="C">
+                    <div class="item item-index">
+                        C
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="D">
+                    <div class="item item-index">
+                        D
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="E">
+                    <div class="item item-index">
+                        E
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="F">
+                    <div class="item item-index">
+                        F
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="G">
+                    <div class="item item-index">
+                        G
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="H">
+                    <div class="item item-index">
+                        H
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="I">
+                    <div class="item item-index">
+                        I
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="J">
+                    <div class="item item-index">
+                        J
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="K">
+                    <div class="item item-index">
+                        K
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="L">
+                    <div class="item item-index">
+                        L
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="M">
+                    <div class="item item-index">
+                        M
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="N">
+                    <div class="item item-index">
+                        N
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="O">
+                    <div class="item item-index">
+                        O
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="P">
+                    <div class="item item-index">
+                        P
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="Q">
+                    <div class="item item-index">
+                        Q
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="R">
+                    <div class="item item-index">
+                        R
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="S">
+                    <div class="item item-index">
+                        S
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="T">
+                    <div class="item item-index">
+                        T
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="U">
+                    <div class="item item-index">
+                        U
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="V">
+                    <div class="item item-index">
+                        V
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="W">
+                    <div class="item item-index">
+                        W
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="X">
+                    <div class="item item-index">
+                        X
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="Y">
+                    <div class="item item-index">
+                        Y
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="Z">
+                    <div class="item item-index">
+                        Z
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+                <div class="item-group" id="other">
+                    <div class="item item-index">
+                        #
+                    </div>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar1.png);"></div>
+                        <div class="name">
+                            卜卜
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar2.png);"></div>
+                        <div class="name">
+                            白茶
+                        </div>
+                    </a>
+                    <a href="person_info.html" class="item">
+                        <div class="avatar" style="background-image: url(images/avatar3.png);"></div>
+                        <div class="name">
+                            BlingBling
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="aside_bar_index">
+            <div class="item" data-target="top">
+                <span class="icon-wp">
+                    <span class="iconfont icon-arr_t"></span>
+                </span>
+                <div class="show">
+                    <span class="icon-wp">
+                        <span class="iconfont icon-arr_t"></span>
+                    </span>
+                </div>
+            </div>
+            <div class="item" data-target="A">
+                A
+                <div class="show">A</div>
+            </div>
+            <div class="item" data-target="B">
+                B
+                <div class="show">B</div>
+            </div>
+            <div class="item" data-target="C">
+                C
+                <div class="show">C</div>
+            </div>
+            <div class="item" data-target="D">
+                D
+                <div class="show">D</div>
+            </div>
+            <div class="item" data-target="E">
+                E
+                <div class="show">E</div>
+            </div>
+            <div class="item" data-target="F">
+                F
+                <div class="show">F</div>
+            </div>
+            <div class="item" data-target="G">
+                G
+                <div class="show">G</div>
+            </div>
+            <div class="item" data-target="H">
+                H
+                <div class="show">H</div>
+            </div>
+            <div class="item" data-target="I">
+                I
+                <div class="show">I</div>
+            </div>
+            <div class="item" data-target="J">
+                J
+                <div class="show">J</div>
+            </div>
+            <div class="item" data-target="K">
+                K
+                <div class="show">K</div>
+            </div>
+            <div class="item" data-target="L">
+                L
+                <div class="show">L</div>
+            </div>
+            <div class="item" data-target="M">
+                M
+                <div class="show">M</div>
+            </div>
+            <div class="item" data-target="N">
+                N
+                <div class="show">N</div>
+            </div>
+            <div class="item" data-target="O">
+                O
+                <div class="show">O</div>
+            </div>
+            <div class="item" data-target="P">
+                P
+                <div class="show">P</div>
+            </div>
+            <div class="item" data-target="Q">
+                Q
+                <div class="show">Q</div>
+            </div>
+            <div class="item" data-target="R">
+                R
+                <div class="show">R</div>
+            </div>
+            <div class="item" data-target="S">
+                S
+                <div class="show">S</div>
+            </div>
+            <div class="item" data-target="T">
+                T
+                <div class="show">T</div>
+            </div>
+            <div class="item" data-target="U">
+                U
+                <div class="show">U</div>
+            </div>
+            <div class="item" data-target="V">
+                V
+                <div class="show">V</div>
+            </div>
+            <div class="item" data-target="W">
+                W
+                <div class="show">W</div>
+            </div>
+            <div class="item" data-target="X">
+                X
+                <div class="show">X</div>
+            </div>
+            <div class="item" data-target="Y">
+                Y
+                <div class="show">Y</div>
+            </div>
+            <div class="item" data-target="Z">
+                Z
+                <div class="show">Z</div>
+            </div>
+            <div class="item" data-target="other">
+                #
+                <div class="show">#</div>
+            </div>
+
+        </div>
+        <div class="tabbar">
+            <div class="tabbar_inner">
+                <a href="chat.html" class="item">
+                    <div class="icon-wp">
+                        <span class="iconfont icon-tabbar_chat"></span>
+                    </div>
+                    聊天
+                </a>
+                <a href="address_book.html" class="item active">
+                    <div class="icon-wp">
+                        <span class="iconfont icon-tabbar_address_book_active"></span>
+                    </div>
+                    通讯录
+                </a>
+                <a href="find.html" class="item">
+                    <div class="icon-wp">
+                        <span class="iconfont icon-tabbar_find"></span>
+                    </div>
+                    发现
+                </a>
+                <a href="member.html" class="item">
+                    <div class="icon-wp">
+                        <span class="iconfont icon-tabbar_member"></span>
+                    </div>
+                    我的
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+
+</html>

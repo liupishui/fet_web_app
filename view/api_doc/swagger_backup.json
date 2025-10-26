@@ -1,0 +1,2301 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "企业站建设",
+    "version": "1.0.0",
+    "description": "企业站建设api规范。<br/> 所有错误返回json格式为{\"code\":0,\"data\":{\"message\":\"错误消息\"}} <br/>所有执行成功返回json格式为{\"code\":1,\"data\":{\"message\":\"成功消息\"}}<br/>api编辑器地址 https://editor.swagger.io/ <br/>",
+    "contact": {
+      "name": "刘丕水",
+      "url": "http://www.qk6080.com",
+      "email": "550830233@qq.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "http://www.xiaoshengkeji.com/"
+  },
+  "servers": [
+    {
+      "url": "https://fjblti77-zhuifengh3o.mock.coding.io",
+      "description": "生产环境"
+    },
+    {
+      "url": "https://fjblti77-zhuifengh3o.mock.coding.io",
+      "description": "测试环境"
+    },
+    {
+      "url": "/api/",
+      "description": "本地"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "summary": "微信用户登录。后台根据用户的注册(认证状态)返回不同的信息，注意看返回示例",
+        "responses": {
+          "200": {
+            "description": "用户登录返回",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "avatar": {
+                      "type": "string",
+                      "description": "微信头像"
+                    },
+                    "token": {
+                      "type": "string",
+                      "description": "jwt Token"
+                    },
+                    "nickName": {
+                      "type": "string",
+                      "description": "微信昵称"
+                    }
+                  }
+                },
+                "examples": {
+                  "首次登录成功范例": {
+                    "value": "{\"token\":\"jfdlajffjdajjldjaf\",\"platform\":\"0\",\"avatar\":\"http://www.baidu.com/1.jpg\",\"nickName\":\"test01\"}"
+                  },
+                  "再次登录个人成功范例": {
+                    "value": {
+                      "token": "jfdlajffjdajjldjaf",
+                      "platform": "0",
+                      "type": 0,
+                      "avatar": "http://www.youku.com/1.jpg",
+                      "auth_status": "2",
+                      "real_name": "张三",
+                      "identity": "370302199008523210",
+                      "id_card_front": "http://www.baidu.com/1.jpg",
+                      "id_card_back": "http://www.baidu.com/2.jpg",
+                      "license": "",
+                      "contact_mobile": "13793332406",
+                      "latitude": "20",
+                      "longitude": "46546.1616",
+                      "province": "山东省",
+                      "city": "淄博市",
+                      "district": "张店区",
+                      "address": "博大花园"
+                    }
+                  },
+                  "再次登录企业成功范例": {
+                    "value": {
+                      "token": "jfdlajffjdajjldjaf",
+                      "platform": "1",
+                      "type": 1,
+                      "avatar": "http://www.youku.com/1.jpg",
+                      "auth_status": "2",
+                      "real_name": "门叮叮有限公司",
+                      "identity": "370302199008523210",
+                      "id_card_front": "",
+                      "id_card_back": "",
+                      "license": "http://www.baidu.com/1.jpg",
+                      "contact_mobile": "13793332406",
+                      "latitude": "20",
+                      "longitude": "46546.1616",
+                      "province": "山东省",
+                      "city": "淄博市",
+                      "district": "张店区",
+                      "address": "博大花园"
+                    }
+                  },
+                  "登录失败范例": {
+                    "value": "{\"code\":\"0\",\"type\":\"ERROR\",\"message\":\"错误消息\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "会话"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "platform": {
+                    "type": "integer",
+                    "description": "登录平台。0:服务商;1:商家"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "wx.login返回的code"
+                  }
+                },
+                "required": [
+                  "code"
+                ]
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": {
+                    "code": "2221212dfsa122222"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/getMobileCode": {
+      "get": {
+        "summary": "获取短信验证码",
+        "responses": {
+          "200": {
+            "description": "获取验证码成功"
+          }
+        },
+        "tags": [
+          "会话"
+        ]
+      }
+    },
+    "/register": {
+      "post": {
+        "summary": "用户注册",
+        "responses": {
+          "200": {
+            "description": "注册成功后返回用户对应注册信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserInfo"
+                },
+                "examples": {
+                  "个人注册成功范例": {
+                    "value": "{\"platform\":\"0\",\"type\":0,\"avatar\":\"http://www.youku.com/1.jpg\",\"auth_status\":\"2\",\"real_name\":\"张三\",\"identity\":\"370302199008523210\",\"id_card_front\":\"http://www.baidu.com/1.jpg\",\"id_card_back\":\"http://www.baidu.com/2.jpg\",\"license\":\"\",\"contact_mobile\":\"13793332406\",\"latitude\":\"43464.15646\",\"longitude\":\"46546.1616\",\"province\":\"山东省\",\"city\":\"淄博市\",\"district\":\"张店区\",\"address\":\"博大花园\"}"
+                  },
+                  "企业注册成功范例": {
+                    "value": "{\"platform\":\"1\",\"type\":1,\"avatar\":\"http://www.youku.com/1.jpg\",\"auth_status\":\"2\",\"real_name\":\"门叮叮有限公司\",\"identity\":\"370302199008523210\",\"id_card_front\":\"\",\"id_card_back\":\"\",\"license\":\"http://www.baidu.com/1.jpg\",\"contact_mobile\":\"13793332406\",\"latitude\":\"43464.15646\",\"longitude\":\"46546.1616\",\"province\":\"山东省\",\"city\":\"淄博市\",\"district\":\"张店区\",\"address\":\"博大花园\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "会话"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  },
+                  "token": {
+                    "type": "string",
+                    "description": "微信用户登录时返回的token"
+                  },
+                  "MobileCode": {
+                    "type": "string",
+                    "description": "短信验证码"
+                  },
+                  "type": {
+                    "type": "integer",
+                    "description": "用户类型：0 个人用户 1 企业用户"
+                  },
+                  "real_name": {
+                    "type": "string",
+                    "description": "真实姓名/企业名称"
+                  },
+                  "identity": {
+                    "type": "string",
+                    "description": "身份证号码/营业执照号码"
+                  },
+                  "id_card_front": {
+                    "type": "string",
+                    "description": "身份证正面照 URL"
+                  },
+                  "id_card_back": {
+                    "type": "string",
+                    "description": "身份证背面照片 URL"
+                  },
+                  "license": {
+                    "type": "string",
+                    "description": "营业执照 URL"
+                  },
+                  "contact_mobile": {
+                    "type": "string",
+                    "description": "联系人手机号码"
+                  },
+                  "latitude": {
+                    "type": "string",
+                    "description": "纬度"
+                  },
+                  "longitude": {
+                    "type": "string",
+                    "description": "经度"
+                  },
+                  "province": {
+                    "type": "string",
+                    "description": "省"
+                  },
+                  "city": {
+                    "type": "string",
+                    "description": "市"
+                  },
+                  "district": {
+                    "type": "string",
+                    "description": "区"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "地址"
+                  }
+                },
+                "required": [
+                  "code",
+                  "MobileCode",
+                  "type",
+                  "real_name",
+                  "identity",
+                  "contact_mobile",
+                  "latitude",
+                  "longitude",
+                  "province",
+                  "city",
+                  "district"
+                ]
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"token\":\"46464fdafaf6\",\"MobileCode\":\"1231\",\"type \":0,\"real_name\":\"李四\",\"identity\":\"1651616\",\"id_card_front\":\"http://www.baidu.com/1.jpg\",\"id_card_back\":\"http://www.baidu.com/2.jpg\",\"license\":\"\",\"contact_mobile \":\"13793332406\",\"latitude\":\"13131.131\",\"province\":\"山东省\",\"city\":\"淄博市\",\"district\":\"张店区\"}"
+                }
+              }
+            }
+          }
+        },
+        "description": "用户注册"
+      }
+    },
+    "/task": {
+      "post": {
+        "summary": "新建/修改任务",
+        "responses": {
+          "200": {
+            "description": "新建/修改成功后返回信息，修改任务的时候，请求里会带taskid字段",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "新建成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"发布成功\"}"
+                  },
+                  "新建失败范例": {
+                    "value": "{\"code\":0,\"type\":\"ERROR\",\"message\":\"发布失败\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "任务"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/TaskInfo"
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"name\":\"门叮叮安装\",\"type\":[{\"dictValue\":0,\"dictLabel\":\"安装\"},{\"dictValue\":2,\"dictLabel\":\"保养\"}],\"latitude\":\"1313313.3222\",\"longitude\":\"13131.333\",\"province\":\"山东\",\"city\":\"淄博\",\"district\":\"张店区\",\"address\":\"博达花园2525\",\"contact_mobile\":\"联系人电话\",\"charges\":\"25.33\",\"description\":\"来安装吧\",\"poster\":[\"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F062021132H5%2F210620132H5-1-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653010288&t=5d051b2302b1f9cf69d88aa8691b4659\"],\"time_shigong\":\"2022-04-20\"}"
+                }
+              }
+            }
+          }
+        },
+        "description": "用户注册"
+      },
+      "get": {
+        "summary": "获取任务详情",
+        "responses": {
+          "200": {
+            "description": "获取任务详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "right": {
+                      "type": "integer",
+                      "description": "是否有权限。0:无权限；1：有权限"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "任务名称"
+                    },
+                    "publisher": {
+                      "type": "string",
+                      "description": "发布人"
+                    },
+                    "isOwner": {
+                      "type": "string",
+                      "description": "是否是自己发布的任务；0：不是自己发布的任务；1，是自己发布的任务(返回是string或者int类型的均可)"
+                    },
+                    "isGrabed": {
+                      "type": "string",
+                      "description": "是否已经抢单；0：未抢单；1：已抢单"
+                    },
+                    "isMyOrder": {
+                      "type": "string",
+                      "description": "如果是已抢单，是否是自己抢到的订单；0：否；1：是"
+                    },
+                    "avatar": {
+                      "type": "string",
+                      "description": "发布人头像"
+                    },
+                    "type": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "dictValue": {
+                            "type": "integer",
+                            "description": "键"
+                          },
+                          "dictLabel": {
+                            "type": "string",
+                            "description": "值 如：安装、维修、保养"
+                          }
+                        }
+                      },
+                      "description": "任务类型,返回数组"
+                    },
+                    "latitude": {
+                      "type": "string",
+                      "description": "纬度"
+                    },
+                    "longitude": {
+                      "type": "string",
+                      "description": "经度"
+                    },
+                    "province": {
+                      "type": "string",
+                      "description": "省"
+                    },
+                    "city": {
+                      "type": "string",
+                      "description": "市"
+                    },
+                    "district": {
+                      "type": "string",
+                      "description": "区"
+                    },
+                    "address": {
+                      "type": "string",
+                      "description": "详细地址"
+                    },
+                    "contact_mobile": {
+                      "type": "string",
+                      "description": "联系人电话"
+                    },
+                    "charges": {
+                      "type": "string",
+                      "description": "费用"
+                    },
+                    "description": {
+                      "type": "string",
+                      "description": "任务描述"
+                    },
+                    "poster": {
+                      "type": "array",
+                      "items": {
+                        "type": "string",
+                        "description": "任务图片 URL"
+                      },
+                      "description": "任务图片数组"
+                    },
+                    "time_shigong": {
+                      "type": "string",
+                      "description": "施工时间"
+                    },
+                    "time": {
+                      "type": "string",
+                      "description": "发布时间"
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"right\":1,\"name\":\"门叮叮安装\",\"publisher\":\"李四\",\"isOwner\":\"0\",\"isGrabed\":\"0\",\"isMyOrder\":\"0\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"type\":[{\"dictValue\":0,\"dictLabel\":\"安装\"},{\"dictValue\":2,\"dictLabel\":\"保养\"}],\"latitude\":\"36.828794\",\"longitude\":\"118.040838\",\"province\":\"山东\",\"city\":\"淄博\",\"district\":\"张店区\",\"address\":\"博达花园2525\",\"contact_mobile\":\"联系人电话\",\"charges\":\"25.33\",\"description\":\"来安装吧\",\"poster\":[\"https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.jj20.com%2Fup%2Fallimg%2F1114%2F062021132H5%2F210620132H5-1-1200.jpg&refer=http%3A%2F%2Fimg.jj20.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1653010288&t=5d051b2302b1f9cf69d88aa8691b4659\"],\"time_shigong\":\"2022-04-20\",\"time\":\"2022-04-20\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "任务"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "id",
+            "description": "根据任务id，获取任务信息"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/deltask": {
+      "post": {
+        "summary": "删除任务",
+        "responses": {
+          "200": {
+            "description": "删除结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "新建成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"删除成功\"}"
+                  },
+                  "新建失败范例": {
+                    "value": "{\"code\":0,\"type\":\"ERROR\",\"message\":\"删除失败\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "任务"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  }
+                },
+                "description": "删除任务"
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":10}"
+                }
+              }
+            }
+          }
+        },
+        "description": "删除任务"
+      }
+    },
+    "/taskList": {
+      "get": {
+        "summary": "获取任务列表",
+        "responses": {
+          "200": {
+            "description": "获取任务列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "任务id"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "任务名称"
+                      },
+                      "publisher": {
+                        "type": "string",
+                        "description": "发布人"
+                      },
+                      "avatar": {
+                        "type": "string",
+                        "description": "发布者头像"
+                      },
+                      "type": {
+                        "type": "array",
+                        "description": "任务类型列表",
+                        "items": {
+                          "type": "integer",
+                          "description": "任务类型。0：安装;1:维修;2:保养"
+                        }
+                      },
+                      "charges": {
+                        "type": "string",
+                        "description": "费用/面议返回0"
+                      },
+                      "time": {
+                        "type": "string",
+                        "description": "发布时间"
+                      },
+                      "status": {
+                        "type": "integer",
+                        "description": "任务状态 0,正常;1,已接单；"
+                      },
+                      "distance": {
+                        "type": "string",
+                        "description": "距离"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"0\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"0\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"0\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":0,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":1,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":1,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":1,\"distance\":\"12.6km\"},{\"id\":10,\"name\":\"门叮叮安装\",\"avatar\":\"http://www.baidu.com/2.jpg\",\"publisher\":\"张三\",\"type\":[0,1],\"charges\":\"25.33\",\"time\":\"2022-04-20\",\"status\":1,\"distance\":\"12.6km\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "任务"
+        ],
+        "parameters": [
+          {
+            "schema": {},
+            "in": "query",
+            "name": "province",
+            "description": "省"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "city",
+            "description": "市"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "district",
+            "description": "区"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "latitude",
+            "description": "所在位置纬度"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "longitude",
+            "description": "所在位置经度"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "searchText",
+            "description": "搜索内容"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "type",
+            "description": "搜索任务类型，默认为空"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "minPrice",
+            "description": "费用区间最底价，默认空"
+          },
+          {
+            "schema": {},
+            "in": "query",
+            "name": "maxPrice",
+            "description": "费用区间最高价，默认空"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "page",
+            "description": "页码,从0开始"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "in": "query",
+            "name": "pageSize",
+            "description": "每页数据条数，默认30"
+          }
+        ]
+      }
+    },
+    "/noticeTuisong": {
+      "get": {
+        "summary": "获取最新一条公告",
+        "responses": {
+          "200": {
+            "description": "获取最新一条公告",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notice_id": {
+                      "type": "integer",
+                      "description": "消息的id"
+                    },
+                    "notice_title": {
+                      "type": "string",
+                      "description": "公告消息标题"
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"notice_id\":100,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "公告"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/noticeList": {
+      "get": {
+        "summary": "获取公告列表",
+        "responses": {
+          "200": {
+            "description": "公告列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "notice_id": {
+                        "type": "integer",
+                        "description": "消息id"
+                      },
+                      "notice_top": {
+                        "type": "string",
+                        "description": "是否置顶。Y:是；N：否"
+                      },
+                      "notice_title": {
+                        "type": "string",
+                        "description": "公告消息标题"
+                      },
+                      "create_time": {
+                        "type": "string",
+                        "description": "公告发布时间"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"notice_id\":10,\"notice_top\":1,\"title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-20\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-19\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-18\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-17\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-16\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-15\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-14\"},{\"notice_id\":10,\"notice_top\":0,\"notice_title\":\"受疫情影响，部分地区暂无法施工，请各商家随时关注最新动\",\"create_time\":\"2022-04-13\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "公告"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/noticeDetail": {
+      "get": {
+        "summary": "获取公告详情",
+        "responses": {
+          "200": {
+            "description": "公告详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "notice_title": {
+                      "type": "string",
+                      "description": "标题"
+                    },
+                    "notice_content": {
+                      "type": "string",
+                      "description": "内容"
+                    },
+                    "create_time": {
+                      "type": "string",
+                      "description": "时间"
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"notice_title\":\"清明期间系统升级通知\",\"notice_content\":\"系统将于清明假期期间进行系统升级，升级期间暂停服务，具体暂停服务时间为2022年4月5日凌晨2点~4点，请各位用户提前安排好时间，避免影响您的使用，给您带来的不便，敬请见谅\",\"create_time\":\"2022-04-20\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "公告"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "id",
+            "description": "根据公告id，获取详细信息"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/billPay": {
+      "post": {
+        "summary": "抢单并新建支付订单",
+        "responses": {
+          "200": {
+            "description": "调用微信支付所需信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timeStamp": {
+                      "type": "string",
+                      "description": "时间戳，从 1970 年 1 月 1 日 00:00:00 至今的秒数，即当前的时间"
+                    },
+                    "nonceStr": {
+                      "type": "string",
+                      "description": "随机字符串，长度为32个字符以下"
+                    },
+                    "package": {
+                      "type": "string",
+                      "description": "统一下单接口返回的 prepay_id 参数值，提交格式如：prepay_id=***"
+                    },
+                    "signType": {
+                      "type": "string",
+                      "description": "签名算法，应与后台下单时的值一致"
+                    },
+                    "paySign": {
+                      "type": "string",
+                      "description": "签名"
+                    }
+                  }
+                },
+                "examples": {
+                  "新建成功范例": {
+                    "value": {
+                      "timeStamp": "131313131",
+                      "nonceStr": "fsafafa",
+                      "package": "prepay_id=1631616",
+                      "signType": "MD5",
+                      "paySign": "fasfsafafdasfa"
+                    }
+                  },
+                  "新建失败范例": {
+                    "value": "{\"code\":0,\"type\":\"ERROR\",\"message\":\"抢单失败,单子已被枪\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  },
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":\"112\",\"platform\":0}"
+                }
+              }
+            }
+          }
+        },
+        "description": "新建抢单并支付"
+      }
+    },
+    "/billPayHistory": {
+      "get": {
+        "summary": "获取历史支付列表",
+        "responses": {
+          "200": {
+            "description": "支付历史",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "title": {
+                        "type": "string",
+                        "description": "标题（如：抢单支付）"
+                      },
+                      "money": {
+                        "type": "string",
+                        "description": "支付了多少钱"
+                      },
+                      "time": {
+                        "type": "string",
+                        "description": "发布时间,精确到秒"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"},{\"title\":\"抢单支付\",\"money\":\"5.00\",\"time\":\"2022-04-11 12:00:00\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "page",
+            "description": "页码,从0开始"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "in": "query",
+            "name": "pageSize",
+            "description": "每页数据条数，默认30"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/billStatusNumber": {
+      "get": {
+        "summary": "获取各种状态订单的数量",
+        "responses": {
+          "200": {
+            "description": "获取各种状态订单的数量",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "description": "各种状态订单的数量 商家（[2,3,4,2,3,4]，对应原型图的六个状态，待接单、接单待完工、完工待评价、已完成、已关闭、申请关闭中）"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[2,3,4,2,3,4]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/billList": {
+      "get": {
+        "summary": "获取订单列表",
+        "responses": {
+          "200": {
+            "description": "获取订单列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "订单id"
+                      },
+                      "taskId": {
+                        "type": "integer",
+                        "description": "任务id"
+                      },
+                      "billState": {
+                        "type": "integer",
+                        "description": "订单状态0、1、2、3、4、5、6，对应原型图的六个状态，待接单、接单待完工、完工待评价、已完成、已关闭、申请关闭中）"
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "任务名称"
+                      },
+                      "publisher": {
+                        "type": "string",
+                        "description": "发布人"
+                      },
+                      "type": {
+                        "type": "array",
+                        "description": "任务类型列表",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "dictValue": {
+                              "type": "string",
+                              "description": "键"
+                            },
+                            "dictLabel": {
+                              "type": "string",
+                              "description": "值 安装、维修、保养"
+                            }
+                          },
+                          "description": "任务类型数组"
+                        }
+                      },
+                      "charges": {
+                        "type": "string",
+                        "description": "费用"
+                      },
+                      "time": {
+                        "type": "string",
+                        "description": "发布时间"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":10,\"taskId\":52,\"billState\":0,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":1,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":2,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":3,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":4,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":5,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":0,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":0,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":0,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"},{\"id\":10,\"taskId\":52,\"billState\":0,\"name\":\"门叮叮安装\",\"publisher\":\"张三\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"25.33\",\"time\":\"2022-04-20\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": -1
+            },
+            "in": "query",
+            "name": "billState",
+            "description": "任务状态，-1是全部、0(待完工/待接单)、1待评论、2待完成、3、已关闭"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "page",
+            "description": "页码,从0开始"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "in": "query",
+            "name": "pageSize",
+            "description": "每页数据条数，默认30"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/billDetail": {
+      "get": {
+        "summary": "获取订单详情",
+        "responses": {
+          "200": {
+            "description": "任务详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "billState": {
+                      "type": "integer",
+                      "description": "订单状态0、1、2、3、4、5，对应原型图的六个状态，待接单、接单待完工、完工待评价、已完成、已关闭、申请关闭中）"
+                    },
+                    "userInfo": {
+                      "type": "object",
+                      "properties": {
+                        "avatar": {
+                          "type": "string",
+                          "description": "头像URL"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "商家/服务商名字"
+                        },
+                        "type": {
+                          "type": "integer",
+                          "description": "用户类型：0 个人用户 1 企业用户"
+                        },
+                        "contact_mobile": {
+                          "type": "string",
+                          "description": "联系方式"
+                        }
+                      }
+                    },
+                    "billInfo": {
+                      "type": "object",
+                      "properties": {
+                        "orderNumber": {
+                          "type": "string",
+                          "description": "订单编号"
+                        },
+                        "timeBuild": {
+                          "type": "string",
+                          "description": "抢单时间"
+                        },
+                        "billPay": {
+                          "type": "string",
+                          "description": "订单金额"
+                        },
+                        "invoiceStatus": {
+                          "description": "开票状态,0未开票，1已开票"
+                        }
+                      }
+                    },
+                    "evaluate": {
+                      "type": "object",
+                      "description": "服务评价",
+                      "properties": {
+                        "rate": {
+                          "type": "number",
+                          "description": "服务感受打分,0：好评，1：一般，2，差评;"
+                        },
+                        "message": {
+                          "type": "string",
+                          "description": "评价描述内容"
+                        },
+                        "poster": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "评价图片URL"
+                          },
+                          "description": "评价图片数组"
+                        }
+                      }
+                    },
+                    "proof": {
+                      "type": "object",
+                      "description": "服务凭证",
+                      "properties": {
+                        "message": {
+                          "type": "string",
+                          "description": "描述信息"
+                        },
+                        "poster": {
+                          "type": "array",
+                          "items": {
+                            "type": "string",
+                            "description": "服务凭证图片URL"
+                          },
+                          "description": "服务凭证图片数组"
+                        }
+                      }
+                    },
+                    "closeInfo": {
+                      "type": "object",
+                      "description": "订单关闭信息",
+                      "properties": {
+                        "timeApply": {
+                          "type": "string",
+                          "description": "申请关闭订单时的时间,精确到秒"
+                        },
+                        "messageShangjia": {
+                          "type": "string",
+                          "description": "关闭订单，商家描述信息"
+                        },
+                        "timeClosed": {
+                          "type": "string",
+                          "description": "关闭订单时的时间,精确到秒,没有关闭的时候，这个值返回空字符串"
+                        },
+                        "messsageFuwushang": {
+                          "type": "string",
+                          "description": "关闭订单，服务商描述信息,系统自动关闭返回空字符串"
+                        },
+                        "messageOther": {
+                          "type": "string",
+                          "description": "超时未确认，系统自动关闭，显示这条信息，服务商关闭，此条返回空字符串"
+                        }
+                      }
+                    },
+                    "taskInfo": {
+                      "type": "object",
+                      "description": "任务信息",
+                      "properties": {
+                        "taskId": {
+                          "type": "string",
+                          "description": "任务id"
+                        },
+                        "name": {
+                          "type": "string",
+                          "description": "任务名称"
+                        },
+                        "type": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "dictValue": {
+                                "type": "string",
+                                "description": "键"
+                              },
+                              "dictLabel": {
+                                "type": "string",
+                                "description": "值"
+                              }
+                            }
+                          },
+                          "description": "任务类型"
+                        },
+                        "charges": {
+                          "type": "string",
+                          "description": "费用"
+                        },
+                        "time_shigong": {
+                          "type": "string",
+                          "description": "施工时间"
+                        },
+                        "address": {
+                          "type": "string",
+                          "description": "施工地点"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"billState\":1,\"userInfo\":{\"avatar\":\"http://www.baidu.com/1.jpg\",\"name\":\"李四\",\"type\":0,\"contact_mobile\":\"13793332406\"},\"billInfo\":{\"orderNumber\":\"MDD22041200001\",\"timeBuild\":\"2022-04-12 17:00\",\"billPay\":\"0.00\",\"invoiceStatus\":\"0\"},\"evaluate\":{\"rate\":0,\"message\":\"客户评论：安装得非常仔细，客户很满意，期待下次合作！\",\"poster\":[\"http://www.baidu.com/2.jpg\"]},\"proof\":{\"message\":\"高创园A座的自动门已完成安装，请验收！\",\"poster\":[\"http://www.baidu.com/3.jpg\"]},\"closeInfo\":{\"timeApply\":\"2022-04-03 10:00:00\",\"messageShangjia\":\"客户所在地区因疫情无法按时施工，任务暂时需要关闭，疫情过后重新发布。\",\"timeClosed\":\"2022-05-01  10:00:00\",\"messsageFuwushang\":\"已线下沟通，同意关闭本任务。\",\"messageOther\":\"超时未确认，系统自动关闭。\"},\"taskInfo\":{\"taskId\":44,\"name\":\"淄博高创园A座平开门安装维...\",\"type\":[{\"dictValue\":\"0\",\"dictLabel\":\"安装\"},{\"dictValue\":\"1\",\"dictLabel\":\"维护\"},{\"dictValue\":\"2\",\"dictLabel\":\"保养\"}],\"charges\":\"1000\",\"time_shigong\":\"2022-05-01\",\"address\":\"博大花园\"}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "in": "query",
+            "name": "taskId",
+            "description": "根据订单列表获取到的订单taskId,或者支付成功对应的taskid跳转，获取订单详情"
+          },
+          {
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "name": "platform",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    },
+    "/invoiceApply": {
+      "summary": "发票申请",
+      "post": {
+        "summary": "发票申请(服务商抢单消费发票申请)",
+        "responses": {
+          "200": {
+            "description": "评价结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"评价成功\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "orderNumber": {
+                    "type": "string",
+                    "description": "订单编号，点击申请发票时带过来"
+                  },
+                  "name": {
+                    "type": "string",
+                    "description": "名称"
+                  },
+                  "nashuirenshibiehao": {
+                    "type": "string",
+                    "description": "纳税人识别号"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "地址"
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "联系电话"
+                  },
+                  "acccountKaihuhang": {
+                    "type": "string",
+                    "description": "开户行账号"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "接收邮箱"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/billEvaluate": {
+      "summary": "提交服务评价",
+      "post": {
+        "summary": "服务评价",
+        "responses": {
+          "200": {
+            "description": "评价结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"评价成功\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  },
+                  "rate": {
+                    "type": "integer",
+                    "description": "服务感受打分,0：好评，1：一般，2，差评;"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "评价描述内容"
+                  },
+                  "poster": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "图片 URL"
+                    },
+                    "description": "图片 数组"
+                  },
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":\"100\",\"rate\":0,\"message\":\"很好\",\"poster\":[\"http://www.baidu.com/33.jpg\"],\"platform\":1}"
+                }
+              }
+            }
+          }
+        },
+        "description": "商家对服务做出评价"
+      }
+    },
+    "/billProof": {
+      "summary": "提交完工凭证",
+      "post": {
+        "summary": "完工凭证",
+        "responses": {
+          "200": {
+            "description": "提交结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"提交成功\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  },
+                  "message": {
+                    "type": "string",
+                    "description": "完工描述"
+                  },
+                  "poster": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "图片 url"
+                    },
+                    "description": "图片 URL"
+                  },
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":\"100\",\"message\":\"很好\",\"poster\":[\"http://www.baidu.com/33.jpg\"],\"platform\":1}"
+                }
+              }
+            }
+          }
+        },
+        "description": "服务商完成后提交服务凭证"
+      }
+    },
+    "/billApplyCloseByShangjia": {
+      "summary": "商家申请关闭订单",
+      "post": {
+        "summary": "商家申请关闭订单",
+        "responses": {
+          "200": {
+            "description": "提交结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"提交成功\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  },
+                  "messageShangjia": {
+                    "type": "string",
+                    "description": "关闭原因"
+                  },
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":\"100\",\"messageShangjia\":\"想关闭，不想做了\",\"platform\":1}"
+                }
+              }
+            }
+          }
+        },
+        "description": "订单生成后商家申请关闭订单"
+      }
+    },
+    "/billCloseByFuwushang": {
+      "summary": "服务商处理关闭申请",
+      "post": {
+        "summary": "服务商处理关闭申请",
+        "responses": {
+          "200": {
+            "description": "提交结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/JSONResponse"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"code\":1,\"type\":\"SUCCESS\",\"message\":\"提交成功\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "订单"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "taskid": {
+                    "type": "integer",
+                    "description": "任务id"
+                  },
+                  "messsageFuwushang": {
+                    "type": "string",
+                    "description": "输入相对商家说的话"
+                  },
+                  "platform": {
+                    "type": "integer",
+                    "description": "注册平台。0:服务商;1:商家"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": "{\"taskid\":\"100\",\"messsageFuwushang\":\"想关闭，不想做了\",\"platform\":1}"
+                }
+              }
+            }
+          }
+        },
+        "description": "商家申请关闭订单后，服务商处理申请"
+      }
+    },
+    "/banner": {
+      "get": {
+        "summary": "获取公司宣传轮播图片",
+        "responses": {
+          "200": {
+            "description": "宣传图片",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "图片id"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "图片标题"
+                      },
+                      "sort": {
+                        "type": "number",
+                        "description": "轮播图片排序"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "图片描述"
+                      },
+                      "image_url": {
+                        "type": "string",
+                        "description": "图片地址"
+                      },
+                      "open_url": {
+                        "type": "string",
+                        "description": "点击图片打开的网址，可能为空"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "description": "图片所属分类"
+                      },
+                      "addtime": {
+                        "type": "string",
+                        "description": "图片添加时间"
+                      },
+                      "domain_id": {
+                        "type": "number",
+                        "description": "图片所属网站id"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":8,\"nav_ids\":null,\"title\":\"\",\"sort\":\"\",\"description\":\"\",\"image_url\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"open_type\":null,\"open_url\":\"\",\"category_id\":57,\"addtime\":\"2023-07-24 13:20:01\",\"domain_id\":1}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "图片/文件上传"
+        ]
+      }
+    },
+    "/newsDetail": {
+      "get": {
+        "summary": "获取新闻详情",
+        "responses": {
+          "200": {
+            "description": "新闻详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsDetail"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"<p>测试 app.encode是嗯嗯嗯否执行额</p>\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0,\"tags\":\"11,12,\",\"poster_org\":\"/public/fcup_upload/2024_02_26/7d45aa543db257de0502ba21ead0d947.jpg\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "新闻"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "此参数无效，只做记录用"
+          }
+        ]
+      }
+    },
+    "/newsList": {
+      "get": {
+        "summary": "获取新闻列表",
+        "responses": {
+          "200": {
+            "description": "新闻列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type":"object",
+                  "properties":{
+                    "data":{
+                      "type":"array",
+                      "items":{
+                        "$ref": "#/components/schemas/newsDetail"
+                      }
+                    },
+                    "page":{
+                      "type":"string",
+                      "description":"分页信息"
+                    },
+                    "pageData":{
+                      "type":"object",
+                      "properties":{
+                        "pageSize":{
+                          "type":"number",
+                          "description":"每页数据条数"
+                        },
+                        "parameterName":{
+                          "type":"string",
+                          "description":"分页参数名字"
+                        },
+                        "rowSize":{
+                          "type":"number",
+                          "description":"数据总记录条数"
+                        },
+                        "pageCurrent":{
+                          "type":"number",
+                          "description":"当前页码"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0}],\"page\":\"<span>1</span><a href='/api/newsList?cat=20&pageSize=1&page=2'>2</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>3</a><a href='/api/newsList?cat=20&pageSize=1&page=2'>下一页</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":1,\"parameterName\":\"page\",\"rowSize\":3,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "新闻"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "新闻分类"
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "schema": {
+              "type": "number",
+              "default": 20
+            },
+            "in": "query",
+            "description": "每页数据条数，默认20"
+          }
+        ]
+      }
+    },
+    "/uploadfile": {
+      "summary": "图片/文件上传",
+      "post": {
+        "responses": {
+          "200": {
+            "description": "上传图片,ws.chooseImage(单个上传)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "description": "图片/文件上传后返回的地址"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "图片/文件上传后返回的图片的名字"
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"url\":\"http://www.sogou.com/1.jpg\",\"name\":\"图片上次\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "图片/文件上传"
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "binary文件"
+                  }
+                }
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": {
+                    "file": "blob"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/taskTypes": {
+      "get": {
+        "summary": "获取任务类型",
+        "responses": {
+          "200": {
+            "description": "任务类型",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "dictValue": {
+                        "type": "string",
+                        "description": "键"
+                      },
+                      "dictSort": {
+                        "type": "integer",
+                        "description": "排序号"
+                      },
+                      "dictLabel": {
+                        "type": "string",
+                        "description": "值 如：安装、维修、保养"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"dictValue\":\"0\",\"dictSort\":1,\"dictLabel\":\"安装\"},{\"dictValue\":\"1\",\"dictSort\":2,\"dictLabel\":\"维修\"},{\"dictValue\":\"2\",\"dictSort\":3,\"dictLabel\":\"保养\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "任务类型"
+        ],
+        "parameters": [
+          {
+            "name": "platform",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "in": "query",
+            "description": "平台，默认0"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "newsDetail": {
+        "title":"newsDetail",
+        "description":"新闻详情/案例详情",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "32",
+            "description": "文章id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "新闻属于那个域名下"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "1",
+            "description": "发表用户的id"
+          },
+          "category_id": {
+            "type": "number",
+            "example": "20",
+            "description": "新闻分类id"
+          },
+          "title": {
+            "type": "string",
+            "example": "测试 app.encode是否执行",
+            "description": "新闻详情"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "",
+            "description": "关键字seo"
+          },
+          "description": {
+            "type": "string",
+            "example": "",
+            "description": "文章描述seo"
+          },
+          "content": {
+            "type": "string",
+            "example": "%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e",
+            "description": "文章详情"
+          },
+          "excerpt": {
+            "type": "string",
+            "example": "",
+            "description": "文章摘要"
+          },
+          "article_status": {
+            "type": "number",
+            "example": "1",
+            "description": "文章状态，不可见/可见/已删除"
+          },
+          "view_count": {
+            "type": "number",
+            "example": "200",
+            "description": "浏览次数"
+          },
+          "is_sticky": {
+            "type": "number",
+            "example": "1",
+            "description": "是否置顶"
+          },
+          "is_essence": {
+            "type": "number",
+            "example": "1",
+            "description": "是否加精"
+          },
+          "comment_status": {
+            "type": "number",
+            "example": "1",
+            "description": "未评论/已经评论/禁止评论"
+          },
+          "comment_count": {
+            "type": "number",
+            "example": "21",
+            "description": "评论次数"
+          },
+          "last_comment_user_id": {
+            "type": "number",
+            "example": "25",
+            "description": "最后评论者id，默认-1(游客)"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "",
+            "description": "头像"
+          },
+          "publish_date": {
+            "type": "string",
+            "example": "2024-02-26 10:21:24",
+            "description": "发布日期"
+          },
+          "publish_ip": {
+            "type": "string",
+            "example": "127.0.0.1",
+            "description": "发布文章时的ip"
+          },
+          "last_modify_date": {
+            "type": "number",
+            "example": "1708914488480",
+            "description": "最后修改时间"
+          },
+          "last_modify_ip": {
+            "type": "string",
+            "example": "127.0.0.1",
+            "description": "最后修改文章时的ip"
+          },
+          "mode": {
+            "type": "string",
+            "example": "",
+            "description": "忘记这个字段做什么的了"
+          },
+          "poster": {
+            "type": "string",
+            "example": "/public/fcup_upload/2023_07_19/8c8721329e330ca9d2fba6d29ac8b7c7..jpg",
+            "description": "文章封面"
+          },
+          "sort": {
+            "type": "string",
+            "example": "99.0",
+            "description": "文章排序99,98,97"
+          },
+          "attached_file_link": {
+            "type": "string",
+            "example": "",
+            "description": "关联文件链接"
+          },
+          "attached_file_name": {
+            "type": "string",
+            "example": "",
+            "description": "关联文件名字"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2024-02-26 10:21:24",
+            "description": "文章添加时间，目前和文章发布时间相同"
+          },
+          "platform": {
+            "type": "number",
+            "example": "0",
+            "description": "平台(小程序,app,网页等)"
+          }
+        }
+      },
+      "UserInfo": {
+        "title": "userInfo",
+        "type": "object",
+        "description": "用户信息测试",
+        "properties": {
+          "platform": {
+            "type": "integer",
+            "description": "注册平台。0:服务商;1:商家"
+          },
+          "type": {
+            "type": "integer",
+            "description": "用户类型：0 个人用户 1 企业用户"
+          },
+          "avatar": {
+            "type": "string",
+            "description": "头像地址"
+          },
+          "auth_status": {
+            "type": "integer",
+            "description": "认证状态：0 未认证 1 等待认证 2 认证通过 3 认证失败"
+          },
+          "real_name": {
+            "type": "string",
+            "description": "真实姓名/企业名称"
+          },
+          "identity": {
+            "type": "string",
+            "description": "身份证号码/营业执照号码"
+          },
+          "id_card_front": {
+            "type": "string",
+            "description": "身份证正面照 URL"
+          },
+          "id_card_back": {
+            "type": "string",
+            "description": "身份证背面照片 UR"
+          },
+          "license": {
+            "type": "string",
+            "description": "营业执照 URL"
+          },
+          "contact_mobile": {
+            "type": "string",
+            "description": "联系人手机号码"
+          },
+          "latitude": {
+            "type": "string",
+            "description": "纬度"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "经度"
+          },
+          "province": {
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "type": "string",
+            "description": "市"
+          },
+          "district": {
+            "type": "string",
+            "description": "区"
+          },
+          "address": {
+            "type": "string",
+            "description": "地址"
+          }
+        }
+      },
+      "TaskInfo": {
+        "title": "TaskInfo",
+        "type": "object",
+        "description": "用户信息",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "任务名称"
+          },
+          "type": {
+            "type": "array",
+            "description": "任务类型列表",
+            "items": {
+              "type": "object",
+              "properties": {
+                "dictValue": {
+                  "type": "integer",
+                  "description": "键"
+                },
+                "dictLabel": {
+                  "type": "string",
+                  "description": "值 如：安装、维修、保养"
+                }
+              },
+              "description": "任务类型。0：安装;1:维修;2:保养"
+            }
+          },
+          "latitude": {
+            "type": "string",
+            "description": "纬度"
+          },
+          "longitude": {
+            "type": "string",
+            "description": "经度"
+          },
+          "province": {
+            "type": "string",
+            "description": "省"
+          },
+          "city": {
+            "type": "string",
+            "description": "市"
+          },
+          "district": {
+            "type": "string",
+            "description": "区"
+          },
+          "address": {
+            "type": "string",
+            "description": "详细地址"
+          },
+          "contact_mobile": {
+            "type": "string",
+            "description": "联系人电话"
+          },
+          "charges": {
+            "type": "string",
+            "description": "费用"
+          },
+          "description": {
+            "type": "string",
+            "description": "任务描述"
+          },
+          "poster": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "description": "任务图片 url"
+            },
+            "description": "任务图片 数组"
+          },
+          "time_shigong": {
+            "type": "string",
+            "description": "施工时间"
+          }
+        }
+      },
+      "JSONResponse": {
+        "title": "JSONResponse",
+        "type": "object",
+        "description": "JSON 正常返回",
+        "properties": {
+          "code": {
+            "type": "number",
+            "description": "消息码。0:失败；1：成功(常用在update,insert,delete等返回执行结果);",
+            "example": "1",
+            "enum": [
+              0,
+              1
+            ]
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "message": {
+                "type": "string",
+                "description": "失败/成功消息内容"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "图片/文件上传",
+      "description": "所有图片或者文件上传请求的接口"
+    },
+    {
+      "name": "新闻",
+      "description": "新闻列表，新闻详情"
+    },
+    {
+      "name": "订单",
+      "description": "订单信息查询，创建支付订单,创建订单，订单列表",
+      "externalDocs": {
+        "description": "更多信息",
+        "url": "https://developers.weixin.qq.com/miniprogram/dev/api/payment/wx.requestPayment.html"
+      }
+    },
+    {
+      "name": "公告",
+      "description": "公告推送，公告列表，公告详情"
+    },
+    {
+      "name": "任务",
+      "description": "任务的发布、列表、详情展示",
+      "externalDocs": {
+        "description": "更多信息",
+        "url": "http://www.xiaoshengkeji.com"
+      }
+    },
+    {
+      "name": "会话",
+      "description": "关于用户的登录、注册"
+    }
+  ]
+}

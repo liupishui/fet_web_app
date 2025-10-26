@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta name="renderer" content="webkit" />
+    <meta name="force-rendering" content="webkit" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>企业互联</title>
+    <script type="text/javascript">
+    !function (e, n) { var t = [{ link: "images/icon/pc_sprite.css", hasImport: !1, dom: "" }, { link: "images/icon/spriteMobile2x.css", hasImport: !1, dom: "" }, { link: "images/icon/spriteMobile3x.css", hasImport: !1, dom: "" }], i = function (e, n) { var t = document, i = t.createStyleSheet, o = i ? "rules" : "cssRules", r = i ? "styleSheet" : "sheet", s = t.getElementsByTagName("link"); n || (n = s[s.length - 1]), function t() { (function () { try { return n && n[r] && n[r][o] && n[r][o][0] } catch (e) { return !1 } })() && setTimeout(e, 1) || setTimeout(t, 40) }() }, o = e.documentElement, r = "orientationchange" in window ? "orientationchange" : "resize", s = function () { var r = o.clientWidth || window.screen.width; r && (r = parseInt(Math.min.apply("", [window.screen.width, r])), cx = n.innerWidth || r, r = parseInt(Math.max.apply("", [cx, r])), o.style.fontSize = r > 1024 ? "" : r / 750 * 100 + "px", setTimeout(function () { var n = "undefined" != typeof window, o = Math.round(n ? window.devicePixelRatio || 1 : 2); 1 == (o = o < 4 ? o : 3) && r >= 1025 && (o = "pc_sprite.css"), (2 == o || 2 == o && r < 1025 || 1 == o && r < 1025) && (o = "spriteMobile2x.css"), 3 == o && (o = "spriteMobile3x.css"), window.environment = o; var s = function () { removeStyle = function () { try { for (var e = 0; e < t.length; e++)"" != t[e].dom && -1 == t[e].link.indexOf(window.environment) && (t[e].dom.parentNode.removeChild(t[e].dom), t[e].hasImport = !1); return !0 } catch (e) { return !1 } }, removeStyle() || setTimeout(function () { s() }, 10) }; !function () { for (var n in t) if (-1 != t[n].link.indexOf(window.environment) && !t[n].hasImport) { var o = e.createElement("link"); o.rel = "stylesheet", o.type = "text/css", o.href = t[n].link, t[n].hasImport = !0, t[n].dom = o; try { e.head.appendChild(o), i(function () { s() }, o) } catch (e) { } } }() }, 1)) }; s(), e.addEventListener && (n.addEventListener(r, s, !1), e.addEventListener("DOMContentLoaded", s, !1)) }(document, window);    </script>
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="images/icon/pc_sprite.css">
+        <![endif]-->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="asset/css/default.css">
+    <link rel="stylesheet" href="asset/css/main.css">
+    <link rel="stylesheet" href="asset/css/reset.css">
+    <link rel="stylesheet" href="//at.alicdn.com/t/font_2469874_bbr6m5b9acv.css">
+    <script src="https://cdn.staticfile.org/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/mixitup/3.3.1/mixitup.min.js"></script>
+    <script type="text/javascript">
+        var currentDevice = 'pc';
+        render = {
+            renderScrollBar: function () {
+                if (currentDevice != 'pc') {
+                    if (typeof (frame1.window.ckscrollbar) == 'undefined') {
+                        var styleEleWp = document.createElement('div');
+                        styleEleWp.innerHTML = "_<style id='ckscrollbar' type='text/css'>::-webkit-scrollbar{width: 4px;background: none;}::-webkit-scrollbar-thumb{background: #000;border-radius: 0px;}</style>";
+                        frame1.document.getElementsByTagName('head')[0].appendChild(styleEleWp.children[0]);
+                    };
+                } else {
+                    if (typeof (frame1.window.ckscrollbar) != 'undefined') {
+                        console.log(frame1.window.ckscrollbar);
+                        frame1.window.ckscrollbar.remove();
+                    }
+                }
+            },
+            pc: function () {
+                currentDevice = 'pc';
+                this.renderScrollBar();
+                $(".lightbox .hd .item").removeClass('active');
+                $(".lightbox .hd [title=pc]").addClass('active');
+                $(".lightbox .bd_inner > div")[0].className = 'pc';
+            },
+            padPortrait: function () {
+                currentDevice = 'mobile';
+                this.renderScrollBar();
+                $(".lightbox .hd .item").removeClass('active');
+                $(".lightbox .hd [title=pad-portrait]").addClass('active');
+                $(".lightbox .bd_inner > div")[0].className = 'padPortrait';
+            },
+            padLandscape: function () {
+                currentDevice = 'mobile';
+                this.renderScrollBar();
+                $(".lightbox .hd .item").removeClass('active');
+                $(".lightbox .hd [title=pad-landscape]").addClass('active');
+                $(".lightbox .bd_inner > div")[0].className = 'padLandscape';
+            },
+            mobilePortrait: function () {
+                currentDevice = 'mobile';
+                this.renderScrollBar();
+                $(".lightbox .hd .item").removeClass('active');
+                $(".lightbox .hd [title=mobile-portrait]").addClass('active');
+                $(".lightbox .bd_inner > div")[0].className = 'mobilePortrait';
+            },
+            mobileLandscape: function () {
+                currentDevice = 'mobile';
+                this.renderScrollBar();
+                $(".lightbox .hd .item").removeClass('active');
+                $(".lightbox .hd [title=mobile-landscape]").addClass('active');
+                $(".lightbox .bd_inner > div")[0].className = 'mobileLandscape';
+            }
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" href="styles/default.css">
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="styles/animate.css">
+    <link rel="stylesheet" href="styles/qiyehulian.css">
+</head>
+
+<body>
+    <div class="wp">
+        <div class="header">
+            <h1 class="hd_l">
+                <a href=""><span class="icon icon-logo"></span></a>
+            </h1>
+            <div class="hd_c">
+                <div class="hd_c_inner">
+                    <div class="item">
+                        <a href="/index.html" class="hd">
+                            首页
+                        </a>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            全部服务
+                        </div>
+                        <div class="bd">
+                            <a href="dailijizhang.html">代理记账</a>
+                            <a href="qiyeshuichou.html">企业税筹</a>
+                            <a href="gongshangzhuce.html">工商注册</a>
+                            <a href="qiyefawu.html">企业法务</a>
+                            <a href="qiyehulian.html">企业互联</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            关于我们
+                        </div>
+                        <div class="bd">
+                            <a href="aboutus.html">关于我们</a>
+                            <a href="newslist.html">新闻资讯</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="hd">解决方案</a>
+                    </div>
+                    <div class="item">
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" class="hd">在线客服</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hd_r">
+                <div class="searchbox">
+                    <div class="hd"><span class="icon icon-search_white"></span></div>
+                    <div class="bd">
+                        <input type="text" class="input_text">
+                        <button class="btn_search"><span class="icon icon-search_gray"></span></button>
+                    </div>
+                </div>
+                <div class="tel">
+                    400-901-0272
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <span class="icon icon-menu"></span>
+            </div>
+        </div>
+        <div class="banner">
+            <div class="pc-banner">
+                <div class="hd">
+                    专业企业服务平台
+                </div>
+                <div class="bd">
+                    工商税务代办、代理记账、财务管理咨询、税务筹划、知识产权、法务咨询、企业信息化等多方面企业管理服务于一体的专业化企业服务公司
+                </div>
+            </div>
+            <div class="mobile-banner mobile-banner1">
+                <div class="hd">
+                    企业互联
+                </div>
+                <div class="bd">
+                    Enterprise interconnection
+                </div>
+            </div>
+        </div>
+        <div class="pc-nav">
+            <div class="div_main">
+                <a href="dailijizhang.html">代理记账</a>
+                <a href="qiyeshuichou.html">企业税筹</a>
+                <a href="gongshangzhuce.html">工商注册</a>
+                <a href="qiyefawu.html">企业法务</a>
+                <a href="qiyehulian.html" class="curr">企业互联</a>
+            </div>
+        </div>
+        <div class="mod-qiyehulian">
+            <div class="div_main">
+                <div class="title">
+                    <h2 class="txt">服务领域</h2>
+                    <div class="ext">
+                        一站式的品牌数字服务体系，助力品牌全流程价值提升。
+                    </div>
+                </div>
+                <div class="container_qiyehulian">
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-net1"></span>
+                        </div>
+                        <h2 class="hd">高端定制网站建设</h2>
+                        <div class="bd"><strong>提升知名度，获取更多客户</strong><br/>
+                            品牌官网设计<br />购物商城网站设计<br />营销型网站建设<br />H5活动网站<br />站群<br />响应试网站
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-net2"></span>
+                        </div>
+                        <h2 class="hd">微信小程序开发</h2>
+                        <div class="bd"><strong>让每一个小程序都能创造价值</strong><br/>
+                        微信小程序<br />微商城<br />微分销<br />微信行业解决方案<br />微信平台定制化开发<br />微信运营
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-net3"></span>
+                        </div>
+                        <h2 class="hd">移动端设计开发</h2>
+                        <div class="bd"><strong>专业的IOS/Android开发服务团队</strong><br/>
+                        手机端网站<br />app设计与开发<br />移动端用户体验设计<br />智能家居
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-net4"></span>
+                        </div>
+                        <h2 class="hd">软件开发</h2>
+                        <div class="bd"><strong>助企业实现一体化办公</strong><br/>
+                        互联网应用<br />电商系统<br />教育教学<br />仓储物流<br />企业管理<br />游戏开发
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="mod-qiyehulian-case">
+            <div class="div_main">
+                <div class="title">
+                    <div class="img">
+                        <img src="images/title-net.png" alt="">
+                    </div>
+                    <div class="ext">
+                        我们已经与一些了不起的企业合作<br />
+                        这里只是一些，点击了解我们所做的工作
+                    </div>
+                </div>
+                <div class="container pt-40 pb-100">
+                    <div class="row">
+                        <div class="col col-12 pb-20 mixitup-screen">
+                            <button type="button" data-filter="all">全部</button>
+                            <button type="button" data-filter=".category-red">红色系列</button>
+                            <button type="button" data-filter=".category-green">绿色系列</button>
+                            <button type="button" data-filter=".category-blue">蓝色系列</button>
+                            <button type="button" data-filter=".category-orange">橙色系列</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a href="template/红色大气的包装印刷服务公司模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">红色大气的包装印刷服务公司模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/红色大气的包装印刷服务公司模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/LMS在线教育/view/index.html" class="mix category-green ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">LMS在线教育</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/LMS在线教育/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/蓝色物流网站/view/index.html" class="mix category-blue ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">蓝色物流网站</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/蓝色物流网站/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/HTML5大气响应式建站网络科技公司网站模板/view/index.html"
+                            class="mix category-blue ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">HTML5大气响应式建站网络科技公司网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/HTML5大气响应式建站网络科技公司网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/html5响应式的绿化种植类公司网站模板/view/index.html"
+                            class="mix category-green ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">html5响应式的绿化种植类公司网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/html5响应式的绿化种植类公司网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/橙色大气货运物流公司网站模板/view/index.html"
+                            class="mix category-orange ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">橙色大气货运物流公司网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/橙色大气货运物流公司网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/大气的餐饮管理培训网站响应式模板/view/index.html"
+                            class="mix category-orange ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">大气的餐饮管理培训网站响应式模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/大气的餐饮管理培训网站响应式模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/大气的广告品牌策划公司网站响应式模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">大气的广告品牌策划公司网站响应式模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/大气的广告品牌策划公司网站响应式模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/大气的互联网产品设计公司响应式网站模板/view/index.html"
+                            class="mix category-green ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">大气的互联网产品设计公司响应式网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/大气的互联网产品设计公司响应式网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/大气的衣服纺织布料生产类网站html5模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">大气的衣服纺织布料生产类网站html5模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/大气的衣服纺织布料生产类网站html5模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/红色大气的宠物兽医医院网站模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">红色大气的宠物兽医医院网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/红色大气的宠物兽医医院网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/红色响应式的定制建站网络公司模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">红色响应式的定制建站网络公司模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/红色响应式的定制建站网络公司模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/绿色清新的蔬菜水果生产类响应式网站模板/view/index.html"
+                            class="mix category-green ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">绿色清新的蔬菜水果生产类响应式网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/绿色清新的蔬菜水果生产类响应式网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/绿色响应式的户外运动装备网站模板/view/index.html"
+                            class="mix category-green ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">绿色响应式的户外运动装备网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/绿色响应式的户外运动装备网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                        <a href="template/响应式的互联网技术服务公司网站模板/view/index.html"
+                            class="mix category-red ck-template-box-wp col col-6 col-lg-3">
+                            <div class="ck-template-box">
+                                <div class="hd">响应式的互联网技术服务公司网站模板</div>
+                                <div class="bd">
+                                    <div class="img" style="background-image: url(template/响应式的互联网技术服务公司网站模板/preview.png);"></div>
+                                </div>
+                                <div class="ft">
+                                    浏览
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="div_main">
+                <div class="item">
+                    <div class="hd">服务项目</div>
+                    <div class="bd">
+                        <a href="dailijizhang.html">代理记账</a>
+                        <a href="qiyeshuichou.html">企业税筹</a>
+                        <a href="gongshangzhuce.html">工商注册</a>
+                        <a href="qiyefawu.html">企业法务</a>
+                        <a href="qiyehulian.html">企业互联</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">新闻资讯</div>
+                    <div class="bd">
+                        <a href="newslist.html">新闻资讯</a>
+                        <a href="news_detail.html">常见问题</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">了解我们</div>
+                    <div class="bd">
+                        <a href="aboutus.html">关于我们</a>
+                        <a href="">联系我们</a>
+                    </div>
+                </div>
+                <div class="pc-item item item-last">
+                    <div class="hd">彩葵企服</div>
+                    <div class="bd">
+                        电话：<a href="tel:400-901-0272">400-901-0272</a>
+                    </div>
+                </div>
+                <div class="qrcode">
+                    <div class="img"></div>
+                    <div class="pc-txt">
+                        创业不容易，扫码更给力
+                    </div>
+                    <div class="mobile-txt">
+                        <a href="tel:400-901-0272">400-901-0272</a>
+                        <div class="ext">全国咨询热线</div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                copyright©2020彩葵企服.All Rights Reserved ICP备案号：鲁ICP备17050707号
+            </div>
+        </div>
+    </div>
+    <div class="toolbox">
+        <a href="" class="item item-talk">
+            <div class="icon_wp">
+                <span class="icon icon-talk"></span>
+            </div>
+            在线咨询
+        </a>
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" class="item item-qq">
+            <div class="icon_wp">
+                <span class="icon icon-qq"></span>
+            </div>
+            qq沟通
+        </a>
+        <a href="tel:15552681446" class="item item-tel">
+            <div class="icon_wp">
+                <span class="icon icon-tel"></span>
+            </div>
+            免费电话
+        </a>
+        <div class="item item-gotop">
+            <div class="icon_wp">
+                <span class="icon icon-gotop"></span>
+            </div>
+            回到顶部
+        </div>
+    </div>
+    <a href="" class="online_service">
+        <span class="icon icon-online_service"></span>
+    </a>
+        <div class="lightbox">
+            <div class="hd">
+                <div class="hd-l">
+                    <div class="item-group">
+                        <div class="item active" title="pc">
+                            <span class="iconfont icon-pc"></span>
+                        </div>
+                        <div class="item" title="pad-portrait">
+                            <span class="iconfont icon-pad"></span>
+                        </div>
+                        <div class="item item-pad-1" title="pad-landscape">
+                            <span class="iconfont icon-pad"></span>
+                        </div>
+                        <div class="item" title="mobile-portrait">
+                            <span class="iconfont icon-mobile"></span>
+                        </div>
+                        <div class="item item-mobile-1" title="mobile-landscape">
+                            <span class="iconfont icon-mobile"></span>
+                        </div>
+                    </div>
+                    <div class="qrcode">
+                        <span class="iconfont icon-qrcode"></span>在手机上浏览
+                        <div class="qrcode-wp"></div>
+                    </div>
+                    <div class="title">
+                        红色大气的包装印刷服务公司模板
+                    </div>
+                </div>
+                <div class="hd-r">
+                    <span class="iconfont icon-close"></span>
+                </div>
+            </div>
+            <div class="bd">
+                <div class="bd_inner">
+                    <div class="pc">
+                        <iframe id="frame_yanshi" name="frame1" onload="render.renderScrollBar()" src="" scrolling="auto"
+                            frameborder="0" vspace="0" hspace="0" marginwidth="0" marginheight="0" style="border:0;margin:0;"
+                            allowtransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body>
+<script type="text/javascript" src="scripts/visualization.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/4.6.0/js/bootstrap.min.js"></script>
+<script src="https://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
+<script type="text/javascript">
+    var mixer = mixitup('.container');
+
+    var isMobile = false;
+    (function () { try { var e = navigator.userAgent, t = e.match(/iPhone|iPod/i); location.href.indexOf("#pc") === -1 && (t || e.indexOf("Android") > -1 || e.indexOf("IEMobile") > -1) && (isMobile = true) } catch (n) { } })();
+    $(function () {
+        $(".lightbox .hd .item-group").delegate('.item', 'click', function () {
+            var $title = $(this).attr('title');
+            switch ($title) {
+                case 'pc': render.pc();
+                    break;
+                case 'pad-portrait': render.padPortrait();
+                    break;
+                case 'pad-landscape': render.padLandscape();
+                    break;
+                case 'mobile-portrait': render.mobilePortrait();
+                    break;
+                case 'mobile-landscape': render.mobileLandscape();
+                    break;
+            }
+        });
+
+        //点击每一项显示展示画板
+        $(".ck-template-box-wp").click(function (e) {
+            if (isMobile == false) {
+                e.preventDefault();
+                $(".lightbox .hd .title").text($('.hd', this).text());
+                $(".lightbox .bd iframe").attr('src', $(this).prop('href'));
+                $(".qrcode-wp").html('');
+                $(".qrcode-wp").qrcode($(this).prop('href'));
+                $("html").addClass('lightbox-show');
+                $(".lightbox .hd .item-group .item:first").trigger('click');
+            }
+        });
+        //关闭展示画板
+        $(".lightbox .hd-r").click(function () {
+            $("html").removeClass('lightbox-show');
+        });
+    });
+</script>
+
+</html>

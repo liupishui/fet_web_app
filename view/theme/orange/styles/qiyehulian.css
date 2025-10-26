@@ -1,0 +1,246 @@
+html {
+  overflow: auto!important;
+}
+.header {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+.header .hd_l a {
+  line-height: 96px;
+}
+@media screen and (max-width: 1024px) {
+  .header {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+  }
+}
+body {
+  background-color: #fff !important;
+}
+.toolbox * {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+.banner .pc-banner {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+.mod-qiyehulian {
+  padding: 83px 0 60px;
+}
+.mod-qiyehulian .title .txt {
+  line-height: 107px;
+  text-align: center;
+  color: #333;
+  font-size: 35px;
+  position: relative;
+}
+.mod-qiyehulian .title .txt:after {
+  content: " ";
+  border-bottom: 2px solid #ff6c00;
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 24px;
+  margin-left: -12px;
+}
+.mod-qiyehulian .title .ext {
+  padding-top: 20px;
+  line-height: 28px;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  width: 650px;
+  margin: 0 auto;
+}
+.mod-qiyehulian .container_qiyehulian {
+  overflow: hidden;
+}
+.mod-qiyehulian .container_qiyehulian .item {
+  padding-top: 85px;
+  float: left;
+  width: 300px;
+  padding: 85px 0 37px;
+  text-align: center;
+}
+.mod-qiyehulian .container_qiyehulian .icon_wp {
+  height: 103px;
+}
+.mod-qiyehulian .container_qiyehulian .hd {
+  font-size: 22px;
+  color: #333;
+  line-height: 73px;
+  font-weight: normal;
+}
+.mod-qiyehulian .container_qiyehulian .bd {
+  line-height: 28px;
+  color: #666;
+}
+@media screen and (max-width: 1024px) {
+  .mod-qiyehulian {
+    padding: 0.37rem 0 0.92rem;
+  }
+  .mod-qiyehulian .title .txt {
+    line-height: 0.84rem;
+    font-size: 0.3rem;
+  }
+  .mod-qiyehulian .title .txt:after {
+    width: 0.24rem;
+    border-bottom-width: 0.02rem;
+    margin-left: -0.12rem;
+  }
+  .mod-qiyehulian .title .ext {
+    padding-top: 0.15rem;
+    line-height: 0.28rem;
+    font-size: 0.16rem;
+    width: 6.64rem;
+  }
+  .mod-qiyehulian .container_qiyehulian {
+    padding-top: 0.27rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row wrap;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+  }
+  .mod-qiyehulian .container_qiyehulian .item {
+    width: 50%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 0.17rem 0.3rem 0;
+  }
+  .mod-qiyehulian .container_qiyehulian .item .icon_wp {
+    height: 1.02rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mod-qiyehulian .container_qiyehulian .item .hd {
+    font-size: 0.22rem;
+    line-height: 0.71rem;
+  }
+  .mod-qiyehulian .container_qiyehulian .item .bd {
+    line-height: 0.28rem;
+    font-size: 0.16rem;
+  }
+}
+.mod-qiyehulian-case {
+  text-align: center;
+}
+.mod-qiyehulian-case .title .ext {
+  padding-top: 20px;
+  line-height: 28px;
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  width: 650px;
+  margin: 0 auto;
+}
+@media screen and (max-width: 1024px) {
+  .mod-qiyehulian-case {
+    padding: 0.37rem 0 0.4rem;
+  }
+  .mod-qiyehulian-case .title .txt {
+    line-height: 0.84rem;
+    font-size: 0.3rem;
+  }
+  .mod-qiyehulian-case .title .txt:after {
+    width: 0.24rem;
+    border-bottom-width: 0.02rem;
+    margin-left: -0.12rem;
+  }
+  .mod-qiyehulian-case .title .ext {
+    padding-top: 0.15rem;
+    line-height: 0.28rem;
+    font-size: 0.16rem;
+    width: 6.64rem;
+  }
+  .mod-qiyehulian-case .container {
+    padding-top: 0.27rem;
+    width: 6.9rem;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: content-box;
+       -moz-box-sizing: content-box;
+            box-sizing: content-box;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: row wrap;
+       -moz-box-orient: horizontal;
+       -moz-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+  }
+  .mod-qiyehulian-case .container .item {
+    width: 50%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+    padding: 0.17rem 0.3rem 0;
+  }
+  .mod-qiyehulian-case .container .item .icon_wp {
+    height: 1.02rem;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+       -moz-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+       -moz-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  .mod-qiyehulian-case .container .item .hd {
+    font-size: 0.22rem;
+    line-height: 0.71rem;
+  }
+  .mod-qiyehulian-case .container .item .bd {
+    line-height: 0.28rem;
+    font-size: 0.16rem;
+  }
+  .mod-qiyehulian-case .container .row:nth-child(2) {
+    width: 6.9rem;
+    margin: 0 auto;
+  }
+}
+.footer {
+  -webkit-box-sizing: content-box;
+     -moz-box-sizing: content-box;
+          box-sizing: content-box;
+}
+/*# sourceMappingURL=qiyehulian.css.map */

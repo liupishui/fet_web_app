@@ -1,0 +1,269 @@
+body{
+    background: #f2f2f2!important;
+}
+.ck-template-box-wp{
+    margin-bottom: 20px;
+}
+.ck-template-box{
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+    background: #fff;
+}
+.ck-template-box .hd{
+    border-top: 3px solid #ff6c00;
+    height: 2.4em;
+    line-height: 2.3em;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    font-size: 18px;
+    padding: 0 20px;
+    color: #666;
+}
+.ck-template-box .bd{
+    border-top: 1px solid #f2f2f2;
+    border-bottom: 1px solid #f2f2f2;
+    height: 260px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 10px;
+}
+.ck-template-box .img{
+    flex: 1;
+    width: 100%;
+    background-size:contain;
+    background-position: center 0;  
+    background-repeat: no-repeat;
+}
+.ck-template-box .ft{
+    text-align: center;
+    line-height: 2.8;
+}
+.ck-template-box:hover{
+    box-shadow: 0 0 10px rgba(0,0,0,.4);
+}
+
+
+/***lightbox 弹窗展示模板***/
+.lightbox{
+    background: #fff;
+    top: 120%;
+    left: 0;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    transition: all ease-in-out .6s;
+}
+.lightbox-show,.lightbox-show body{
+    overflow: hidden;
+}
+.lightbox-show .lightbox{
+    top: 0;
+}
+.lightbox .hd{
+    height: 60px;
+    display: flex;
+    padding: 0 30px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0,0,0,.8);
+    position: relative;
+    z-index: 999;
+    background-color: #fff;
+}
+.lightbox .hd .hd-l{
+    display: flex;
+}
+.lightbox .hd .item-group .item{
+    float: left;
+    cursor: pointer;
+    margin-right: 10px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    height: 60px;
+}
+.lightbox .hd .item-group .item:hover,.lightbox .hd .item-group .item.active {
+    color: #ff6c00;
+}
+.lightbox .hd .item-group .iconfont{
+    font-size: 24px!important;
+}
+.lightbox .hd .item-group .icon-mobile{
+    font-size: 21px!important;
+}
+.lightbox .hd .item-pad-1,.lightbox .hd .item-mobile-1{
+    transform:rotate(-90deg);
+}
+.lightbox .hd .qrcode{
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.lightbox .hd .qrcode .iconfont{
+    font-size: 24px!important;
+    margin-right: 4px;
+}
+.lightbox .hd .qrcode:hover{
+    color: #ff6c00;
+}
+.lightbox .hd .qrcode-wp{
+    position: absolute;
+    top: 60px;
+    left: 252px;
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    border: 1px solid #f2f2f2;
+    background: #fff;
+    display: none;
+}
+.lightbox .hd .qrcode-wp canvas{
+    max-width: 100%;
+}
+.lightbox .hd .qrcode:hover .qrcode-wp{
+    display: block;
+}
+.lightbox .hd .title{
+    color: #000;
+    height: 60px;
+    line-height: 60px;
+    font-size: 18px;
+    font-weight: bold;
+}
+.lightbox .hd .hd-r{
+    position: absolute;
+    right: 0;
+    padding: 0 40px;
+    cursor: pointer;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all ease-in-out .1s;
+}
+.lightbox .hd .hd-r:hover{
+    transform: rotate(90deg);
+    color: #ff6c00;
+}
+.lightbox .hd .hd-r .iconfont{
+    font-size: 24px!important;
+}
+
+.lightbox .bd{
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+.lightbox .bd_inner{
+    overflow: auto;
+    height: 100%;
+    position: relative;
+}
+.lightbox .bd .pc iframe{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.lightbox .bd .padPortrait{
+    top: 20px;
+    width: 985px;
+    height: 1249px;
+    margin: 0 auto;
+    background: url(../img/bg-mob.png) no-repeat 0 0;
+    position: relative;
+}
+.lightbox .bd .padPortrait iframe{
+    width: 785px;
+    height: 960px;
+    top: 175px;
+    left: 50%;
+    margin-left: -393px!important;
+    position: absolute;
+}
+
+.lightbox .bd .padLandscape{
+    top: 20px;
+    width: 1300px;
+    height: 968px;
+    margin: 0 auto;
+    background: url(../img/bg-mob.png) no-repeat 30px -1249px;
+    position: relative;
+}
+.lightbox .bd .padLandscape iframe{
+    width: 1041px;
+    height: 703px;
+    top: 164px;
+    left: 50%;
+    margin-left: -520px!important;
+    position: absolute;
+}
+
+.lightbox .bd .mobilePortrait{
+    top: 40px;
+    width: 387px;
+    height: 700px;
+    margin: 0 auto;
+    background: url(../img/bg-mob.png) no-repeat 0 bottom;
+    position: relative;
+}
+.lightbox .bd .mobilePortrait iframe{
+    width: 337px;
+    height: 416px;
+    top: 125px;
+    left: 50%;
+    margin-left: -169px!important;
+    position: absolute;
+}
+
+.lightbox .bd .mobileLandscape{
+    top: 50%;
+    width: 740px;
+    height: 370px;
+    margin: -185px auto 0;
+    background: url(../img/bg-mob.png) no-repeat -387px -2217px;
+    position: relative;
+}
+.lightbox .bd .mobileLandscape iframe{
+    width: 497px;
+    height: 256px;
+    top: 45px;
+    left: 50%;
+    margin-left: -265px!important;
+    position: absolute;
+}
+/***过滤筛选***/
+.mixitup-screen{
+    display: flex;
+    flex-flow: row wrap;
+}
+.mixitup-screen button{
+    border:1px solid #ccc;
+    position: relative;
+    width: 148px;
+    line-height: 2;
+    background: #fff;
+    margin-right: 30px;
+    line-height: 44px;
+    border-radius: 4px;
+}
+.mixitup-screen .mixitup-control-active{
+    background: #ff6c00;
+    color: #fff;
+}
+@media screen and (max-width:1024px){
+    .mixitup-screen button{
+        margin-bottom: 10px;
+        width: 142px;
+    }
+}
+

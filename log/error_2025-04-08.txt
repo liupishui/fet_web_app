@@ -1,0 +1,13 @@
+2025-04-08 22:58:28
+请求原始路径:http://localhost:5036/
+请求路径:http://localhost:5036/
+访问者IP:127.0.0.1
+code:EISDIR
+errno:-4068
+syscall:read
+message:
+        EISDIR: illegal operation on a directory, read
+stack:
+        Error: EISDIR: illegal operation on a directory, read: 
+        Error: EISDIR: illegal operation on a directory, read
+

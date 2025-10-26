@@ -1,0 +1,1826 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "企业站建设",
+    "version": "1.0.0",
+    "description": "企业站建设api规范。<br/> 所有错误返回json格式为{\"code\":0,\"data\":{\"message\":\"错误消息\"}} <br/>所有执行成功返回json格式为{\"code\":1,\"data\":{\"message\":\"成功消息\"}}<br/>api编辑器地址 https://editor.swagger.io/ <br/>",
+    "contact": {
+      "name": "刘丕水",
+      "url": "http://www.qk6080.com",
+      "email": "550830233@qq.com"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    },
+    "termsOfService": "http://www.xiaoshengkeji.com/"
+  },
+  "servers": [
+    {
+      "url": "/api/",
+      "description": "本地"
+    }
+  ],
+  "paths": {
+    "/leaveContact": {
+      "post": {
+        "summary": "联系我们，用户留言",
+        "responses": {
+          "200": {
+            "description": "联系我们留言",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "boolean"
+                },
+                "examples": {
+                  "留言成功": {
+                    "value": "true"
+                  },
+                  "留言失败": {
+                    "value": "{\"code\":\"0\",\"message\":\"验证码不正确\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "联系我们"
+        ],
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "留言者名字"
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "接收邮箱"
+                  },
+                  "mobile": {
+                    "type": "string",
+                    "description": "联系电话"
+                  },
+                  "context": {
+                    "type": "string",
+                    "description": "留言内容"
+                  },
+                  "code": {
+                    "type": "string",
+                    "description": "验证码防刷"
+                  }
+                },
+                "required": [
+                  "name",
+                  "email",
+                  "mobile",
+                  "context",
+                  "code"
+                ]
+              },
+              "examples": {
+                "新增请求范例": {
+                  "value": {
+                    "code": "2221212dfsa122222"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/contactList": {
+      "get": {
+        "summary": "联系我们用户留言列表",
+        "responses": {
+          "200": {
+            "description": "用户留言列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": "1"
+                      },
+                      "domain_id": {
+                        "type": "number",
+                        "example": "1"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "静水"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "550830233@qq.com"
+                      },
+                      "mobile": {
+                        "type": "string",
+                        "example": "13793332405"
+                      },
+                      "context": {
+                        "type": "string",
+                        "example": "null"
+                      },
+                      "time": {
+                        "type": "string",
+                        "example": "null"
+                      },
+                      "ip": {
+                        "type": "string",
+                        "example": "null"
+                      },
+                      "readed": {
+                        "type": "number",
+                        "example": "1"
+                      },
+                      "addtime": {
+                        "type": "number",
+                        "example": "1702889149864"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":1,\"domain_id\":1,\"name\":\"静水\",\"email\":\"550830233@qq.com\",\"mobile\":\"13793332405\",\"context\":null,\"time\":null,\"ip\":null,\"readed\":1,\"addtime\":1702889149864},{\"id\":2,\"domain_id\":1,\"name\":\"放大\",\"email\":\"550830233@qq.com\",\"mobile\":\"13793332406\",\"context\":\"fsda\",\"time\":null,\"ip\":\"127.0.0.1\",\"readed\":0,\"addtime\":\"2024-03-07 10:44:47\"},{\"id\":3,\"domain_id\":1,\"name\":\"放大\",\"email\":\"550830233@qq.com\",\"mobile\":\"13793332406\",\"context\":\"fafa\",\"time\":null,\"ip\":\"127.0.0.1\",\"readed\":0,\"addtime\":\"2024-03-07 10:45:51\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "联系我们"
+        ]
+      }
+    },
+    "/friendlinkList": {
+      "get": {
+        "summary": "友情链接列表",
+        "responses": {
+          "200": {
+            "description": "友情链接",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": "2"
+                      },
+                      "domain_id": {
+                        "type": "number",
+                        "example": "1"
+                      },
+                      "name": {
+                        "type": "string",
+                        "example": "百度"
+                      },
+                      "link": {
+                        "type": "string",
+                        "example": "https://www.baidu.com"
+                      },
+                      "sort": {
+                        "type": "string",
+                        "example": "88.0"
+                      },
+                      "addtime": {
+                        "type": "string",
+                        "example": "2023-07-30 10:08:15"
+                      },
+                      "img": {
+                        "type": "string",
+                        "example": ""
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":2,\"domain_id\":1,\"name\":\"百度\",\"link\":\"https://www.baidu.com\",\"sort\":\"88.0\",\"addtime\":\"2023-07-30 10:08:15\",\"img\":null}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "联系我们"
+        ]
+      }
+    },
+    "/banner": {
+      "get": {
+        "summary": "获取公司宣传轮播图片",
+        "responses": {
+          "200": {
+            "description": "宣传图片",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "description": "图片id"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "图片标题"
+                      },
+                      "sort": {
+                        "type": "number",
+                        "description": "轮播图片排序"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "图片描述"
+                      },
+                      "image_url": {
+                        "type": "string",
+                        "description": "图片地址"
+                      },
+                      "open_url": {
+                        "type": "string",
+                        "description": "点击图片打开的网址，可能为空"
+                      },
+                      "category_id": {
+                        "type": "string",
+                        "description": "图片所属分类"
+                      },
+                      "addtime": {
+                        "type": "string",
+                        "description": "图片添加时间"
+                      },
+                      "domain_id": {
+                        "type": "number",
+                        "description": "图片所属网站id"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":8,\"nav_ids\":null,\"title\":\"\",\"sort\":\"\",\"description\":\"\",\"image_url\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"open_type\":null,\"open_url\":\"\",\"category_id\":57,\"addtime\":\"2023-07-24 13:20:01\",\"domain_id\":1}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "图片轮播/照片墙"
+        ]
+      }
+    },
+    "/webinfo": {
+      "get": {
+        "summary": "获取网站基本信息",
+        "responses": {
+          "200": {
+            "description": "网站基本信息",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "user_id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "domain_id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "title": {
+                      "type": "string",
+                      "example": "艺堂1"
+                    },
+                    "companyname": {
+                      "type": "string",
+                      "example": "艺堂科技有限公司"
+                    },
+                    "keywords": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "description": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "footer_company_brief": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "idea": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "code_statistics": {
+                      "type": "string",
+                      "example": "",
+                      "description": "统计代码"
+                    },
+                    "map_card": {
+                      "type": "string",
+                      "example": "",
+                      "description": "地图名片"
+                    },
+                    "contact_person": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_mobile": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_fax": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_email": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_address": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_point": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_qrcode": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "contact_qq": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "icp_num": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "icp_link": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "favicon": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "logo_src": {
+                      "type": "string",
+                      "example": "/public/fcup_upload/2024_02_18/89cf76f7a03ed5e11d3ab587b6952586.jpg"
+                    },
+                    "logo_big_src": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "logo_src_mobile": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "icon": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "theme_id": {
+                      "type": "number",
+                      "example": "1"
+                    },
+                    "addtime": {
+                      "type": "string",
+                      "example": "2023-06-09 05:34:21"
+                    },
+                    "company1": {
+                      "type": "string",
+                      "example": "1313"
+                    },
+                    "tel1": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "email1": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "address1": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "map1": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "company2": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "tel2": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "email2": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "address2": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "map2": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "company3": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "tel3": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "email3": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "address3": {
+                      "type": "string",
+                      "example": ""
+                    },
+                    "map3": {
+                      "type": "string",
+                      "example": ""
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":1,\"user_id\":1,\"domain_id\":1,\"title\":\"艺堂1\",\"companyname\":\"艺堂科技有限公司\",\"keywords\":\"\",\"description\":\"\",\"footer_company_brief\":\"\",\"idea\":\"\",\"code_statistics\":\"\",\"map_card\":\"\",\"contact_person\":\"\",\"contact_mobile\":\"\",\"contact_fax\":\"\",\"contact_email\":\"\",\"contact_address\":\"\",\"contact_point\":\"\",\"contact_qrcode\":\"\",\"contact_qq\":\"\",\"icp_num\":\"\",\"icp_link\":\"\",\"favicon\":\"\",\"logo_src\":\"/public/fcup_upload/2024_02_18/89cf76f7a03ed5e11d3ab587b6952586.jpg\",\"logo_big_src\":\"\",\"logo_src_mobile\":\"\",\"icon\":\"\",\"theme_id\":1,\"addtime\":\"2023-06-09 05:34:21\",\"company1\":\"1313\",\"tel1\":\"\",\"email1\":\"\",\"address1\":\"\",\"map1\":\"\",\"company2\":\"\",\"tel2\":\"\",\"email2\":\"\",\"address2\":\"\",\"map2\":\"\",\"company3\":\"\",\"tel3\":\"\",\"email3\":\"\",\"address3\":\"\",\"map3\":\"\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "网站信息"
+        ]
+      }
+    },
+    "/imageDetail": {
+      "get": {
+        "summary": "图片墙图片详情",
+        "responses": {
+          "200": {
+            "description": "图片墙图片详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/image"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":6,\"domain_id\":1,\"title\":\"\",\"content\":\"\",\"category_id\":29,\"src\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"link\":\"\",\"sort\":\"\",\"addtime\":\"2023-07-24 10:57:02\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "图片轮播/照片墙"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 0
+            },
+            "in": "query",
+            "description": "图片id"
+          }
+        ]
+      }
+    },
+    "/imageList": {
+      "get": {
+        "summary": "获取图片墙列表,cat取值5所有id，29企业荣誉,30企业资质，31员工风采",
+        "responses": {
+          "200": {
+            "description": "新闻列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/image"
+                      }
+                    },
+                    "page": {
+                      "type": "string",
+                      "description": "分页信息"
+                    },
+                    "pageData": {
+                      "type": "object",
+                      "properties": {
+                        "pageSize": {
+                          "type": "number",
+                          "description": "每页数据条数"
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "description": "分页参数名字"
+                        },
+                        "rowSize": {
+                          "type": "number",
+                          "description": "数据总记录条数"
+                        },
+                        "pageCurrent": {
+                          "type": "number",
+                          "description": "当前页码"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":7,\"domain_id\":1,\"title\":\"\",\"content\":\"\",\"category_id\":31,\"src\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"link\":\"\",\"sort\":\"\",\"addtime\":\"2023-07-24 10:57:07\"},{\"id\":6,\"domain_id\":1,\"title\":\"\",\"content\":\"\",\"category_id\":29,\"src\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"link\":\"\",\"sort\":\"\",\"addtime\":\"2023-07-24 10:57:02\"}],\"page\":\"<span>1</span><a href='/api/imageList?pageSize=2&cat=5&page=2'>2</a><a href='/api/imageList?pageSize=2&cat=5&page=3'>3</a><a href='/api/imageList?pageSize=2&cat=5&page=2'>下一页</a><a href='/api/imageList?pageSize=2&cat=5&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":2,\"parameterName\":\"page\",\"rowSize\":6,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "图片轮播/照片墙"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 5
+            },
+            "in": "query",
+            "description": "图片分类,cat取值5所有id，29企业荣誉,30企业资质，31员工风采"
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "schema": {
+              "type": "number",
+              "default": 20
+            },
+            "in": "query",
+            "description": "每页数据条数，默认20"
+          }
+        ]
+      }
+    },
+    "/tag": {
+      "get": {
+        "summary": "获取标签信息",
+        "responses": {
+          "200": {
+            "description": "标签详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/tag"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":10,\"domain_id\":1,\"name\":\"贾静雯\",\"news_categories_id\":1,\"addtime\":\"2023-08-14 11:11:13\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "标签"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 0
+            },
+            "in": "query",
+            "description": "单页id"
+          }
+        ]
+      }
+    },
+    "/tagList": {
+      "get": {
+        "summary": "获取标签列表",
+        "responses": {
+          "200": {
+            "description": "标签列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/tag"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":10,\"domain_id\":1,\"name\":\"贾静雯\",\"news_categories_id\":1,\"addtime\":\"2023-08-14 11:11:13\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "标签"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 0
+            },
+            "in": "query",
+            "description": "单页id"
+          }
+        ]
+      }
+    },
+    "/clientssayList": {
+      "get": {
+        "summary": "获取后台添加客户对公司的评价列表",
+        "responses": {
+          "200": {
+            "description": "后台添加的客户对公司的评价",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/clientssay"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":2338,\"domain_id\":1,\"name\":\"孙雪宁2\",\"job\":\"sss\",\"evaluation\":\"ss\",\"avatar\":\"/public/fcup_upload/2023_07_20/68e6eb3b749ee3614f4410ae843a4d77.png\",\"addtime\":\"2023-07-28 09:40:43\"},{\"id\":2339,\"domain_id\":1,\"name\":\"333\",\"job\":\"333\",\"evaluation\":\"333\",\"avatar\":\"/public/fcup_upload/2023_07_20/68e6eb3b749ee3614f4410ae843a4d77.png\",\"addtime\":\"2023-07-28 10:09:50\"},{\"id\":2340,\"domain_id\":1,\"name\":\"发大水发\",\"job\":\"发大水发\",\"evaluation\":\"发发\",\"avatar\":\"/public/fcup_upload/2023_07_28/49e94c581c5ad92ba8c364a75a289d48.png\",\"addtime\":\"2023-07-28 10:11:43\"},{\"id\":2341,\"domain_id\":1,\"name\":\"3333\",\"job\":\"443434\",\"evaluation\":\"该发生的故事\",\"avatar\":\"/public/fcup_upload/2023_07_21/eda1eb7702d1a0ba5fda7acd1fec1475.png\",\"addtime\":\"2023-07-28 10:12:38\"},{\"id\":2342,\"domain_id\":1,\"name\":null,\"job\":null,\"evaluation\":null,\"avatar\":null,\"addtime\":\"2023-08-04 15:26:49\"},{\"id\":2343,\"domain_id\":1,\"name\":null,\"job\":null,\"evaluation\":null,\"avatar\":null,\"addtime\":\"2023-08-04 15:36:17\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "客户评价"
+        ]
+      }
+    },
+    "/page": {
+      "get": {
+        "summary": "获取自定义单页详情",
+        "responses": {
+          "200": {
+            "description": "自定义单页",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/page"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":7,\"domain_id\":1,\"platform\":0,\"title\":\"测试单页\",\"poster\":\"\",\"keywords\":\"\",\"description\":\"\",\"document\":\"<p>    很漂亮的一个页面</p>\",\"show_nav\":0,\"show_home\":0,\"sort\":99,\"ip\":\"127.0.0.1\",\"modify_time\":1709626589925,\"addtime\":\"2024-03-05 16:16:29\",\"title_en\":\"\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "单页"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 0
+            },
+            "in": "query",
+            "description": "单页id"
+          }
+        ]
+      }
+    },
+    "/pageList": {
+      "get": {
+        "summary": "获取自定义单页详情",
+        "responses": {
+          "200": {
+            "description": "自定义单页",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/page"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":3,\"domain_id\":1,\"platform\":0,\"title\":\"地图测试\",\"poster\":\"/public/fcup_upload/2023_08_14/6fd5225bd53618d88f0433983efe837f.jpg\",\"keywords\":\"2\",\"description\":\"2\",\"document\":\"<p>    <br/></p><p>    å¤§åè¨æ³</p>\",\"show_nav\":1,\"show_home\":1,\"sort\":99,\"ip\":\"127.0.0.1\",\"modify_time\":1691981173696,\"addtime\":\"2023-07-25 14:46:11\",\"title_en\":\"\"},{\"id\":4,\"domain_id\":1,\"platform\":0,\"title\":\"233223\",\"poster\":\"\",\"keywords\":\"2332\",\"description\":\"233223\",\"document\":\"<p>    <br/></p>\",\"show_nav\":1,\"show_home\":1,\"sort\":2,\"ip\":\"127.0.0.1\",\"modify_time\":1690285888329,\"addtime\":\"2023-07-25 19:51:28\",\"title_en\":\"\"},{\"id\":5,\"domain_id\":1,\"platform\":0,\"title\":\"222222\",\"poster\":\"\",\"keywords\":\"\",\"description\":\"\",\"document\":\"<p>    <br/>222</p>\",\"show_nav\":0,\"show_home\":0,\"sort\":99,\"ip\":\"127.0.0.1\",\"modify_time\":1702887403774,\"addtime\":\"2023-12-18 16:16:43\",\"title_en\":\"\"},{\"id\":6,\"domain_id\":1,\"platform\":0,\"title\":\"22222\",\"poster\":\"\",\"keywords\":\"\",\"description\":\"\",\"document\":\"<p>    <br/></p>\",\"show_nav\":0,\"show_home\":0,\"sort\":99,\"ip\":\"127.0.0.1\",\"modify_time\":1702887466168,\"addtime\":\"2023-12-18 16:17:55\",\"title_en\":\"\"},{\"id\":7,\"domain_id\":1,\"platform\":0,\"title\":\"测试单页\",\"poster\":\"\",\"keywords\":\"\",\"description\":\"\",\"document\":\"<p>    å¾æ¼äº®çä¸ä¸ªé¡µé¢</p>\",\"show_nav\":0,\"show_home\":0,\"sort\":99,\"ip\":\"127.0.0.1\",\"modify_time\":1709626589925,\"addtime\":\"2024-03-05 16:16:29\",\"title_en\":\"\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "单页"
+        ]
+      }
+    },
+    "/zhaopin": {
+      "get": {
+        "summary": "公司招聘信息",
+        "responses": {
+          "200": {
+            "description": "招聘信息列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "number",
+                        "example": "6",
+                        "description": "招聘id"
+                      },
+                      "domain_id": {
+                        "type": "number",
+                        "example": "1",
+                        "description": "所属网站id"
+                      },
+                      "city": {
+                        "type": "string",
+                        "example": "61",
+                        "description": "城市"
+                      },
+                      "gangwei": {
+                        "type": "string",
+                        "example": "2222",
+                        "description": "岗位"
+                      },
+                      "zhaopinrenshu": {
+                        "type": "string",
+                        "example": "212121",
+                        "description": "招聘人数"
+                      },
+                      "zhiweimiaoshu": {
+                        "type": "string",
+                        "example": "21212121",
+                        "description": "职位描述"
+                      },
+                      "zhiweizhize": {
+                        "type": "string",
+                        "example": "212112",
+                        "description": "职位职责"
+                      },
+                      "renzhizige": {
+                        "type": "string",
+                        "example": "12122121",
+                        "description": "任职资格"
+                      },
+                      "fulidaiyu": {
+                        "type": "string",
+                        "example": "122112",
+                        "description": "福利待遇"
+                      },
+                      "email": {
+                        "type": "string",
+                        "example": "liupishui@gmail.com",
+                        "description": "联系电话"
+                      },
+                      "tel": {
+                        "type": "string",
+                        "example": "5555",
+                        "description": "联系电话"
+                      },
+                      "addtime": {
+                        "type": "string",
+                        "example": "2023-07-23 20:20:08",
+                        "description": "添加时间"
+                      },
+                      "category_id": {
+                        "type": "number",
+                        "example": "61",
+                        "description": "所属分类"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":7,\"domain_id\":1,\"title\":\"\",\"content\":\"\",\"category_id\":31,\"src\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"link\":\"\",\"sort\":\"\",\"addtime\":\"2023-07-24 10:57:07\"},{\"id\":6,\"domain_id\":1,\"title\":\"\",\"content\":\"\",\"category_id\":29,\"src\":\"/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png\",\"link\":\"\",\"sort\":\"\",\"addtime\":\"2023-07-24 10:57:02\"}],\"page\":\"<span>1</span><a href='/api/imageList?pageSize=2&cat=5&page=2'>2</a><a href='/api/imageList?pageSize=2&cat=5&page=3'>3</a><a href='/api/imageList?pageSize=2&cat=5&page=2'>下一页</a><a href='/api/imageList?pageSize=2&cat=5&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":2,\"parameterName\":\"page\",\"rowSize\":6,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "招聘"
+        ]
+      }
+    },
+    "/newsDetail": {
+      "get": {
+        "summary": "获取新闻详情",
+        "responses": {
+          "200": {
+            "description": "新闻详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsDetail"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"<p>测试 app.encode是嗯嗯嗯否执行额</p>\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0,\"tags\":\"11,12,\",\"poster_org\":\"/public/fcup_upload/2024_02_26/7d45aa543db257de0502ba21ead0d947.jpg\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "新闻"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "新闻id"
+          }
+        ]
+      }
+    },
+    "/caseDetail": {
+      "get": {
+        "summary": "获取案例详情",
+        "responses": {
+          "200": {
+            "description": "案例详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsDetail"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"<p>测试 app.encode是嗯嗯嗯否执行额</p>\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0,\"tags\":\"11,12,\",\"poster_org\":\"/public/fcup_upload/2024_02_26/7d45aa543db257de0502ba21ead0d947.jpg\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "案例"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "description": "案例id"
+          }
+        ]
+      }
+    },
+    "/productDetail": {
+      "get": {
+        "summary": "获取产品详情",
+        "responses": {
+          "200": {
+            "description": "产品详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/newsDetail"
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"<p>测试 app.encode是嗯嗯嗯否执行额</p>\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0,\"tags\":\"11,12,\",\"poster_org\":\"/public/fcup_upload/2024_02_26/7d45aa543db257de0502ba21ead0d947.jpg\"}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "产品"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "description": "产品id"
+          }
+        ]
+      }
+    },
+    "/newsList": {
+      "get": {
+        "summary": "获取新闻列表",
+        "responses": {
+          "200": {
+            "description": "新闻列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/newsDetail"
+                      }
+                    },
+                    "page": {
+                      "type": "string",
+                      "description": "分页信息"
+                    },
+                    "pageData": {
+                      "type": "object",
+                      "properties": {
+                        "pageSize": {
+                          "type": "number",
+                          "description": "每页数据条数"
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "description": "分页参数名字"
+                        },
+                        "rowSize": {
+                          "type": "number",
+                          "description": "数据总记录条数"
+                        },
+                        "pageCurrent": {
+                          "type": "number",
+                          "description": "当前页码"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0}],\"page\":\"<span>1</span><a href='/api/newsList?cat=20&pageSize=1&page=2'>2</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>3</a><a href='/api/newsList?cat=20&pageSize=1&page=2'>下一页</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":1,\"parameterName\":\"page\",\"rowSize\":3,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "新闻"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "新闻分类"
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "schema": {
+              "type": "number",
+              "default": 20
+            },
+            "in": "query",
+            "description": "每页数据条数，默认20"
+          }
+        ]
+      }
+    },
+    "/caseList": {
+      "get": {
+        "summary": "获取案例列表",
+        "responses": {
+          "200": {
+            "description": "新闻列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/newsDetail"
+                      }
+                    },
+                    "page": {
+                      "type": "string",
+                      "description": "分页信息"
+                    },
+                    "pageData": {
+                      "type": "object",
+                      "properties": {
+                        "pageSize": {
+                          "type": "number",
+                          "description": "每页数据条数"
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "description": "分页参数名字"
+                        },
+                        "rowSize": {
+                          "type": "number",
+                          "description": "数据总记录条数"
+                        },
+                        "pageCurrent": {
+                          "type": "number",
+                          "description": "当前页码"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0}],\"page\":\"<span>1</span><a href='/api/newsList?cat=20&pageSize=1&page=2'>2</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>3</a><a href='/api/newsList?cat=20&pageSize=1&page=2'>下一页</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":1,\"parameterName\":\"page\",\"rowSize\":3,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "案例"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 2
+            },
+            "in": "query",
+            "description": "案例分类"
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "schema": {
+              "type": "number",
+              "default": 20
+            },
+            "in": "query",
+            "description": "每页数据条数，默认20"
+          }
+        ]
+      }
+    },
+    "/productList": {
+      "get": {
+        "summary": "获取产品列表",
+        "responses": {
+          "200": {
+            "description": "产品",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/newsDetail"
+                      }
+                    },
+                    "page": {
+                      "type": "string",
+                      "description": "分页信息"
+                    },
+                    "pageData": {
+                      "type": "object",
+                      "properties": {
+                        "pageSize": {
+                          "type": "number",
+                          "description": "每页数据条数"
+                        },
+                        "parameterName": {
+                          "type": "string",
+                          "description": "分页参数名字"
+                        },
+                        "rowSize": {
+                          "type": "number",
+                          "description": "数据总记录条数"
+                        },
+                        "pageCurrent": {
+                          "type": "number",
+                          "description": "当前页码"
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "{\"data\":[{\"id\":32,\"domain_id\":1,\"user_id\":null,\"category_id\":20,\"title\":\"测试 app.encode是否执行\",\"keywords\":\"\",\"description\":\"\",\"content\":\"%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e\",\"excerpt\":null,\"article_status\":null,\"view_count\":null,\"is_sticky\":null,\"is_essence\":null,\"comment_status\":null,\"comment_count\":null,\"last_comment_user_id\":null,\"avatar\":null,\"publish_date\":\"2024-02-26 10:21:24\",\"publish_ip\":\"127.0.0.1\",\"last_modify_date\":1708936569382,\"last_modify_ip\":\"127.0.0.1\",\"mode\":null,\"poster\":\"/public/croper/2024_02_26/7ca4ec27-fdc5-4f8e-81ea-8d07fd4862cf-1708936394030.jpg\",\"sort\":\"99.0\",\"attached_file_link\":\"/public/fcup_upload/2024_02_26/af9a4af361192919755861517ff30af5.zip\",\"attached_file_name\":\"111.zip\",\"addtime\":\"2024-02-26 10:21:24\",\"platform\":0}],\"page\":\"<span>1</span><a href='/api/newsList?cat=20&pageSize=1&page=2'>2</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>3</a><a href='/api/newsList?cat=20&pageSize=1&page=2'>下一页</a><a href='/api/newsList?cat=20&pageSize=1&page=3'>尾 页</a>\",\"pageData\":{\"pageSize\":1,\"parameterName\":\"page\",\"rowSize\":3,\"pageCurrent\":1}}"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "产品"
+        ],
+        "parameters": [
+          {
+            "name": "cat",
+            "schema": {
+              "type": "number",
+              "default": 3
+            },
+            "in": "query",
+            "description": "案例分类"
+          },
+          {
+            "name": "page",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "页码"
+          },
+          {
+            "name": "pageSize",
+            "schema": {
+              "type": "number",
+              "default": 20
+            },
+            "in": "query",
+            "description": "每页数据条数，默认20"
+          }
+        ]
+      }
+    },
+    "/categoryFamilytree": {
+      "get": {
+        "summary": "获取某个分类的族谱树，常用来显示面包屑导航等",
+        "responses": {
+          "200": {
+            "description": "获取某个分类下的族谱树,返回数据没有level字段",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/category"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":2,\"domain_id\":1,\"is_system\":1,\"name\":\"案例\",\"keywords\":null,\"description\":\"\",\"pid\":0,\"sort\":0,\"publish_date\":\"2021-03-26 09:41:30\",\"modifytime\":null,\"addtime\":\"2023-05-30 06:34:33\"},{\"id\":38,\"domain_id\":1,\"is_system\":0,\"name\":\"医疗空间\",\"keywords\":\"\",\"description\":\"Architecture bibendum eros eget lacus the vulputate sit amet vehicuta nibhen ulicera in the vitae miss.\",\"pid\":2,\"sort\":1,\"publish_date\":\"2021-04-01 13:32:15\",\"modifytime\":null,\"addtime\":\"2023-05-30 06:34:33\"},{\"id\":44,\"domain_id\":1,\"is_system\":0,\"name\":\"专科医院\",\"keywords\":\"\",\"description\":\"\",\"pid\":38,\"sort\":1,\"publish_date\":\"2021-07-02 22:12:31\",\"modifytime\":null,\"addtime\":\"2023-05-30 06:34:33\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "分类"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "分类id;1新闻资讯，2案例，3产品中心，5图片，40关于我们，47联系我们，56图片轮播，60招聘城市"
+          }
+        ]
+      }
+    },
+    "/categorySubtree": {
+      "get": {
+        "summary": "获取某个分类下的所有子分类",
+        "responses": {
+          "200": {
+            "description": "获取某个分类下的所有子分类",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/category"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":55,\"domain_id\":1,\"is_system\":0,\"name\":\"设计分享\",\"keywords\":\"\",\"description\":\"\",\"pid\":1,\"sort\":99,\"publish_date\":\"2021-07-03 18:22:00\",\"modifytime\":null,\"addtime\":\"2023-05-30 06:34:33\",\"level\":0}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "分类"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "分类id;1新闻资讯，2案例，3产品中心，5图片，40关于我们，47联系我们，56图片轮播，60招聘城市"
+          }
+        ]
+      }
+    },
+    "/categorySon": {
+      "get": {
+        "summary": "获取某个分类下的子分类",
+        "responses": {
+          "200": {
+            "description": "获取某个分类下的子分类,因为就一个层级所以没有level字段",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/category"
+                  }
+                },
+                "examples": {
+                  "请求成功范例": {
+                    "value": "[{\"id\":55,\"domain_id\":1,\"is_system\":0,\"name\":\"设计分享\",\"keywords\":\"\",\"description\":\"\",\"pid\":1,\"sort\":99,\"publish_date\":\"2021-07-03 18:22:00\",\"modifytime\":null,\"addtime\":\"2023-05-30 06:34:33\"}]"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "分类"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "schema": {
+              "type": "number",
+              "default": 1
+            },
+            "in": "query",
+            "description": "分类id;1新闻资讯，2案例，3产品中心，5图片，40关于我们，47联系我们，56图片轮播，60招聘城市"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "category": {
+        "title": "category",
+        "description": "分类",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "55",
+            "description": "分类id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "分类所属域名id"
+          },
+          "is_system": {
+            "type": "number",
+            "example": "0",
+            "description": "是否系统分类"
+          },
+          "name": {
+            "type": "string",
+            "example": "设计分享",
+            "description": "分类名字"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "",
+            "description": "分类关键字用于seo"
+          },
+          "description": {
+            "type": "string",
+            "example": "",
+            "description": "分类描述用于seo"
+          },
+          "pid": {
+            "type": "number",
+            "example": "1",
+            "description": "分类的父级分类"
+          },
+          "sort": {
+            "type": "number",
+            "example": "99",
+            "description": "分类排序"
+          },
+          "publish_date": {
+            "type": "string",
+            "example": "2021-07-03 18:22:00"
+          },
+          "modifytime": {
+            "type": "string",
+            "example": ""
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2023-05-30 06:34:33"
+          },
+          "level": {
+            "type": "number",
+            "example": "0"
+          }
+        }
+      },
+      "clientssay": {
+        "title":"clientssay",
+        "description":"客户对公司的评价",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "2338"
+          },
+          "domain_id": {
+            "type": "number",
+            "description":"所属网站id",
+            "example": "1"
+          },
+          "name": {
+            "type": "string",
+            "description":"客户姓名",
+            "example": "孙雪宁2"
+          },
+          "job": {
+            "type": "string",
+            "description" :"客户职位",
+            "example": "sss"
+          },
+          "evaluation": {
+            "type": "string",
+            "description":"评价内容",
+            "example": "ss"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "/public/fcup_upload/2023_07_20/68e6eb3b749ee3614f4410ae843a4d77.png"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2023-07-28 09:40:43"
+          }
+        }
+      },
+      "tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "10",
+            "description": "tag的id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "所属域名id"
+          },
+          "name": {
+            "type": "string",
+            "example": "贾静雯",
+            "description": "tag名字"
+          },
+          "news_categories_id": {
+            "type": "number",
+            "example": "1",
+            "description": "所属分类"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2023-08-14 11:11:13",
+            "description": "添加时间"
+          }
+        }
+      },
+      "page": {
+        "title": "page",
+        "description": "自定义页面详情",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "7",
+            "description": "页面id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "页面所属域名"
+          },
+          "platform": {
+            "type": "number",
+            "example": "0",
+            "description": "发布到平台，小程序，网站,目前不分"
+          },
+          "title": {
+            "type": "string",
+            "example": "测试单页",
+            "description": "自定义页面标题"
+          },
+          "poster": {
+            "type": "string",
+            "example": "",
+            "description": "自定义页面图片"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "",
+            "description": "自定义页面关键字SEO"
+          },
+          "description": {
+            "type": "string",
+            "example": "",
+            "description": "页面描述SEO"
+          },
+          "document": {
+            "type": "string",
+            "example": "<p>\n    很漂亮的一个页面\n</p>",
+            "description": "文章主题"
+          },
+          "show_nav": {
+            "type": "number",
+            "example": "0",
+            "description": "是否在导航显示"
+          },
+          "show_home": {
+            "type": "number",
+            "example": "0",
+            "description": "是否在首页显示"
+          },
+          "sort": {
+            "type": "number",
+            "example": "99",
+            "description": "显示排序"
+          },
+          "ip": {
+            "type": "string",
+            "example": "127.0.0.1",
+            "description": "发布者ip"
+          },
+          "modify_time": {
+            "type": "number",
+            "example": "1709626589925",
+            "description": "修改时间"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2024-03-05 16:16:29",
+            "description": "添加时间"
+          },
+          "title_en": {
+            "type": "string",
+            "example": "",
+            "description": "英文标题"
+          }
+        }
+      },
+      "image": {
+        "title": "imagePhoto",
+        "description": "图片图片墙信息",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "7",
+            "description": "图片id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "图片所属网站id"
+          },
+          "title": {
+            "type": "string",
+            "example": "",
+            "description": "图片标题"
+          },
+          "content": {
+            "type": "string",
+            "example": "",
+            "description": "图片描述"
+          },
+          "category_id": {
+            "type": "number",
+            "example": "31",
+            "description": "图片所属分类"
+          },
+          "src": {
+            "type": "string",
+            "example": "/public/fcup_upload/2023_07_20/93f259dcd4c5d64a12478a095ea2be99.png",
+            "description": "图片链接地址"
+          },
+          "link": {
+            "type": "string",
+            "example": "",
+            "description": "图片关联链接地址"
+          },
+          "sort": {
+            "type": "string",
+            "example": "",
+            "description": "图片显示顺序"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2023-07-24 10:57:07",
+            "description": "图片添加时间"
+          }
+        }
+      },
+      "newsDetail": {
+        "title": "newsDetail",
+        "description": "新闻详情/案例详情",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": "32",
+            "description": "文章id"
+          },
+          "domain_id": {
+            "type": "number",
+            "example": "1",
+            "description": "新闻属于那个域名下"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "1",
+            "description": "发表用户的id"
+          },
+          "category_id": {
+            "type": "number",
+            "example": "20",
+            "description": "新闻分类id"
+          },
+          "title": {
+            "type": "string",
+            "example": "测试 app.encode是否执行",
+            "description": "新闻详情"
+          },
+          "keywords": {
+            "type": "string",
+            "example": "",
+            "description": "关键字seo"
+          },
+          "description": {
+            "type": "string",
+            "example": "",
+            "description": "文章描述seo"
+          },
+          "content": {
+            "type": "string",
+            "example": "%3cp%3e测试%20app%2eencode是嗯嗯嗯否执行额%3c%2fp%3e",
+            "description": "文章详情"
+          },
+          "excerpt": {
+            "type": "string",
+            "example": "",
+            "description": "文章摘要"
+          },
+          "article_status": {
+            "type": "number",
+            "example": "1",
+            "description": "文章状态，不可见/可见/已删除"
+          },
+          "view_count": {
+            "type": "number",
+            "example": "200",
+            "description": "浏览次数"
+          },
+          "is_sticky": {
+            "type": "number",
+            "example": "1",
+            "description": "是否置顶"
+          },
+          "is_essence": {
+            "type": "number",
+            "example": "1",
+            "description": "是否加精"
+          },
+          "comment_status": {
+            "type": "number",
+            "example": "1",
+            "description": "未评论/已经评论/禁止评论"
+          },
+          "comment_count": {
+            "type": "number",
+            "example": "21",
+            "description": "评论次数"
+          },
+          "last_comment_user_id": {
+            "type": "number",
+            "example": "25",
+            "description": "最后评论者id，默认-1(游客)"
+          },
+          "avatar": {
+            "type": "string",
+            "example": "",
+            "description": "头像"
+          },
+          "publish_date": {
+            "type": "string",
+            "example": "2024-02-26 10:21:24",
+            "description": "发布日期"
+          },
+          "publish_ip": {
+            "type": "string",
+            "example": "127.0.0.1",
+            "description": "发布文章时的ip"
+          },
+          "last_modify_date": {
+            "type": "number",
+            "example": "1708914488480",
+            "description": "最后修改时间"
+          },
+          "last_modify_ip": {
+            "type": "string",
+            "example": "127.0.0.1",
+            "description": "最后修改文章时的ip"
+          },
+          "mode": {
+            "type": "string",
+            "example": "",
+            "description": "忘记这个字段做什么的了"
+          },
+          "poster": {
+            "type": "string",
+            "example": "/public/fcup_upload/2023_07_19/8c8721329e330ca9d2fba6d29ac8b7c7..jpg",
+            "description": "文章封面"
+          },
+          "sort": {
+            "type": "string",
+            "example": "99.0",
+            "description": "文章排序99,98,97"
+          },
+          "attached_file_link": {
+            "type": "string",
+            "example": "",
+            "description": "关联文件链接"
+          },
+          "attached_file_name": {
+            "type": "string",
+            "example": "",
+            "description": "关联文件名字"
+          },
+          "addtime": {
+            "type": "string",
+            "example": "2024-02-26 10:21:24",
+            "description": "文章添加时间，目前和文章发布时间相同"
+          },
+          "platform": {
+            "type": "number",
+            "example": "0",
+            "description": "平台(小程序,app,网页等)"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "网站信息",
+      "description": "网站的基本信息"
+    },
+    {
+      "name": "联系我们",
+      "description": "联系我们留言"
+    },
+    {
+      "name": "客户评价",
+      "description": "后台添加的客户对公司的评价"
+    },
+    {
+      "name": "标签",
+      "description": "新闻等，下面的tag标签"
+    },
+    {
+      "name": "招聘",
+      "description": "招聘信息"
+    },
+    {
+      "name": "单页",
+      "description": "自定义单页"
+    },
+    {
+      "name": "图片轮播/照片墙",
+      "description": "所有图片或者文件上传请求的接口"
+    },
+    {
+      "name": "案例",
+      "description": "比如设计类公司的一些案例"
+    },
+    {
+      "name": "产品",
+      "description": "比如石油类公司的一些案例"
+    },
+    {
+      "name": "新闻",
+      "description": "新闻列表，新闻详情"
+    },
+    {
+      "name": "分类",
+      "description": "获取分类下子分类，获取某个分类下子孙树，查找某个分类的家谱树"
+    }
+  ]
+}

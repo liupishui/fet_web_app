@@ -1,0 +1,6 @@
+{
+    "docwriter.style": "JSDoc",
+    "emmet.includeLanguages": {
+        "ejs": "EJS"
+    }
+}

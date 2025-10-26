@@ -1,0 +1,30 @@
+{
+    "compilerOptions": {
+      "target": "ESNext",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "strict": true,
+      "declaration": false,
+      "sourceMap": true,
+      "inlineSources": true,
+      "typeRoots": ["./","./types", "./node_modules/@types"],
+      "types": [
+        "node","global"
+      ],
+      "rootDir":"./",
+      "stripInternal": true,
+      "incremental": true,
+      "skipLibCheck": true,
+      "inlineSourceMap": false,
+      "noEmit": false,
+      "noImplicitThis": false 
+    },
+    "include": ["./"],
+    "exclude": ["node_modules"],  
+    "ts-node": {
+      "cwd": "./",
+      "projectSearchDir": "./",
+      "require": [],
+      "project": "./tsconfig.json"
+    }
+  }

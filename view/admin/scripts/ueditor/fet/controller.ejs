@@ -1,0 +1,26 @@
+<% let {__filename,context,app} = this;%>
+<%- await include('./config.ejs') %>
+<% if (context.url.query.action==='config') { %>
+    <% context.toJSON(config); %>
+
+<% /* 上传图片 || 上传涂鸦 || 上传视频 || 上传文件*/ %>
+<% } else if (context.url.query.action==='uploadimage'||context.url.query.action==='uploadscrawl'||context.url.query.action==='uploadvideo'||context.url.query.action==='uploadfile') { %>
+    <%- await include('./action_upload.ejs',{config:config}) %>
+
+<%/* 列出图片 */%>
+<% } else if (context.url.query.action==='listimage'||context.url.query.action==='listfile') { %>
+    <%- await include('./action_list.ejs',{config:config}) %>
+
+<%/* 列出文件 */%>
+
+
+<%/* 抓取远程文件 */%>
+
+<% } else if (context.url.query.action==='catchimage') { %>
+    <%- await include('./action_crawler.ejs',{config:config}) %>
+
+<% } else { %>
+    <% context.toJSON({"state":"请求地址出错"});%>
+<% } %>
+
+

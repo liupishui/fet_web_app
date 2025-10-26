@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>自定义页面添加-管理中心</title>
+    <link href="static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="static/css/animate.min.css" rel="stylesheet">
+    <link href="static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>添加单页</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <form class="form-horizontal m-t">
+                        <div class="form-group" style="display:none;">
+                            <label class="col-sm-3 control-label">
+                                选择发布平台
+                            </label>
+                            <div class="col-sm-8">
+                                <label>
+                                    <input type="radio" value="0" checked name="platform"/>
+                                        网页
+                                </label>
+                                <label>
+                                    <input type="radio" value="1" name="platform"/>
+                                        小程序
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label"><i class="text-danger">*</i> 单页标题：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="title" autocomplete="off" placeholder="请输入页面标题" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <label class="col-sm-3 control-label">英文标题：</label>
+                                    <div class="col-sm-8">
+                                        <input type="text" id="title_en" autocomplete="off" placeholder="请输入英文标题，可不填" class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group from-group-product_img">
+                                <label class="col-sm-3 control-label">图片：</label>
+                                <div class="col-sm-8">
+                                    <div class="form-control" style="border:none;height:auto;font-size:0;line-height:0;"></div>
+                                    <label for="banner" id="poster" data-cropper-option='{"width":600,"height":450}' class="btn-add">
+                                        <span class="btn btn-primary">点击上传</span>
+                                    </label>
+                                    <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>建议尺寸600*450</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">关键字：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" col="30" row="3" id="keywords" placeholder="好的关键字有利于SEO，关键字用英文的逗号分割"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">页面描述：</label>
+                                <div class="col-sm-8">
+                                    <textarea class="form-control" id="description" placeholder=""></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label"><i class="text-danger">*</i> 页面内容：</label>
+                                <div class="col-sm-8">
+                                    <textarea placeholder="" id="content" style="height: 220px;"></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">是否在导航显示:</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" class="" id="isShowNav" name="isShowNav" /><label for="isShowNav"> 是否在导航显示</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">是否在首页显示:</label>
+                                <div class="col-sm-8">
+                                    <input type="checkbox" class="" id="isShowHome" name="isShowHome" /><label for="isShowHome"> 是否在首页显示</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">显示顺序：</label>
+                                <div class="col-sm-8">
+                                    <input class="form-control" type="text" id="sort" placeholder="默认99，数字越小显示越靠前">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <button class="btn btn-primary btn-submit" type="button">提交</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-8 col-sm-offset-3">
+                                    <div style="color:red;font-size:12px;line-height:1.5;text-align:left;">如果想编辑html页面，请选择：->工具栏->“代码语言” ->"html"；<br/>
+                                        <br/>示例代码：<br/>&lt;style&gt;<br/>.topic_content{<br/>width:100%;<br/>}<br/>&lt;/style&gt;<br/>&lt;div&gt;测试&lt;/div&gt;
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script src="static/js/plugins/layer/layer.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="scripts/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" src="scripts/ueditor/ueditor.all.js"></script>
+<script type="text/javascript" src="scripts/fcup/fcup.min.js"></script>
+<script src="/admin/scripts/common.js" type="text/javascript"></script>
+<script type="text/javascript">
+    uploadImgFcup('poster');
+    $("#content").width($("#content").parent().width());
+    var ue = UE.getEditor('content');
+    $(function(){
+        //添加新闻
+        ue.ready(function(){
+            setTimeout(function(){
+                ue.execCommand('source');
+            },200);
+        })
+        $(".btn-submit").click(function(){
+            var canInsert = true;
+            var addPages = <%- modify===-1?'true':'false'; -%>;
+            if(!addPages){
+                return;
+            };
+            if($.trim($("#title").val())==""){
+                canInsert = false;
+                layer.msg('页面标题');
+            }else if($.trim(ue.getContent())==""){
+                canInsert = false;
+                layer.msg('请输入页面内容');
+            }else{
+                $.post('/admin/page_add',{
+                    type:'pagesAdd',
+                    'title':$.trim($("#title").val()),
+                    'title_en':$.trim($("#title_en").val()),
+                    'platform':$("[name=platform]:checked").val(),
+                    'poster':$('#poster').prev().find('img').attr('src')?$('#poster').prev().find('img').attr('src').split('?')[0]:'',
+                    'keywords':$.trim($("#keywords").val()),
+                    'description':$.trim($("#description").val()),
+                    'document':$("<div>"+ue.getContent()+"</div>").find('pre').length>0?$("<div>"+ue.getContent()+"</div>").find('pre').eq(0).prop('outerHTML'):ue.getContent(),
+                    'show_nav':$("#isShowNav").is(":checked") ? 1 : 0,
+                    'show_home':$("#isShowHome").is(":checked") ? 1 : 0,
+                    'sort':$.trim($("#sort").val())
+                },function(data){
+                    resetForm();
+                    layer.msg(data,{time:3000},function(){
+                       //window.location.href="/admin/page_list.php";
+                    });
+                    window.top.openMenu($(window.top.document).find('[data-index=7]'));
+                    window.top.freshPagesList();
+                })
+            }
+        });
+        //修改新闻
+        <% if(modify!==-1) { %>
+            //获取修改新闻内容
+            $.get('/admin/page_add?modify=<%-modify-%>',function(data){
+                var pageInfo = data;
+                $("#title").val(pageInfo.title);
+                $("[name=platform][value="+pageInfo.platform+"]").prop('checked',true);
+                $("#title_en").val(pageInfo.title_en);
+                if(pageInfo.poster!==''){
+                    $(".from-group-product_img .form-control").html($('<img style="width:150px;" data-org="' + pageInfo.poster_org + '" data-width="' + 600 + '" data-height="' + 450 + '" class="poster" src="'+pageInfo.poster+'" alt="">'));
+                }
+                $("#keywords").val(pageInfo.keywords);
+                $("#description").val(pageInfo.description);
+                ue.ready(function(){
+                    if(pageInfo.document){
+                        ue.setContent(pageInfo.document);
+                    }
+                });
+                $("#isShowNav").prop('checked',pageInfo.show_nav==1);
+                $("#isShowHome").prop('checked',pageInfo.show_home==1);
+                $("#sort").val(pageInfo.sort);
+            })
+            //上传修改内容
+            $(".btn-submit").click(function(){
+            if($.trim($("#title").val())==""){
+                canInsert = false;
+                layer.msg('页面标题');
+            }else if($.trim(ue.getContent())==""){
+                canInsert = false;
+                layer.msg('请输入页面内容');
+            }else{
+                $.post('/admin/page_add',{
+                    type:'pagesUpdate',
+                    'title':$.trim($("#title").val()),
+                    'title_en':$.trim($("#title_en").val()),
+                    'poster':$('#poster').prev().find('img').attr('src')?$('#poster').prev().find('img').attr('src').split('?')[0]:'',
+                    'keywords':$.trim($("#keywords").val()),
+                    'description':$.trim($("#description").val()),
+                    'document':$("<div>"+ue.getContent()+"</div>").find('pre').length>0?$("<div>"+ue.getContent()+"</div>").find('pre').eq(0).prop('outerHTML'):ue.getContent(),
+                    'show_nav':$("#isShowNav").is(":checked") ? 1 : 0,
+                    'show_home':$("#isShowHome").is(":checked") ? 1 : 0,
+                    'sort':$.trim($("#sort").val()),
+                    'modify':<%-modify-%>
+                },function(data){
+                    layer.msg(data,{time:2000},function(data){
+                        //window.location.href="/admin/page_list.php";
+                        window.top.freshPagesList();
+                        var index = window.top.layer.getFrameIndex(window.name);
+                        window.top.layer.close(index);
+                    });
+                    // window.top.openMenu($(window.top.document).find('[data-index=7]'));
+                })
+            }
+            });
+
+        <% } %>
+    });
+
+</script>
+
+</html>

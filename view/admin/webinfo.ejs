@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>管理中心</title>
+    <link href="static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="static/css/animate.min.css" rel="stylesheet">
+    <link href="static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>网站基础信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                            <div class="form-horizontal m-t">
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">网站标题：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="title" value="<%- webinfoCurrent['title'] -%>" placeholder="(显示在浏览器标签页，好的标题有利于SEO)" type="text" />
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">logo：</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-control" style="border:none;height:auto;font-size:0;line-height:0;">
+                                            <img src="<%- webinfoCurrent['logo_src'] -%>" style="width:100px;"/>
+                                        </div>
+                                        <label for="banner" id="logo_src" class="btn-add">
+                                            <span class="btn btn-primary">点击上传</span>
+                                        </label>
+                                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>显示在PC网站左上角,尺寸：294 x 47,格式：PNG ;</span>                                               
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">logo(大)：</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-control" style="border:none;height:auto;font-size:0;line-height:0;">
+                                            <img src="<%- webinfoCurrent['logo_big_src']=='null'?'':webinfoCurrent['logo_big_src'] -%>" style="width:100px;"/>
+                                        </div>
+                                        <label for="banner" id="logo_big_src" class="btn-add">
+                                            <span class="btn btn-primary">点击上传</span>
+                                        </label>
+                                        <span class="help-block m-b-none"><i class="fa fa-info-circle"></i>显示在PC网站左上角,尺寸：250 x 150,格式：PNG ;</span>                                               
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">favicon：</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-control" style="border:none;height:auto;font-size:0;line-height:0;">
+                                            <%- webinfoCurrent['favicon'] -%>
+                                        </div>
+                                        <label for="banner" id="favicon" class="btn-add">
+                                            <span class="btn btn-primary">点击上传</span>
+                                        </label>
+                                        <div class="help-block m-b-none">
+                                            <i class="fa fa-info-circle"></i> 显示在浏览器标签页上的小图标,格式：.ico<a href="https://tool.lu/favicon/" target="_blank">https://tool.lu/favicon/</a>;
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">关键词：</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" id="keywords" placeholder="好的关键字有利于SEO，关键字用英文的逗号分割"><%- webinfoCurrent['keywords'] -%></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">描述：</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" id="description" placeholder="网站描述有利于SEO，网站被搜索引擎抓取后显示在标题下方"><%- webinfoCurrent['description'] -%></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="display:none;">
+                                    <label for="" class="col-sm-3 control-label">底部公司介绍：</label>
+                                    <div class="col-sm-8">
+                                        <textarea class="form-control" id="footer_company_brief" placeholder="网站底部公司介绍，如果没有该模块的不填"><%- webinfoCurrent['footer_company_brief'] -%></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">联系电话：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="contact_mobile" type="text" value="<%- webinfoCurrent['contact_mobile'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">邮箱：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="contact_email" type="text" value="<%- webinfoCurrent['contact_email'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">公司名：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="companyname" type="text" value="<%- webinfoCurrent['companyname'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">联系人：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="contact_person" type="text" value="<%- webinfoCurrent['contact_person'] %>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">联系地址：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="contact_address" type="text" value="<%- webinfoCurrent['contact_address'] %>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">备案号：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="icp_num" type="text" value="<%- webinfoCurrent['icp_num'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">备案号链接：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="icp_link" type="text" value="<%- webinfoCurrent['icp_link'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="align-items:baseline;display:none;">
+                                    <label for="" class="col-sm-3 control-label">微信二维码：</label>
+                                    <div class="col-sm-8">
+                                        <div class="form-control" style="border:none;height:auto;font-size:0;line-height:0;">
+                                            <% if (webinfoCurrent['contact_qrcode']!=='') { %>
+                                                <img src="<%- webinfoCurrent['contact_qrcode'] -%>" style="width:100px;"/>
+                                            <% } %>
+                                        </div>
+                                        <label for="banner" id="contact_qrcode" class="btn-add">
+                                            <span class="btn btn-primary">点击上传</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">代码统计：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="code_statistics" type="text" value="<%- webinfoCurrent['code_statistics'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group" style="align-items:baseline;">
+                                    <label for="" class="col-sm-3 control-label">公司坐标：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="contact_point" type="text" value="<%- webinfoCurrent['contact_point'] -%>"/>                                       
+                                        <div class="form-control" style="border:none;height:auto;">
+                                            <i class="fa fa-info-circle"></i> 用于联系我们地图坐标显示, 公司坐标获取<a href="http://api.map.baidu.com/lbsapi/getpoint/index.html" target="_blank">拾取坐标系统</a>;
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">宣传视频链接：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="video" type="text" value="<%- webinfoCurrent['video'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <h2 class="col-sm-6 col-sm-offset-3 text-warning">请填写分公司信息(非必填)</h2>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司名1名称：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="company1" type="text" value="<%- webinfoCurrent['company1'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司1电话：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="tel1" type="text" value="<%- webinfoCurrent['tel1'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司1邮箱：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="email1" type="text" value="<%- webinfoCurrent['email1'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司1地址：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="address1" type="text" value="<%- webinfoCurrent['address1'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">地图名片1：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="map1" type="text" value="<%- webinfoCurrent['map1'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司名2名称：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="company2" type="text" value="<%- webinfoCurrent['company2'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司2电话：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="tel2" type="text" value="<%- webinfoCurrent['tel2'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司2邮箱：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="email2" type="text" value="<%- webinfoCurrent['email2'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司2地址：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="address2" type="text" value="<%- webinfoCurrent['address2'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">地图名片2：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="map2" type="text" value="<%- webinfoCurrent['map2'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司名3名称：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="company3" type="text" value="<%- webinfoCurrent['company3'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司3电话：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="tel3" type="text" value="<%- webinfoCurrent['tel3'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">地图名片3：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="map3" type="text" value="<%- webinfoCurrent['map3'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司3邮箱：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="email3" type="text" value="<%- webinfoCurrent['email3'] -%>"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="col-sm-3 control-label">分公司3地址：</label>
+                                    <div class="col-sm-8">
+                                        <input class="form-control" id="address3" type="text" value="<%- webinfoCurrent['address3'] -%>"/>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-8 col-sm-offset-3">
+                                        <input type="button" value="<%- webinfoCurrent.user_id===-1?'保存':'更新网站信息'-%>" class="btn btn-primary btn-submit">
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="static/js/jquery.min.js"></script>
+<script src="static/js/plugins/layer/layer.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="scripts/fcup/fcup.min.js"></script>
+<script src="/admin/scripts/common.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(function(){
+        uploadImgFcup('logo_src');
+        uploadImgFcup('logo_big_src');
+        uploadImgFcup('favicon');
+        uploadImgFcup('contact_qrcode');
+        $(".btn-submit").click(function(){
+            $.post('/admin/webinfo',{
+                'type':'insert',
+                'title':$("#title").val(),
+                'logo_src':$("#logo_src").prev().find('img').attr('src')?$("#logo_src").prev().find('img').attr('src').split('?')[0]:'',
+                'logo_big_src':$("#logo_big_src").prev().find('img').attr('src')?$("#logo_big_src").prev().find('img').attr('src').split('?')[0]:'',
+                'map1':$("#map1").val(),
+                'map2':$("#map2").val(),
+                'map3':$("#map3").val(),
+                'favicon':$("#favicon").prev().find('img').attr('src')?$("#favicon").prev().find('img').attr('src').split('?')[0]:'',
+                'keywords':$("#keywords").val(),
+                'description':$("#description").val(),
+                'footer_company_brief':$("#footer_company_brief").val(),
+                'contact_mobile':$("#contact_mobile").val(),
+                'contact_email':$("#contact_email").val(),
+                'companyname':$("#companyname").val(),
+                'contact_person':$("#contact_person").val(),
+                'contact_address':$("#contact_address").val(),
+                'icp_num':$("#icp_num").val(),
+                'icp_link':$("#icp_link").val(),
+                'video':$("#video").val(),
+                'contact_qrcode':$("#contact_qrcode").prev().find('img').attr('src')?$("#contact_qrcode").prev().find('img').attr('src').split('?')[0]:'',
+                'code_statistics':$("#code_statistics").val(),
+                'company1':$("#company1").val(),
+                'tel1':$("#tel1").val(),
+                'email1':$("#email1").val(),
+                'address1':$("#address1").val(),
+                'company2':$("#company2").val(),
+                'tel2':$("#tel2").val(),
+                'email2':$("#email2").val(),
+                'address2':$("#address2").val(),
+                'company3':$("#company3").val(),
+                'tel3':$("#tel3").val(),
+                'email3':$("#email3").val(),
+                'address3':$("#address3").val()
+            },function(data){
+                layer.msg(data,{time:1000});
+            })
+        });
+    })
+</script>
+</html>

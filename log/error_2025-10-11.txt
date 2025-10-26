@@ -1,0 +1,195 @@
+2025-10-11 14:39:06
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 14:39:18
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 14:39:18
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 14:39:19
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 14:39:20
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 14:39:26
+请求原始路径:http://localhost:5036/aktools_show.ejs
+请求路径:http://localhost:5036/aktools_show.ejs
+访问者IP:127.0.0.1
+code:ECONNREFUSED
+errno:-4078
+syscall:connect
+message:
+        E:\web\fet_web_app\view\aktools_show.ejs:438
+    436|   <script>
+    437|   <% // 关闭从本地数据库读取数据 %>
+ >> 438|     let stockAll = <%- JSON.stringify(await aktoolsInstance.stock_info_a_code_name(false));%>;
+    439|     console.log(stockAll);
+    440|   </script>
+    441| </body>
+
+connect ECONNREFUSED 127.0.0.1:8080
+stack:
+        node\axios.cjs:836 Function.from
+            at Function.from (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\axios\dist\node\axios.cjs:836:14)
+        node\axios.cjs:3010 RedirectableRequest.handleRequestError
+            at RedirectableRequest.handleRequestError (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\axios\dist\node\axios.cjs:3010:25)
+        node:events:514 RedirectableRequest.emit
+            at RedirectableRequest.emit (node:events:514:28)
+        node:domain:488 RedirectableRequest.emit
+            at RedirectableRequest.emit (node:domain:488:12)
+        follow-redirects\index.js:14 ClientRequest.<anonymous>
+            at ClientRequest.<anonymous> (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar\node_modules\follow-redirects\index.js:14:24)
+        node:events:514 ClientRequest.emit
+            at ClientRequest.emit (node:events:514:28)
+        node:domain:488 ClientRequest.emit
+            at ClientRequest.emit (node:domain:488:12)
+        node:_http_client:495 Socket.socketErrorListener
+            at Socket.socketErrorListener (node:_http_client:495:9)
+        node:events:514 Socket.emit
+            at Socket.emit (node:events:514:28)
+        node:domain:488 Socket.emit
+            at Socket.emit (node:domain:488:12)
+
+2025-10-11 15:00:43
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:06
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:06
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:07
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:07
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:08
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+
+2025-10-11 15:01:10
+请求原始路径:http://localhost:5036/favicon.ico
+请求路径:http://localhost:5036/favicon.ico
+访问者IP:127.0.0.1
+code:ENOENT
+errno:-4058
+syscall:open
+message:
+        ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+stack:
+        view\favicon.ico': 
+        Error: ENOENT: no such file or directory, open 'E:\web\fet_web_app\view\favicon.ico'
+

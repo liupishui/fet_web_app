@@ -1,0 +1,747 @@
+<%
+    let {context,app,require} = this; 
+    let hotnewsList = await require('./index.fet.ts').hotnews.call(this,6,20);
+%>
+%>
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>首页</title>
+    <script type="text/javascript">
+    !function (e, n) { var t = [{ link: "images/icon/pc_sprite.css", hasImport: !1, dom: "" }, { link: "images/icon/spriteMobile2x.css", hasImport: !1, dom: "" }, { link: "images/icon/spriteMobile3x.css", hasImport: !1, dom: "" }], i = function (e, n) { var t = document, i = t.createStyleSheet, o = i ? "rules" : "cssRules", r = i ? "styleSheet" : "sheet", s = t.getElementsByTagName("link"); n || (n = s[s.length - 1]), function t() { (function () { try { return n && n[r] && n[r][o] && n[r][o][0] } catch (e) { return !1 } })() && setTimeout(e, 1) || setTimeout(t, 40) }() }, o = e.documentElement, r = "orientationchange" in window ? "orientationchange" : "resize", s = function () { var r = o.clientWidth || window.screen.width; r && (r = parseInt(Math.min.apply("", [window.screen.width, r])), cx = n.innerWidth || r, r = parseInt(Math.max.apply("", [cx, r])), o.style.fontSize = r > 1024 ? "" : r / 750 * 100 + "px", setTimeout(function () { var n = "undefined" != typeof window, o = Math.round(n ? window.devicePixelRatio || 1 : 2); 1 == (o = o < 4 ? o : 3) && r >= 1025 && (o = "pc_sprite.css"), (2 == o || 2 == o && r < 1025 || 1 == o && r < 1025) && (o = "spriteMobile2x.css"), 3 == o && (o = "spriteMobile3x.css"), window.environment = o; var s = function () { removeStyle = function () { try { for (var e = 0; e < t.length; e++)"" != t[e].dom && -1 == t[e].link.indexOf(window.environment) && (t[e].dom.parentNode.removeChild(t[e].dom), t[e].hasImport = !1); return !0 } catch (e) { return !1 } }, removeStyle() || setTimeout(function () { s() }, 10) }; !function () { for (var n in t) if (-1 != t[n].link.indexOf(window.environment) && !t[n].hasImport) { var o = e.createElement("link"); o.rel = "stylesheet", o.type = "text/css", o.href = t[n].link, t[n].hasImport = !0, t[n].dom = o; try { e.head.appendChild(o), i(function () { s() }, o) } catch (e) { } } }() }, 1)) }; s(), e.addEventListener && (n.addEventListener(r, s, !1), e.addEventListener("DOMContentLoaded", s, !1)) }(document, window);    </script>
+    <!--[if lt IE 9]>
+        <link rel="stylesheet" type="text/css" href="images/icon/pc_sprite.css">
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="styles/default.css">
+    <link rel="stylesheet" type="text/css" href="styles/reset.css">
+    <link rel="stylesheet" type="text/css" href="styles/animate.css">
+</head>
+<body>
+    <div class="wp">
+        <div class="header">
+            <h1 class="hd_l">
+                <a href="" title="彩葵企服·企业无忧"><span class="icon icon-logo"></span></a>
+            </h1>
+            <div class="hd_c">
+                <div class="hd_c_inner">
+                    <div class="item">
+                        <a href="/index.html" class="hd">
+                            首页
+                        </a>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            全部服务
+                        </div>
+                        <div class="bd">
+                            <a href="dailijizhang.html">代理记账</a>
+                            <a href="qiyeshuichou.html">企业税筹</a>
+                            <a href="gongshangzhuce.html">工商注册</a>
+                            <a href="qiyefawu.html">企业法务</a>
+                            <a href="qiyehulian.html">企业互联</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            关于我们
+                        </div>
+                        <div class="bd">
+                            <a href="aboutus.html">关于我们</a>
+                            <a href="newslist.html">新闻资讯</a>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <a href="#" class="hd">解决方案</a>
+                    </div>
+                    <div class="item">
+                        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" class="hd">在线客服</a>
+                    </div>
+                </div>
+            </div>
+            <div class="hd_r">
+                <div class="searchbox">
+                    <div class="hd"><span class="icon icon-search_white"></span></div>
+                    <div class="bd">
+                        <input type="text" class="input_text">
+                        <button class="btn_search"><span class="icon icon-search_gray"></span></button>
+                    </div>
+                </div>
+                <div class="tel">
+                    400-901-0272
+                </div>
+            </div>
+            <div class="mobile-menu">
+                <span class="icon icon-menu"></span>
+            </div>
+        </div>
+        <div class="banner">
+            <div class="pc-banner">
+                <div class="hd">
+                    专业企业服务平台
+                </div>
+                <div class="bd">
+                    工商税务代办、代理记账、财务管理咨询、税务筹划、知识产权、法务咨询、企业信息化等多方面企业管理服务于一体的专业化企业服务公司
+                </div>
+            </div>
+            <div class="mobile-banner">
+                <div class="hd">
+                    专业企业服务平台
+                </div>
+                <div class="bd">
+                    工商税务代办、代理记账、财务管理咨询、税务筹划、知识产权、法务咨询、企业信息化等
+                    多方面企业管理服务于一体的专业化企业服务公司
+                </div>
+            </div>
+        </div>
+        <div class="div_main">
+            <div class="pc-platform_statistics">
+                <div class="item">
+                    <div class="hd">
+                        <span class="num">32,317</span>位
+                    </div>
+                    <div class="bd">
+                        <span class="icon icon-ljkh"></span>累计服务客户
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">
+                        <span class="num">43,726</span>家
+                    </div>
+                    <div class="bd">
+                        <span class="icon icon-gszhc"></span>公司注册
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">
+                        <span class="num">12,735</span>家
+                    </div>
+                    <div class="bd">
+                        <span class="icon icon-dljzh"></span>代理记账
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">
+                        <span class="num">8,769</span>家
+                    </div>
+                    <div class="bd">
+                        <span class="icon icon-shshchh1"></span>税收筹划
+                    </div>
+                </div>
+                <div class="item item-last">
+                    <div class="hd">
+                        <span class="num">23,482</span>件
+                    </div>
+                    <div class="bd">
+                        <span class="icon icon-gshbg"></span>工商变更
+                    </div>
+                </div>
+            </div>
+            <div class="mod-home-service">
+                <h2 class="title1">
+                    <div class="txt">企业经营必备服务</div>
+                    <div class="en">Essential Services</div>
+                </h2>
+                <div class="container clearfix">
+                    <div class="item item-dljzh">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon_wp">
+                                    <span class="icon icon-dljzh_1"></span>
+                                </div>
+                                <div class="txt">
+                                    代理记账
+                                </div>
+                                <div class="en">agency bookkeeping</div>
+                            </div>
+                            <div class="backface">
+                                <div class="backface_inner">
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">税务申报</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">汇算清缴</a>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">工商年检</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">企业注销</a>
+                                        </div>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">建立账目账套</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">税务异常解除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-qyshch">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon_wp">
+                                    <span class="icon icon-qyshch_1"></span>
+                                </div>
+                                <div class="txt">
+                                    企业税筹
+                                </div>
+                                <div class="en">enterprise tax</div>
+                            </div>
+                            <div class="backface">
+                                <div class="backface_inner">
+                                    <div class="tc">
+                                            <a href="">合法优化税收机构</a>
+                                    </div>
+                                    <div class="tc">
+                                            <a href="">结合政策节省税收</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-gshzhc">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon_wp">
+                                    <span class="icon icon-gshzhc_1"></span>
+                                </div>
+                                <div class="txt">
+                                    工商注册
+                                </div>
+                                <div class="en">Enterprise Registration</div>
+                            </div>
+                            <div class="backface">
+                                <div class="backface_inner">
+                                    <div class="tc">
+                                        <a href="">企业名称预核准</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">工商设立登记</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">企业资质办理</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">工商异常解除</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-qyfw">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon_wp">
+                                    <span class="icon icon-qyfw_1"></span>
+                                </div>
+                                <div class="txt">
+                                    企业法务
+                                </div>
+                                <div class="en">corporate counsel</div>
+                            </div>
+                            <div class="backface">
+                                <div class="backface_inner">
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">法律申报</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">合同审核</a>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">企业债权</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">劳资法务</a>
+                                        </div>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">股份重组</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">个人法律咨询</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item item-last item-qyhl">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon_wp">
+                                    <span class="icon icon-qyhl_1"></span>
+                                </div>
+                                <div class="txt">
+                                    代理记账
+                                </div>
+                                <div class="en">Enterprise interconnection</div>
+                            </div>
+                            <div class="backface">
+                                <div class="backface_inner">
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">网站建设</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">微信建设</a>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">商城搭建</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">定制开发</a>
+                                        </div>
+                                    </div>
+                                    <div class="line">
+                                        <div class="fl">
+                                            <a href="">APP开发</a>
+                                        </div>
+                                        <div class="fr">
+                                            <a href="">小程序开发</a>
+                                        </div>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">企业信息化建设</a>
+                                    </div>
+                                    <div class="tc">
+                                        <a href="">网站排名优化推广</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mod-home-company_brief">
+                <div class="banner animated" data-effect="fadeInRight"></div>
+                <div class="container">
+                    <h2 class="hd">中国专业的企业服务公司</h2>
+                    <div class="bd">
+                        公司一直以“彩葵企服，助力企业成功”为宗旨，遵循“提高专业素质，服务企业需求”的发展理念，从工商代办、代账报税等基本企业服务入手，逐步完善企业的专业资质办理、企业互联网平台搭建、知识产权、融资贷款、股权上市等多方面企业服务，立足于打造辐射全国的综合企业服务平台。立志成为企业不可或缺的合作伙伴。
+                    </div>
+                    <div class="ft">
+                        <a href="aboutus.html" class="btn">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+            <div class="mod-home-applicable_people">
+                <div class="title1">
+                    <div class="txt">适用人群</div>
+                    <div class="en">Applicable People</div>
+                </div>
+                <div class="container">
+                    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" target="_blank" class="item item1">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon-wp">
+                                    <span class="icon icon-applicable_people1"></span>
+                                </div>
+                                创业人群
+                            </div>
+                            <div class="backface">
+                                <div class="btn">点击咨询</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" target="_blank" class="item item2">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon-wp">
+                                    <span class="icon icon-applicable_people2"></span>
+                                </div>
+                                中小型企业
+                            </div>
+                            <div class="backface">
+                                <div class="btn">点击咨询</div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" target="_blank" class="item item3">
+                        <div class="item_inner">
+                            <div class="frontface">
+                                <div class="icon-wp">
+                                    <span class="icon icon-applicable_people3"></span>
+                                </div>
+                                中外投资者
+                            </div>
+                            <div class="backface">
+                                <div class="btn">点击咨询</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="mod-home-why_choose_us">
+            <div class="div_main">
+                <div class="title animated" data-effect="fadeInLeft">
+                    <div class="txt">
+                        为什么选择我们 ?
+                    </div>
+                    <div class="en">Why<br/>
+                        Choose Us</div>
+                </div>
+                <div class="container">
+                    <div class="item item_1">
+                        <div class="icon_wp">
+                            <span class="icon icon-pzhbzh"></span>
+                        </div>
+                        <div class="hd">品质保障</div>
+                        <div class="bd">
+                            明码标价支付及信息安全，保证服务质量，所有服务都由专业人士进行操作，全程跟进服务，专业高效。
+                        </div>
+                    </div>
+                    <div class="item item_2">
+                        <div class="icon_wp">
+                            <span class="icon icon-dzhfw"></span>
+                        </div>
+                        <div class="hd">多种服务</div>
+                        <div class="bd">
+                            彩葵企服提供多种服务项目，一站式企业服务平台全方位专业服务，满足企业/个人的所有需求。
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-qchfw"></span>
+                        </div>
+                        <div class="hd">全程服务</div>
+                        <div class="bd">
+                            售前咨询，先咨询后选择，全程一对一专人服务，彩葵企服专业顾问跟踪指导，信息化监管把控。
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="icon_wp">
+                            <span class="icon icon-aqbm"></span>
+                        </div>
+                        <div class="hd">安全保密</div>
+                        <div class="bd">
+                            签署合同服务全程专人监管，让企业/个人财产安全又保密，报账出现问题100%全额赔付，无后顾之忧。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mod-home-service_step">
+            <div class="div_main div_main1">
+                <div class="title1">
+                    <div class="txt">
+                        <span class="white">服务</span>流程
+                    </div>
+                    <div class="en">
+                        <span class="white">Service</span>Process
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="item">
+                        <div class="hd">
+                            <span class="icon icon-service_step1"></span>
+                        </div>
+                        <div class="bd">
+                            <div class="t">整理需求</div>
+                            <div class="desc">需求沟通，彩葵企服为您定制最优质的专业服务</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            <span class="icon icon-service_step2"></span>
+                        </div>
+                        <div class="bd">
+                            <div class="t">选择服务</div>
+                            <div class="desc">彩葵企服为您提供全方位的企业服务</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            <span class="icon icon-service_step3"></span>
+                        </div>
+                        <div class="bd">
+                            <div class="t">工作跟进</div>
+                            <div class="desc">彩葵企服专业顾问为您全程跟进</div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="hd">
+                            <span class="icon icon-service_step4"></span>
+                        </div>
+                        <div class="bd">
+                            <div class="t">售后咨询</div>
+                            <div class="desc">售后服务，24小时给您最满意的服务质量</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="div_main_wp">
+                <div class="div_main">
+                    <div class="title">
+                        <div class="txt">彩葵企服·企业无忧</div>
+                        <div class="ext">中国专业企业服务商</div>
+                    </div>
+                    <div class="container clearfix">
+                        <div class="container_left">
+                            <div class="item item1">
+                                <div class="hd">
+                                    <span class="num">10</span>家分公司
+                                </div>
+                                <div class="bd">
+                                    十几家分公司，遍布全国各地
+                                </div>
+                            </div>
+                            <div class="item item2">
+                                <div class="hd">
+                                    <span class="num">600</span>名员工
+                                </div>
+                                <div class="bd">
+                                    十几家分公司，遍布全国各地
+                                </div>
+                            </div>
+                            <div class="item item3">
+                                <div class="hd">
+                                    <span class="num">30000</span>家客户的选择
+                                </div>
+                                <div class="bd">
+                                    十几家分公司，遍布全国各地
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container_right">
+                            <div class="items-service items-service1">
+                                <div class="hd">
+                                    主要项目
+                                </div>
+                                <div class="bd">
+                                    <a href="gongshangzhuce.html" class="item">
+                                        <span class="dot">·</span>工商服务
+                                        <span class="mobile-en">Business Services</span>
+                                    </a>
+                                    <a href="qiyeshuichou.html" class="item">
+                                        <span class="dot">·</span>税务服务
+                                        <span class="mobile-en">Tax Collection Services</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>商标服务
+                                        <span class="mobile-en">Trademark Services</span>
+                                    </a>
+                                    <a href="qiyefawu.html" class="item">
+                                        <span class="dot">·</span>法务咨询
+                                        <span class="mobile-en">Legal Consultation</span>
+                                    </a>
+                                    <a href="qiyeshuichou.html" class="item">
+                                        <span class="dot">·</span>税务筹划
+                                        <span class="mobile-en">Tax Planning</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>网站建设
+                                        <span class="mobile-en">Website Construction</span>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="items-service items-service2">
+                                <div class="hd">
+                                    热点业务
+                                </div>
+                                <div class="bd">
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>企业注册
+                                        <span class="mobile-en">Enterprise Rgistration</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>业务变更
+                                        <span class="mobile-en">Business Change</span>
+                                    </a>
+                                    <a href="dailijizhang.html" class="item">
+                                        <span class="dot">·</span>代理记账
+                                        <span class="mobile-en">Bookkeeping</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>税务申报
+                                        <span class="mobile-en">Tax Declaration</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>税务变更
+                                        <span class="mobile-en">Tax Changes</span>
+                                    </a>
+                                    <a href="" class="item">
+                                        <span class="dot">·</span>高企服务
+                                        <span class="mobile-en">High Enterprise Service</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="mod-home-news">
+            <div class="div_main">
+                <div class="title1">
+                    <div class="txt">新闻资讯</div>
+                    <div class="en">News</div>
+                </div>
+                <div class="container clearfix">
+                    <a href="/news_article_<%-hotnewsList[0]?hotnewsList[0].id:'#'%>.html" class="items_left" style="background-image:url(<%-hotnewsList[0]?hotnewsList[0].poster:''%>)">
+                        <div class="txt"><%-hotnewsList[0]?hotnewsList[0].title:''%></div>
+                    </a>
+                    <div class="items_center">
+                        <a href="/news_article_<%-hotnewsList[1]?hotnewsList[1].id:'#'%>.html" class="item">
+                            <div class="hd"><%-hotnewsList[1]?hotnewsList[1].title:''%></div>
+                            <div class="bd"><%-hotnewsList[1]?hotnewsList[1].excerpt:''%></div>
+                            <div class="ft">
+                                <div class="time">
+                                    <div class="day"><%-hotnewsList[1]?(new Date(hotnewsList[1].publish_date)).getDate():''%></div>
+                                    <%-hotnewsList[1]?(new Date(hotnewsList[1].publish_date).toLocaleDateString().split('/').slice(0,2).join('.')):''%>
+                                </div>
+                                <div class="more">
+                                    <span class="icon icon-more"></span>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="/news_article_<%-hotnewsList[2]?hotnewsList[2].id:'#'%>.html" class="item item-last">
+                            <div class="hd"><%-hotnewsList[2]?hotnewsList[2].title:''%></div>
+                            <div class="bd"><%-hotnewsList[2]?hotnewsList[2].excerpt:''%></div>
+                            <div class="ft">
+                                <div class="time">
+                                    <div class="day"><%-hotnewsList[2]?(new Date(hotnewsList[2].publish_date)).getDate():''%></div>
+                                    <%-hotnewsList[2]?(new Date(hotnewsList[2].publish_date).toLocaleDateString().split('/').slice(0,2).join('.')):''%>
+                                </div>
+                                <div class="more">
+                                    <span class="icon icon-more"></span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="item_right">
+                        <a href="/news_article_<%-hotnewsList[3]?hotnewsList[3].id:'#'%>.html" class="item">
+                            <div class="hd">
+                                <div class="day"><%-hotnewsList[3]?(new Date(hotnewsList[3].publish_date)).getDate():''%></div>
+                                <%-hotnewsList[3]?(new Date(hotnewsList[3].publish_date).toLocaleDateString().split('/').slice(0,2).join('.')):''%>
+                            </div>
+                            <div class="bd">
+                                <%-hotnewsList[3]?hotnewsList[3].title:''%>
+                            </div>
+                            <div class="ft">
+                                →
+                            </div>
+                        </a>
+                        <a href="/news_article_<%-hotnewsList[4]?hotnewsList[4].id:'#'%>.html" class="item">
+                            <div class="hd">
+                                <div class="day"><%-hotnewsList[4]?(new Date(hotnewsList[4].publish_date)).getDate():''%></div>
+                                <%-hotnewsList[4]?(new Date(hotnewsList[4].publish_date).toLocaleDateString().split('/').slice(0,2).join('.')):''%>
+                            </div>
+                            <div class="bd">
+                                <%-hotnewsList[4]?hotnewsList[4].title:''%>
+                            </div>
+                            <div class="ft">
+                                →
+                            </div>
+                        </a>
+                        <a href="/news_article_<%-hotnewsList[5]?hotnewsList[5].id:'#'%>.html" class="item">
+                            <div class="hd">
+                                <div class="day"><%-hotnewsList[5]?(new Date(hotnewsList[5].publish_date)).getDate():''%></div>
+                                <%-hotnewsList[5]?(new Date(hotnewsList[5].publish_date).toLocaleDateString().split('/').slice(0,2).join('.')):''%>
+                            </div>
+                            <div class="bd">
+                                <%-hotnewsList[5]?hotnewsList[5].title:''%>
+                            </div>
+                            <div class="ft">
+                                →
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="div_main">
+                <div class="item">
+                    <div class="hd">服务项目</div>
+                    <div class="bd">
+                        <a href="dailijizhang.html">代理记账</a>
+                        <a href="qiyeshuichou.html">企业税筹</a>
+                        <a href="gongshangzhuce.html">工商注册</a>
+                        <a href="qiyefawu.html">企业法务</a>
+                        <a href="qiyehulian.html">企业互联</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">新闻资讯</div>
+                    <div class="bd">
+                        <a href="newslist.html">新闻资讯</a>
+                        <a href="news_detail.html">常见问题</a>
+                    </div>
+                </div>
+                <div class="item">
+                    <div class="hd">了解我们</div>
+                    <div class="bd">
+                        <a href="aboutus.html">关于我们</a>
+                        <a href="">联系我们</a>
+                    </div>
+                </div>
+                <div class="pc-item item item-last">
+                    <div class="hd">彩葵企服</div>
+                    <div class="bd">
+                        电话：<a href="tel:400-901-0272">400-901-0272</a>
+                    </div>
+                </div>
+                <div class="qrcode">
+                    <div class="img"></div>
+                    <div class="pc-txt">
+                        创业不容易，扫码更给力
+                    </div>
+                    <div class="mobile-txt">
+                        <a href="tel:400-901-0272">400-901-0272</a>
+                        <div class="ext">全国咨询热线</div>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                copyright©2020彩葵企服.All Rights Reserved ICP备案号：鲁ICP备17050707号
+            </div>
+        </div>
+    </div>
+    <div class="toolbox">
+        <a href="" class="item item-talk">
+            <div class="icon_wp">
+                <span class="icon icon-talk"></span>
+            </div>
+            在线咨询
+        </a>
+        <a href="http://wpa.qq.com/msgrd?v=3&amp;uin=602695861&amp;site=qq&amp;menu=yes" class="item item-qq">
+            <div class="icon_wp">
+                <span class="icon icon-qq"></span>
+            </div>
+            qq沟通
+        </a>
+        <a href="tel:15552681446" class="item item-tel">
+            <div class="icon_wp">
+                <span class="icon icon-tel"></span>
+            </div>
+            免费电话
+        </a>
+        <div class="item item-gotop">
+            <div class="icon_wp">
+                <span class="icon icon-gotop"></span>
+            </div>
+            回到顶部
+        </div>
+    </div>
+    <a href="" class="online_service">
+        <span class="icon icon-online_service"></span>
+    </a>
+</body>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/visualization.js"></script>
+<script type="text/javascript" src="scripts/common.js"></script>
+</html>

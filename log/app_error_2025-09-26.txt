@@ -1,0 +1,15 @@
+
+
+2025-09-26 17:04:42
+发生未捕获的异常:
+{"errno":-4091,"code":"EADDRINUSE","syscall":"bind","address":"0.0.0.0","port":5036}
+Error: bind EADDRINUSE 0.0.0.0:5036
+    at listenOnPrimaryHandle (node:net:1940:18)
+    at shared (node:internal/cluster/child:157:3)
+    at Worker.<anonymous> (node:internal/cluster/child:110:7)
+    at process.onInternalMessage (node:internal/cluster/utils:49:5)
+    at process.emit (node:events:526:35)
+    at process.emit (node:domain:488:12)
+    at process.emit (C:\Users\Administrator\Desktop\fet-win32-x64\resources\app.asar.unpacked\node_modules\ts-node\node_modules.asar\ts-node\node_modules\@cspotcode\source-map-support\source-map-support.js:745:40)
+    at emit (node:internal/child_process:951:14)
+    at processTicksAndRejections (node:internal/process/task_queues:83:21)

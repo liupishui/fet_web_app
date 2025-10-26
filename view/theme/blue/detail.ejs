@@ -1,0 +1,17 @@
+<%
+    let detail = await this.require('./detail.fet').detail.call(this);
+    if(detail===false){
+        this.context.router.redirectTo('http://localhost:57778/',404);
+        return;
+    }
+    await this.require('./news_detail.fet').article_view_count_add.call(this,{id:detail.id,view_count:detail.view_count+1});
+    let article_pre_data = await this.require('./detail.fet').article_pre.call(this);
+    let article_next_data = await this.require('./detail.fet').article_next.call(this);
+%>
+<%-detail.title;%><br /><br />
+<% for(let item of detail.familyTree){ %>
+    <%-item.name%>
+<%}%>
+<%-detail.content.replace(/5036/,'57778');%><br /><br />
+<%-article_pre_data.length>0?article_pre_data[0].title : '没有更多了';%><br /><br />
+<%-article_next_data.length>0?article_next_data[0].title : '没有更多了';%><br /><br />

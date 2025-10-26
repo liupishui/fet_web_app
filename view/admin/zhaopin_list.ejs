@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>招聘-管理中心</title>
+    <link href="static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="static/css/animate.min.css" rel="stylesheet">
+    <link href="static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5><%- categoryPidInfo['name']-%>列表</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div id="toolbar" class="form-inline">
+                            <select class="form-control" id="selectChangeType">
+                                <option value="-1">全部</option>
+                                <% for( let index = 0; index < categorySon.length; index++ ) { %>
+                                    <option value="<%- categorySon[index]['id']-%>"><%- categorySon[index]['name']-%></option>
+                                <% } %>
+                            </select> 
+                            <a href="#"  class="btn btn-error" id="delSelect">删除所选行</a>
+                        </div>
+                        <table id="table_style" data-toggle="table" data-height="246">
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="static/js/jquery.min.js?v=2.1.4"></script>
+<script src="static/js/bootstrap.min.js?v=3.3.6"></script>
+<script src="static/js/content.min.js?v=1.0.0"></script>
+<script src="static/js/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="static/js/plugins/bootstrap-table/bootstrap-table-mobile.min.js"></script>
+<script src="static/js/plugins/bootstrap-table/locale/bootstrap-table-zh-CN.min.js"></script>
+<script type="text/javascript">
+    var category = {
+        <% for( let index = 0; index < news_categories_all.length; index++ ) { %>
+            '<%- news_categories_all[index]['id']-%>':'<%- news_categories_all[index]['name']-%>',
+        <% } %>
+    }
+    $('#table_style').bootstrapTable({
+            url: 'zhaopin_list',         //请求后台的URL（*）
+            method: 'get',                      //请求方式（*）
+            search: true,                    //启用搜索
+            showColumns:true,                   //列选择
+            toolbar: '#toolbar',                //工具按钮用哪个容器
+            striped: true,                      //是否显示行间隔色
+            cache: false,                       //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
+            pagination: true,                   //是否显示分页（*）
+            sortable: true,                     //是否启用排序
+            sortOrder: "desc",                   //排序方式
+            queryParams: function(a){a.categoryPid = <%- categoryPid-%>; return a},        //传递参数（*）
+            sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+            pageNumber: 1,                       //初始化加载第一页，默认第一页
+            pageSize: 10,                       //每页的记录行数（*）
+            pageList: [10, 15,20,'ALL'],        //可供选择的每页的行数（*）
+            strictSearch: true,
+            clickToSelect: true,                //是否启用点击选中行
+            height: 'auto',                        //行高，如果没有设置height属性，表格自动根据记录条数觉得表格高度
+            uniqueId: "id",                     //每一行的唯一标识，一般为主键列
+            cardView: false,                    //是否显示详细视图
+            showToggle:true,
+            detailView: false,                   //是否显示父子表
+            columns:[
+               // id,city,gangwei,zhaopinrenshu,email,tel,publishDate
+                {
+                    checkbox:true//显示复选框
+                }, {
+                    field: 'id',
+                    title: 'id'
+                }, {
+                    field: 'city',
+                    title: '城市',
+                    formatter:function(value,row,index){
+                        return category[row.city];
+                    }
+                 }, 
+                 {
+                    field: 'gangwei',
+                    title:'岗位名称',
+                    formatter:function(value,row,index){
+                        return row.gangwei;
+                    }
+                 },
+                {
+                    field: 'zhaopinrenshu',
+                    title: '招聘人数',
+                    sortable: true
+                  },                  
+                {
+                    field: 'email',
+                    title: '联系邮箱'
+                  },                  
+                {
+                    field: 'tel',
+                    title: '电话'
+                  },                  
+                {
+                    field: 'publishDate',
+                    title: '发布日期'
+                  }, 
+                  {
+                    field: 'id',
+                    title: '操作',
+                    formatter: function (value, row, index) {
+                        //value单元格内的数据，row行数据，index行数
+                        //var editBtn = "<a href='additems.php?id=" + value + "' class='btn btn-primary'>编辑</a>";
+                        var editBtn = '<a href="javascript:openLayerBianji('+value+',\''+row.city+'-'+row.gangwei+'\');" class="btn btn-primary">修改</a>';
+                        var deleteBtn = "<a href='/admin/zhaopin_list?id=" + value + "' data-id='"+value+"' class='btn btn-cancel'>删除</a>";
+                        return editBtn + deleteBtn;
+                    }
+                }
+            ]
+        });
+        // function openLayerBianji(id,title) {
+        //     window.top.addMenuTab('/admin/zhaopin_add?categoryPid=<%- categoryPid-%>&modify='+id,title,new Date().getTime());
+        // }
+        function openLayerBianji(id) {
+            window.top.layer.open({
+                skin: 'layer-ext-moon',
+                type: 2,
+                title: ' ',
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['1150px', '540px'],
+                content: 'zhaopin_add?categoryPid=<%- categoryPid-%>&modify='+id
+            });
+        }
+        function refreshTableList() {
+            $('#table_style').bootstrapTable('refresh',{silent: true});
+        }
+        
+        //批量删除
+        $("#delSelect").click(function(e){
+            var $e=$.event.fix(e);
+            $e.preventDefault();
+            var delIdArr=[];
+            var selectData=$('#table_style').bootstrapTable('getSelections',function(data){});
+            for(var x in selectData){
+                delIdArr.push(selectData[x].id);
+            }
+            if(delIdArr.length>0){
+                if(confirm('确定要删除吗？')){
+                    $.post('/admin/zhaopin_list',{'delid':delIdArr.join(',')},function(data){
+                        $('#table_style').bootstrapTable('refresh',{silent: true});
+                    })
+                }
+            }else{
+                alert('没有选择任何行');
+            }
+        })
+
+        $('#table_style').delegate('.btn-cancel', 'click', function(e) {
+            var $e=$.event.fix(e);
+            $e.preventDefault();
+            if(confirm('确定要删除吗？')){
+                //window.location.href=$(this).attr('href');
+                $.post('/admin/zhaopin_list',{'delid':[$(this).attr('data-id')].join(',')},function(data){
+                    $('#table_style').bootstrapTable('refresh',{silent: true});
+                })
+            }
+        });
+
+        //筛选类型
+        $("#selectChangeType").change(function(){
+            var _self = $(this);
+            var options=$('#table_style').bootstrapTable('getOptions');
+            options.queryParams=function(a){
+                a.category_id = _self.val();               
+                return a;
+            }
+            $('#table_style').bootstrapTable('refreshOptions',options);
+        });
+</script>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "fet_web_app",
+  "version": "1.0.0",
+  "description": "基于fet的一个小型web应用",
+  "main": "index.js",
+  "scripts": {
+    "debug": "node debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://e.coding.net/zhuifengh3o/node/fet_web_app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
+    "@types/node": "^22.13.10"
+  },
+  "dependencies": {
+    "json2excel": "^1.2.0"
+  }
+}

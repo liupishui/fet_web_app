@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+        content="width=device-width,initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+    <title>系统信息-管理中心</title>
+    <link href="static/css/bootstrap.min14ed.css?v=3.3.6" rel="stylesheet">
+    <link href="static/css/font-awesome.min93e3.css?v=4.4.0" rel="stylesheet">
+    <link href="static/css/plugins/bootstrap-table/bootstrap-table.min.css" rel="stylesheet">
+    <link href="static/css/animate.min.css" rel="stylesheet">
+    <link href="static/css/style.min862f.css?v=4.1.0" rel="stylesheet">
+</head>
+
+<body class="gray-bg">
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>我的站内域名</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <a href="<%- myDomain %>" target="_blank"><%- myDomain %></a>
+                    </div>    
+                </div>
+            </div>
+            <div class="col-sm-12">
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h5>系统信息</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="form_basic.html#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="form_basic.html#">选项1</a>
+                                </li>
+                                <li><a href="form_basic.html#">选项2</a>
+                                </li>
+                            </ul>
+                            <a class="close-link">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="ibox-content bootstrap-table">
+                        <div class="fixed-table-container">
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td>服务器IP地址</td>
+                                        <td><%-ipAddress-%></td>
+                                        <td>服务器端口</td>
+                                        <td><%-port%></td>
+                                    </tr>
+                                    <tr>
+                                        <td>CPU</td>
+                                        <td><%-cpuModel%>(<%-cpuNum%>核)</td>
+                                        <td>服务器类型</td>
+                                        <td><%- machine %></td>
+                                    </tr>
+                                    <tr>
+                                        <td>内存</td>
+                                        <td><%= ((totalmem-freemem)/1024/1024/1024).toFixed(2) %>G / <%= (totalmem/1024/1024/1024).toFixed(2) %>G</td>
+                                        <td>APP占用内存</td>
+                                        <td>
+                                            <%= (appmemu/1024/1024).toFixed(2) %>M                                     
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            服务器操作系统
+                                        </td>
+                                        <td>
+                                            <%- version -%>
+                                        </td>
+                                        <td>
+                                            主机名
+                                        </td>
+                                        <td><%- hostname %>
+                                                                                </td>
+                                    </tr>
+                                    <!-- <tr>
+                                        <td>运行时间
+                                        </td>
+                                        <td colspan="3">
+                                            <%= parseInt(uptime/60/60/24) %>天 <%= parseInt(uptime%(24*60*60)/60/60) %>小时<%= parseInt(uptime%(60*60)/60) %>分钟 <%= parseInt(uptime%(60*60)%60) %>秒
+                                        </td>
+                                    </tr> -->
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="4" class="text-center">
+                                            技术支持：<a href="http://xiaoshengkeji.com/" target="_blank">画之味网站管理系统</a>
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="static/js/jquery.min.js?v=2.1.4"></script>
+<script src="static/js/bootstrap.min.js?v=3.3.6"></script>
+<script type="text/javascript">
+</script>
+</html>

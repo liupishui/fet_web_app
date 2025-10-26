@@ -1,0 +1,106 @@
+<% 
+let {url,runtime,__theme} = this.context;
+  let {require,app,context,param,setup} = this;
+    context.LRU_HREF_PAGE_OPTION = {ttl:1000*60};
+
+   %>
+<!DOCTYPE html>
+<html lang="en">
+<% 
+  //axios获取一个数据
+  let {http} = require('./common.fet');
+  let bannerData = [];
+  try{
+      bannerData = await http(this).get('/api/banner');
+  }catch(e){
+    
+  }
+%>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2001</title>
+  <meta name="referrer" content="always">
+  <link rel="stylesheet" href="styles/reset.css">
+</head>
+
+<body>
+<%-__theme%>
+<%-__filename%>
+<%-__dirname%><br/>
+<%-__serverpath%><br/>
+<%-__path%>
+<%-__pathname%>
+<a href="detail?id=6">详情</a>
+  <% for( let index = 0; index < bannerData.data.length; index++ ) { %>
+    <img src="<%- bannerData.data[index].image_url; %>" alt="">
+  <% } %>
+  <%- JSON.stringify(url) %>
+  <%- await include('header.ejs'); %>
+  <%= new Date(runtime).toLocaleDateString() %>
+  <%= typeof(sjj)==='undefined'?'jjj' : sjj; %>
+</body>
+<script type="text/javascript">
+  (function(doScript) {
+    doScript()
+  })(function() {
+    var connectWebSocket = function() {
+      if (typeof(WebSocket) !== 'undefined') {
+        var timmerReload = '';
+        var socketReload = new WebSocket((window.location.href.indexOf('https') === 0 ? 'wss://' : 'ws://') + window.location.host);
+        //socketReload.binaryType = "arraybuffer"
+        socketReload.onopen = function(event) {
+          var cookieSessionId = document.cookie.replace(/\s+/g,'').split(';').filter(function(val){return val.replace(/\s+/g,'').indexOf('session_id=')===0});
+          if(cookieSessionId.length>0){
+            socketReload.send(cookieSessionId[0]);
+          }
+          // socketReload.send("pong");
+          // setInterval(()=>{
+          //   socketReload.send('nihao')
+          // },100);
+
+        };
+        let isLogin = false;
+        socketReload.onmessage = function(event) {
+          if (event.data.indexOf('modifyLiveReload:') == 0) {
+            if (event.data.indexOf('modifyLiveReload:modleDesign') == 0) {
+              document.getElementById('modleDesign').style.display = 'block';
+            } else if (event.data.indexOf('modifyLiveReload:modleDesignImg') == 0) {
+              document.getElementById('modleDesignImg').src = document.getElementById('modleDesignImg').src + 1;
+            } else {
+              clearTimeout(timmerReload);
+              timmerReload = setTimeout(function() {
+                window.location.reload();
+              }, 100);
+            }
+          }
+          // if(isLogin = false){
+          //   isLogin = true;
+          //   socketReload.send(cookieSessionId[0])
+          // }else{
+
+          // }
+          console.log(event);
+        }
+        socketReload.onclose = function(event) {
+          if (event.code === 1000) {
+            console.log('websocket正常关闭')
+          } else {
+            // console.log(event.code);
+            connectWebSocket();
+          }
+        }
+        socketReload.onerror = function(event) {
+          socketReload.close();
+          console.log(event);
+        };
+
+      }
+    }
+    connectWebSocket();
+
+  })
+</script>
+
+</html>

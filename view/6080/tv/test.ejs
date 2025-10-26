@@ -1,0 +1,4 @@
+<% let test = this.require('./test.fet.js');
+    await test.run(this.context,this.app);
+    this.context.res.write('end');
+%>
