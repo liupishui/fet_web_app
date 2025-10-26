@@ -118,3 +118,4 @@ core/app_init/db/sqlite/db/akshare.*
 
 node_modules
 
+db*
